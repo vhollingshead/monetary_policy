@@ -16,9 +16,9 @@ import streamlit as st
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.radio("Go to", ["Home", "About", "Our Solution", "Demo (MVP)", "Use Case"])
+    selection = st.sidebar.radio("Go to", ["Product (MVP)","About", "Our Solution", "Home", "Use Case"])
     
-    if selection == "Our Product goes here":
+    if selection == "Product (MVP)":
         demo()
     elif selection == "Home":
         home()
@@ -29,6 +29,10 @@ def main():
     
     elif selection == "Use Case":
         use_case()
+
+def demo():
+    st.title("Our Product Goes Here (MVP)")
+    st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 
 def home():
     st.title("Home")
@@ -74,10 +78,6 @@ def our_solution():
     
     st.subheader("Acknowledgements")
     st.write("Pellentesque dapibus hendrerit tortor. Praesent egestas tristique nibh.")
-
-def demo():
-    st.title("Demo (MVP)")
-    st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 
 def use_case():
     st.title("Use Case")
