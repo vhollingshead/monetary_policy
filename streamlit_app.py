@@ -18,14 +18,15 @@ def main():
     st.sidebar.title("Navigation")
     selection = st.sidebar.radio("Go to", ["Home", "About", "Our Solution", "Demo (MVP)", "Use Case"])
     
-    if selection == "Home":
+    if selection == "Our Product goes here":
+        demo()
+    elif selection == "Home":
         home()
     elif selection == "About":
         about()
     elif selection == "Our Solution":
         our_solution()
-    elif selection == "Demo (MVP)":
-        demo()
+    
     elif selection == "Use Case":
         use_case()
 
