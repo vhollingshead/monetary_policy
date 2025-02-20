@@ -149,8 +149,6 @@ def main():
         use_case()
 
 def demo():
-    st.title("Our Product Goes Here (MVP)")
-
     # Generate dummy time series data
     def generate_data(interest_rate):
         np.random.seed(42)
@@ -160,10 +158,18 @@ def demo():
         return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
 
     # Streamlit UI
-    st.title("Gini Coefficient Dashboard")
+    st.title("Monetary Policy Dashboard")
 
-    # Slider for interest rate on main page
-    interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        # Slider for interest rate
+        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+    
+    with col2:
+        # Display a random Gini coefficient
+        random_gini = round(np.random.uniform(0.3, interest_rate), 3)
+        st.metric(label="Gini Coefficient Change", value=random_gini)
 
     data = generate_data(interest_rate)
 
@@ -176,10 +182,7 @@ def demo():
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
-    # Display a random Gini coefficient on the right
-    random_gini = round(np.random.uniform(0.3, 0.6), 3)
-    st.metric(label="Gini Coefficient", value=random_gini)
-    st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    
 
 def home():
     st.title("Home")
