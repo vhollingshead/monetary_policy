@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import math
 from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
@@ -32,6 +34,35 @@ def main():
 
 def demo():
     st.title("Our Product Goes Here (MVP)")
+
+        # Generate dummy time series data
+    def generate_data(interest_rate):
+        np.random.seed(42)
+        time = pd.date_range(start="2020-01-01", periods=50, freq='M')
+        base_gini = 0.35 + (interest_rate * 0.005)  # Simulated effect of interest rate on Gini coefficient
+        gini_values = base_gini + np.random.normal(0, 0.02, len(time))  # Adding some noise
+        return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
+
+    # Streamlit UI
+    st.title("Gini Coefficient Dashboard")
+
+    # Sidebar slider for interest rate
+    interest_rate = st.sidebar.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+
+    data = generate_data(interest_rate)
+
+    # Plot the time-series graph
+    fig, ax = plt.subplots()
+    ax.plot(data["Time"], data["Gini Coefficient"], marker='o', linestyle='-')
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Gini Coefficient")
+    ax.set_title("Predicted Gini Coefficient Over Time")
+    plt.xticks(rotation=45)
+    st.pyplot(fig)
+
+    # Display a random Gini coefficient on the right
+    random_gini = round(np.random.uniform(0.3, 0.6), 3)
+    st.metric(label="Gini Coefficient", value=random_gini)
     st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 
 def home():
@@ -85,3 +116,6 @@ def use_case():
 
 if __name__ == "__main__":
     main()
+
+
+
