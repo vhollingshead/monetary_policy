@@ -38,6 +38,29 @@ def demo():
     timeseries_loaded_model = joblib.load(model_filename)
 
 
+    # Generate dummy time series data
+    def generate_data(interest_rate):
+        np.random.seed(42)
+        time = pd.date_range(start="2020-01-01", periods=50, freq='M')
+        base_gini = 0.35 + (interest_rate * 0.005)  # Simulated effect of interest rate on Gini coefficient
+        gini_values = base_gini + np.random.normal(0, 0.02, len(time))  # Adding some noise
+        return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
+
+    # Streamlit UI
+    st.title("Monetary Policy Dashboard")
+
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        # Slider for interest rate
+        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+        input_value = np.array([[interest_rate]])
+        prediction = loaded_model.predict(input_value)
+    
+    with col2:
+        # Display a random Gini coefficient
+        calc_gini = round(prediction[0], 2)
+        st.metric(label="Gini Coefficient Change", value=calc_gini)
 
     # 4. Adjust Time Series Based on Interest Rate
     # Simulating the effect of the interest rate on future values
@@ -65,42 +88,6 @@ def demo():
 
     # Display the plot in Streamlit
     st.pyplot(plt)
-
-
-    # Generate dummy time series data
-    def generate_data(interest_rate):
-        np.random.seed(42)
-        time = pd.date_range(start="2020-01-01", periods=50, freq='M')
-        base_gini = 0.35 + (interest_rate * 0.005)  # Simulated effect of interest rate on Gini coefficient
-        gini_values = base_gini + np.random.normal(0, 0.02, len(time))  # Adding some noise
-        return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
-
-    # Streamlit UI
-    st.title("Monetary Policy Dashboard")
-
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        # Slider for interest rate
-        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
-        input_value = np.array([[interest_rate]])
-        prediction = loaded_model.predict(input_value)
-    
-    with col2:
-        # Display a random Gini coefficient
-        calc_gini = round(prediction[0], 2)
-        st.metric(label="Gini Coefficient Change", value=calc_gini)
-
-    data = generate_data(interest_rate)
-
-    # Plot the time-series graph
-    fig, ax = plt.subplots()
-    ax.plot(data["Time"], data["Gini Coefficient"], marker='o', linestyle='-')
-    ax.set_xlabel("Time")
-    ax.set_ylabel("Gini Coefficient")
-    ax.set_title("Predicted Gini Coefficient Over Time")
-    plt.xticks(rotation=45)
-    st.pyplot(fig)
 
     
 
