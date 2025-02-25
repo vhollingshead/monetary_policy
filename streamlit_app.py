@@ -35,7 +35,8 @@ def demo():
     loaded_model = joblib.load(model_filename)
 
     # Load the time series trained model
-    timeseries_loaded_model = joblib.load(model_filename)
+    timeseries_model_filename = "time_series_arima_model.joblib"
+    timeseries_loaded_model = joblib.load(timeseries_model_filename)
 
 
     # Generate dummy time series data
