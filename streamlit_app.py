@@ -34,6 +34,39 @@ def demo():
     model_filename = 'linear_regression_model.joblib'
     loaded_model = joblib.load(model_filename)
 
+    # Load the time series trained model
+    timeseries_loaded_model = joblib.load(model_filename)
+
+
+
+    # 4. Adjust Time Series Based on Interest Rate
+    # Simulating the effect of the interest rate on future values
+    # Higher interest rates dampen growth in this example
+    adjustment_factor = 1 - (interest_rate / 100)  # Reduces future forecast values based on interest rate
+
+    # Generate forecast for the next 10 days
+    forecast = timeseries_loaded_model.forecast(steps=10)
+    adjusted_forecast = forecast * adjustment_factor  # Adjusting the forecast based on interest rate
+
+    # Display the forecast
+    st.write(f"Predicted Values Adjusted for an Interest Rate of {interest_rate}%:")
+    st.write(adjusted_forecast.round(2))
+
+    # 5. Plot Historical Data and Adjusted Forecast
+    st.write("### Time Series Forecast Visualization")
+    plt.figure(figsize=(10, 6))
+    plt.plot(time_series_data, label='Historical Data')
+    forecast_index = pd.date_range(start=time_series_data.index[-1] + pd.Timedelta(days=1), periods=10, freq='D')
+    plt.plot(forecast_index, adjusted_forecast, label=f'Forecast (Adjusted for {interest_rate}%)', color='red')
+    plt.title('Time Series Forecast Adjusted by Interest Rate')
+    plt.xlabel('Date')
+    plt.ylabel('Value')
+    plt.legend()
+
+    # Display the plot in Streamlit
+    st.pyplot(plt)
+
+
     # Generate dummy time series data
     def generate_data(interest_rate):
         np.random.seed(42)
