@@ -76,6 +76,12 @@ def demo():
     st.write(f"Predicted Values Adjusted for an Interest Rate of {interest_rate}%:")
     st.write(adjusted_forecast.round(2))
 
+    # 1. Generate Dummy Time Series Data
+    np.random.seed(42)
+    date_range = pd.date_range(start='2020-01-01', periods=100, freq='D')
+    data = 50 + np.arange(100) * 0.5 + np.random.normal(0, 2, 100)
+    time_series_data = pd.Series(data, index=date_range)
+
     # 5. Plot Historical Data and Adjusted Forecast
     st.write("### Time Series Forecast Visualization")
     plt.figure(figsize=(10, 6))
