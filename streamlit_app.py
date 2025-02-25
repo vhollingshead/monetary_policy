@@ -74,7 +74,7 @@ def demo():
 
     # Display the forecast
     st.write(f"Predicted Values Adjusted for an Interest Rate of {interest_rate}%:")
-    st.write(adjusted_forecast.round(2))
+    # st.write(adjusted_forecast.round(2))
 
     # 1. Generate Dummy Time Series Data
     np.random.seed(42)
