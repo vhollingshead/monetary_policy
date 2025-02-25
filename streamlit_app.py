@@ -55,7 +55,7 @@ def demo():
     
     with col2:
         # Display a random Gini coefficient
-        calc_gini = prediction[0]
+        calc_gini = round(prediction[0], 2)
         st.metric(label="Gini Coefficient Change", value=calc_gini)
 
     data = generate_data(interest_rate)
