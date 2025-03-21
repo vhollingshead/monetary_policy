@@ -1,5 +1,97 @@
 # Version New Above #
 
+import streamlit as st
+import requests
+import pandas as pd
+import matplotlib.pyplot as plt
+from streamlit_option_menu import option_menu  # For sidebar navigation icons
+
+# Set page config
+st.set_page_config(page_title='Monetary Policy Dashboard', page_icon=':bar_chart:', layout='wide')
+
+# Custom CSS for Arial font and button styling
+st.markdown(
+    """
+    <style>
+    body { font-family: Arial, sans-serif; }
+    .stButton>button { background-color: #007BFF; color: white; border-radius: 8px; padding: 10px 20px; }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Sidebar Navigation with Icons
+with st.sidebar:
+    selected = option_menu(
+        "Navigation", ["Home", "Product (MVP)", "Our Solution", "Use Case", "About"],
+        icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
+        menu_icon="cast", default_index=0
+    )
+
+# Placeholder for content sections
+def home():
+    st.title("Home")
+    st.write("Lorem ipsum placeholder text for the homepage.")
+    # Image placeholder
+    st.image("home_banner.png", use_container_width=True)  # Replace with actual image
+
+def product():
+    st.title("Product (MVP)")
+    st.write("Overview of the product MVP.")
+    # Image placeholder
+    st.image("product_image.png", use_container_width=True)
+
+def our_solution():
+    st.title("Our Solution")
+    st.write("Description of the solution.")
+    # Image placeholder
+    st.image("solution_diagram.png", use_container_width=True)
+
+def use_case():
+    st.title("Use Case")
+    st.write("Details of how the product is used.")
+    # Image placeholder
+    st.image("use_case_chart.png", use_container_width=True)
+
+def about():
+    st.title("About")
+    st.write("Information about the team and project.")
+    # Image placeholder
+    st.image("about_us.png", use_container_width=True)
+
+# Example API call to FRED for economic data
+def fetch_fred_data(series_id, api_key):
+    url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()["observations"]
+        df = pd.DataFrame(data)
+        df["value"] = pd.to_numeric(df["value"], errors='coerce')
+        df["date"] = pd.to_datetime(df["date"])
+        return df
+    else:
+        st.error("Failed to fetch data from FRED API.")
+        return None
+
+# Display FRED API Data Example
+if selected == "Product (MVP)":
+    product()
+    st.subheader("Economic Data from FRED API")
+    api_key = "your_fred_api_key_here"  # Replace with actual API key
+    series_id = "GDP"  # Replace with desired economic indicator
+    df = fetch_fred_data(series_id, api_key)
+    if df is not None:
+        st.line_chart(df.set_index("date")["value"], use_container_width=True)
+
+elif selected == "Home":
+    home()
+elif selected == "Our Solution":
+    our_solution()
+elif selected == "Use Case":
+    use_case()
+elif selected == "About":
+    about()
+
 
 
 
