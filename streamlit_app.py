@@ -41,8 +41,6 @@ with st.sidebar:
         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
         menu_icon="cast", default_index=1
     )
-    if selected == "Dashboard":
-        dashboard()
 
 # Interactive Controls
 st.sidebar.subheader("Adjust Monetary Parameters")
@@ -140,6 +138,8 @@ def dashboard():
 
     gini_coefficient()
 
+if __name__ == "__main__":
+    dashboard()
 
 #  
 # # Example API call to FRED for economic data
