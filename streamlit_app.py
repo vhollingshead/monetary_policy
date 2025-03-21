@@ -36,26 +36,6 @@ st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequ
 st.markdown("<div class='subheader'>Nicole, Victoria, William, Tracy</div>", unsafe_allow_html=True)
 st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve, plays a critical role in shaping economic conditions. Decisions on interest rates and money supply impact income inequality. Accurate tools are essential to analyze these effects.</div>", unsafe_allow_html=True)
 
-# Sidebar Navigation with Icons
-def main():
-    st.sidebar.title("Navigation")
-    selection = option_menu(
-        "Go to", ["Home", "Product (MVP)", "Our Solution", "Use Case", "About"],
-        icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
-        menu_icon="cast", default_index=0
-    )
-    
-    if selection == "Product (MVP)":
-        product()
-    elif selection == "Home":
-        home()
-    elif selection == "About":
-        about()
-    elif selection == "Our Solution":
-        our_solution()
-    elif selection == "Use Case":
-        use_case()
-
 # Page Definitions
 def home():
     st.title("Home")
@@ -82,18 +62,38 @@ def about():
     st.write("Information about the team and project.")
     st.image("about_us.png", use_container_width=True)
 
+# Sidebar Navigation with Icons
+def main():
+    st.sidebar.title("Navigation")
+    selection = option_menu(
+        "Go to", ["Home", "Product (MVP)", "Our Solution", "Use Case", "About"],
+        icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
+        menu_icon="cast", default_index=0
+    )
+    
+    if selection == "Product (MVP)":
+        product()
+    elif selection == "Home":
+        home()
+    elif selection == "About":
+        about()
+    elif selection == "Our Solution":
+        our_solution()
+    elif selection == "Use Case":
+        use_case()
+
 # Run App
 if __name__ == "__main__":
     main()
 
-# Interactive Controls
-st.sidebar.subheader("Adjust Monetary Parameters")
-interest_rate = st.sidebar.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
-m2_supply = st.sidebar.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
+# # Interactive Controls
+# st.sidebar.subheader("Adjust Monetary Parameters")
+# interest_rate = st.sidebar.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+# m2_supply = st.sidebar.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
 
-col1, col2 = st.sidebar.columns([1,1])
-col1.button("Submit", key="submit_button")
-col2.button("Reset", key="reset_button")
+# col1, col2 = st.sidebar.columns([1,1])
+# col1.button("Submit", key="submit_button")
+# col2.button("Reset", key="reset_button")
 
 # Placeholder for content sections
 def dashboard():
