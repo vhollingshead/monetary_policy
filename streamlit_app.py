@@ -52,7 +52,7 @@ def dashboard():
     
     # Time Series Forecast Plot
     st.subheader("Time Series Plot")
-    st.image("time_series_plot.png", use_column_width=True)  # Replace with actual image
+    st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
     
     # Policy Impact Table
     st.subheader("Interest Rate & M2 Supply Impact")
