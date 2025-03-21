@@ -6,6 +6,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu  # For sidebar navigation icons
 
+import streamlit as st
+import pandas as pd
+import math
+from pathlib import Path
+import numpy as np
+import joblib
+
 # Set page config
 st.set_page_config(page_title='Monetary Policy & Inequality', page_icon=':chart_with_upwards_trend:', layout='wide')
 
@@ -30,12 +37,54 @@ st.markdown("<div class='subheader'>Nicole, Victoria, William, Tracy</div>", uns
 st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve, plays a critical role in shaping economic conditions. Decisions on interest rates and money supply impact income inequality. Accurate tools are essential to analyze these effects.</div>", unsafe_allow_html=True)
 
 # Sidebar Navigation with Icons
-with st.sidebar:
-    selected = option_menu(
-        "Navigation", ["Home", "Dashboard", "Policy Impact", "Gini Coefficient", "About"],
+def main():
+    st.sidebar.title("Navigation")
+    selection = option_menu(
+        "Go to", ["Home", "Product (MVP)", "Our Solution", "Use Case", "About"],
         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
-        menu_icon="cast", default_index=1
+        menu_icon="cast", default_index=0
     )
+    
+    if selection == "Product (MVP)":
+        product()
+    elif selection == "Home":
+        home()
+    elif selection == "About":
+        about()
+    elif selection == "Our Solution":
+        our_solution()
+    elif selection == "Use Case":
+        use_case()
+
+# Page Definitions
+def home():
+    st.title("Home")
+    st.write("Lorem ipsum placeholder text for the homepage.")
+    st.image("home_banner.png", use_container_width=True)  # Replace with actual image
+
+def product():
+    st.title("Product (MVP)")
+    st.write("Overview of the product MVP.")
+    st.image("product_image.png", use_container_width=True)
+
+def our_solution():
+    st.title("Our Solution")
+    st.write("Description of the solution.")
+    st.image("solution_diagram.png", use_container_width=True)
+
+def use_case():
+    st.title("Use Case")
+    st.write("Details of how the product is used.")
+    st.image("use_case_chart.png", use_container_width=True)
+
+def about():
+    st.title("About")
+    st.write("Information about the team and project.")
+    st.image("about_us.png", use_container_width=True)
+
+# Run App
+if __name__ == "__main__":
+    main()
 
 # Interactive Controls
 st.sidebar.subheader("Adjust Monetary Parameters")
@@ -48,11 +97,10 @@ col2.button("Reset", key="reset_button")
 
 # Placeholder for content sections
 def dashboard():
-    st.title("Monetary Policy Dashboard")
     
     # Time Series Forecast Plot
     st.subheader("Time Series Plot")
-    st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
+    # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
     
     # Policy Impact Table
     st.subheader("Interest Rate & M2 Supply Impact")
