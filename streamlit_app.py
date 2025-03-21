@@ -77,32 +77,32 @@ def gini_coefficient():
     
     # st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
     
-# Example API call to FRED for economic data
-def fetch_fred_data(series_id, api_key):
-    url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()["observations"]
-        df = pd.DataFrame(data)
-        df["value"] = pd.to_numeric(df["value"], errors='coerce')
-        df["date"] = pd.to_datetime(df["date"])
-        return df
-    else:
-        st.error("Failed to fetch data from FRED API.")
-        return None
+# # Example API call to FRED for economic data
+# def fetch_fred_data(series_id, api_key):
+#     url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
+#     response = requests.get(url)
+#     if response.status_code == 200:
+#         data = response.json()["observations"]
+#         df = pd.DataFrame(data)
+#         df["value"] = pd.to_numeric(df["value"], errors='coerce')
+#         df["date"] = pd.to_datetime(df["date"])
+#         return df
+#     else:
+#         st.error("Failed to fetch data from FRED API.")
+#         return None
 
-# Display FRED API Data Example
-if selected == "Dashboard":
-    dashboard()
-    st.subheader("Economic Data from FRED API")
-    api_key = "your_fred_api_key_here"  # Replace with actual API key
-    series_id = "GDP"  # Replace with desired economic indicator
-    df = fetch_fred_data(series_id, api_key)
-    if df is not None:
-        st.line_chart(df.set_index("date")["value"], use_container_width=True)
+# # Display FRED API Data Example
+# if selected == "Dashboard":
+#     dashboard()
+#     st.subheader("Economic Data from FRED API")
+#     api_key = "your_fred_api_key_here"  # Replace with actual API key
+#     series_id = "GDP"  # Replace with desired economic indicator
+#     df = fetch_fred_data(series_id, api_key)
+#     if df is not None:
+#         st.line_chart(df.set_index("date")["value"], use_container_width=True)
 
-elif selected == "Gini Coefficient":
-    gini_coefficient()
+# elif selected == "Gini Coefficient":
+#     gini_coefficient()
 
 
 
