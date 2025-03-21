@@ -71,6 +71,19 @@ def time_series_plot():
     # Streamlit UI
     st.title("Monetary Policy Dashboard")
 
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        # Slider for interest rate
+        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+        input_value = np.array([[interest_rate]])
+        prediction = loaded_model.predict(input_value)
+    
+    with col2:
+        # Display a random Gini coefficient
+        calc_gini = round(prediction[0], 2)
+        st.metric(label="Gini Coefficient Change", value=calc_gini)
+
     # 4. Adjust Time Series Based on Interest Rate
     # Simulating the effect of the interest rate on future values
     # Higher interest rates dampen growth in this example
@@ -151,6 +164,10 @@ def gini_coefficient():
 #     else:
 #         st.error("Failed to fetch data from FRED API.")
 #         return None
+
+
+if __name__ == "__main__":
+    main()
 
 
 
