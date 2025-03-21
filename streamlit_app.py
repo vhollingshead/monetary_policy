@@ -41,6 +41,8 @@ with st.sidebar:
         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
         menu_icon="cast", default_index=1
     )
+    if selected == "Dashboard":
+        dashboard()
 
 # Interactive Controls
 st.sidebar.subheader("Adjust Monetary Parameters")
@@ -104,23 +106,6 @@ def time_series_plot():
     # Display the plot in Streamlit
     st.pyplot(plt)
 
-# Placeholder for content sections
-def dashboard():
-    st.title("Monetary Policy Dashboard")
-    
-    # Time Series Forecast Plot
-    st.subheader("Time Series Plot")
-    # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
-    
-    # Policy Impact Table
-    st.subheader("Interest Rate & M2 Supply Impact")
-    policy_data = pd.DataFrame({
-        "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
-        "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
-        "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
-    })
-    st.table(policy_data)
-
 def gini_coefficient():
     st.title("Measuring Inequality: Gini Coefficient")
     
@@ -135,6 +120,25 @@ def gini_coefficient():
     
     # st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
 
+# Placeholder for content sections
+def dashboard():
+    st.title("Monetary Policy Dashboard")
+    
+    # Time Series Forecast Plot
+    st.subheader("Time Series Plot")
+    time_series_plot()
+    # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
+    
+    # Policy Impact Table
+    st.subheader("Interest Rate & M2 Supply Impact")
+    policy_data = pd.DataFrame({
+        "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
+        "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
+        "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
+    })
+    st.table(policy_data)
+
+    gini_coefficient()
 
 
 #  
