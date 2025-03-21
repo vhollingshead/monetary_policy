@@ -7,58 +7,76 @@ import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu  # For sidebar navigation icons
 
 # Set page config
-st.set_page_config(page_title='Monetary Policy Dashboard', page_icon=':bar_chart:', layout='wide')
+st.set_page_config(page_title='Monetary Policy & Inequality', page_icon=':chart_with_upwards_trend:', layout='wide')
 
-# Custom CSS for Arial font and button styling
+# Custom CSS for Styling
 st.markdown(
     """
     <style>
     body { font-family: Arial, sans-serif; }
-    .stButton>button { background-color: #007BFF; color: white; border-radius: 8px; padding: 10px 20px; }
+    .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
+    .header { text-align: center; color: #4F7849; font-size: 28px; font-weight: bold; }
+    .subheader { text-align: center; font-size: 18px; }
+    .green-box { background-color: #4F7849; color: white; padding: 10px; border-radius: 5px; }
+    .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
     unsafe_allow_html=True
 )
 
+# Header Section
+st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
+st.markdown("<div class='subheader'>Nicole, Victoria, William, Tracy</div>", unsafe_allow_html=True)
+st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve, plays a critical role in shaping economic conditions. Decisions on interest rates and money supply impact income inequality. Accurate tools are essential to analyze these effects.</div>", unsafe_allow_html=True)
+
 # Sidebar Navigation with Icons
 with st.sidebar:
     selected = option_menu(
-        "Navigation", ["Home", "Product (MVP)", "Our Solution", "Use Case", "About"],
+        "Navigation", ["Home", "Dashboard", "Policy Impact", "Gini Coefficient", "About"],
         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
-        menu_icon="cast", default_index=0
+        menu_icon="cast", default_index=1
     )
 
+# Interactive Controls
+st.sidebar.subheader("Adjust Monetary Parameters")
+interest_rate = st.sidebar.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+m2_supply = st.sidebar.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
+
+col1, col2 = st.sidebar.columns([1,1])
+col1.button("Submit", key="submit_button")
+col2.button("Reset", key="reset_button")
+
 # Placeholder for content sections
-def home():
-    st.title("Home")
-    st.write("Lorem ipsum placeholder text for the homepage.")
-    # Image placeholder
-    st.image("home_banner.png", use_container_width=True)  # Replace with actual image
+def dashboard():
+    st.title("Monetary Policy Dashboard")
+    
+    # Time Series Forecast Plot
+    st.subheader("Time Series Plot")
+    st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
+    
+    # Policy Impact Table
+    st.subheader("Interest Rate & M2 Supply Impact")
+    policy_data = pd.DataFrame({
+        "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
+        "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
+        "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
+    })
+    st.table(policy_data)
 
-def product():
-    st.title("Product (MVP)")
-    st.write("Overview of the product MVP.")
-    # Image placeholder
-    st.image("product_image.png", use_container_width=True)
-
-def our_solution():
-    st.title("Our Solution")
-    st.write("Description of the solution.")
-    # Image placeholder
-    st.image("solution_diagram.png", use_container_width=True)
-
-def use_case():
-    st.title("Use Case")
-    st.write("Details of how the product is used.")
-    # Image placeholder
-    st.image("use_case_chart.png", use_container_width=True)
-
-def about():
-    st.title("About")
-    st.write("Information about the team and project.")
-    # Image placeholder
-    st.image("about_us.png", use_container_width=True)
-
+def gini_coefficient():
+    st.title("Measuring Inequality: Gini Coefficient")
+    
+    st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
+    
+    st.write("The Gini coefficient measures income inequality. A score of 1 is total inequality, while 0 represents total equality.")
+    st.image("gini_formula.png", use_container_width=True)  # Replace with actual image
+    
+    st.subheader("Inequality Pulse Check")
+    st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
+    st.write("Real-time deep learning estimation of inequality based on indirect economic indicators.")
+    
+    st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
+    
 # Example API call to FRED for economic data
 def fetch_fred_data(series_id, api_key):
     url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
@@ -74,8 +92,8 @@ def fetch_fred_data(series_id, api_key):
         return None
 
 # Display FRED API Data Example
-if selected == "Product (MVP)":
-    product()
+if selected == "Dashboard":
+    dashboard()
     st.subheader("Economic Data from FRED API")
     api_key = "your_fred_api_key_here"  # Replace with actual API key
     series_id = "GDP"  # Replace with desired economic indicator
@@ -83,14 +101,9 @@ if selected == "Product (MVP)":
     if df is not None:
         st.line_chart(df.set_index("date")["value"], use_container_width=True)
 
-elif selected == "Home":
-    home()
-elif selected == "Our Solution":
-    our_solution()
-elif selected == "Use Case":
-    use_case()
-elif selected == "About":
-    about()
+elif selected == "Gini Coefficient":
+    gini_coefficient()
+
 
 
 
