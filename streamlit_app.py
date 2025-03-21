@@ -52,7 +52,7 @@ def dashboard():
     
     # Time Series Forecast Plot
     st.subheader("Time Series Plot")
-    st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
+    # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
     
     # Policy Impact Table
     st.subheader("Interest Rate & M2 Supply Impact")
@@ -69,13 +69,13 @@ def gini_coefficient():
     st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
     
     st.write("The Gini coefficient measures income inequality. A score of 1 is total inequality, while 0 represents total equality.")
-    st.image("gini_formula.png", use_container_width=True)  # Replace with actual image
+    # st.image("gini_formula.png", use_container_width=True)  # Replace with actual image
     
     st.subheader("Inequality Pulse Check")
     st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
     st.write("Real-time deep learning estimation of inequality based on indirect economic indicators.")
     
-    st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
+    # st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
     
 # Example API call to FRED for economic data
 def fetch_fred_data(series_id, api_key):
