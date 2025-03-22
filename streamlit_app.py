@@ -179,18 +179,23 @@ def second_part():
         })
         st.table(policy_data)
 
+def third_part():
+    col1, col2 = st.columns([1, 1], gap="large")
 
+    with col1:
+        st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
+    
+    with col2:
+        # Policy Impact Table
+        st.title("Measuring Inequality: Gini Coefficient")
+        st.write("The Gini coefficient measures income inequality. A score of 1 is total inequality, while 0 represents total equality.")
 
 
 
 
 
 def gini_coefficient():
-    st.title("Measuring Inequality: Gini Coefficient")
     
-    st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
-    
-    st.write("The Gini coefficient measures income inequality. A score of 1 is total inequality, while 0 represents total equality.")
     # st.image("gini_formula.png", use_container_width=True)  # Replace with actual image
     
     st.subheader("Inequality Pulse Check")
@@ -204,6 +209,7 @@ def dashboard():
 
     first_part()
     second_part()
+    third_part()
     
 
     gini_coefficient()
