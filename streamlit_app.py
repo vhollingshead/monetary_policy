@@ -61,21 +61,35 @@ def main():
 #     )
 
 def first_part():
-    # Create two columns
-    col1, col2 = st.columns(2)
-
+    # Custom CSS for centering the columns
+    st.markdown(
+        """
+        <style>
+        .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
+        .centered-container { display: flex; justify-content: center; align-items: center; }
+        .stColumns { display: flex; justify-content: center; align-items: center; }
+        </style>
+        """,
+        unsafe_allow_html=True
+)
+    # Create a centered container for two columns
+    st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 1], gap="large")
+    
     with col1:
         # Interactive Controls
         interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
         m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
-
-        col3, col4 = st.columns([1,1])
+        
+        col3, col4 = st.columns([1, 1])
         col3.button("Submit", key="submit_button")
         col4.button("Reset", key="reset_button")
-
+    
     with col2:
         st.subheader("Interest Rate & M2 Supply")
-        st.write("You can adjust the Interest Rate & M2 Supply to and see how the inequality forecast changes under different scenarios.")
+        st.write("You can adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios.")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 
