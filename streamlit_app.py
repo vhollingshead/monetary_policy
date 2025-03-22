@@ -30,9 +30,10 @@ st.markdown(
 )
 
 # Header Section
+st.title("How Does Monetary Policy Influence Income Inequality?")
 st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
-st.markdown("<div class='subheader'>Nicole, Victoria, William, Tracy</div>", unsafe_allow_html=True)
-st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve, plays a critical role in shaping economic conditions. Decisions on interest rates and money supply impact income inequality. Accurate tools are essential to analyze these effects.</div>", unsafe_allow_html=True)
+st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
+st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve in the United States, plays a critical role in shaping economic conditions. The Federal Reserve operates under a dual mandate: to promote maximum employment and stable prices. However, its policy decisions, such as interest rate changes and quantitative easing, can unintentionally widen income and wealth inequality. Policymakers and financial institutions face significant challenges in addressing unintended consequences, such as widening income inequality and regional disparities. Without accurate tools to measure these effects, decisions are often made in isolation, perpetuating cycles of inequality and hindering inclusive growth. Addressing this gap is essential for building equitable and resilient economic systems.</div>", unsafe_allow_html=True)
 
 # Sidebar Navigation with Icons
 with st.sidebar:
