@@ -166,7 +166,7 @@ def first_part():
     
     st.markdown("</div>", unsafe_allow_html=True)
 
-def second_part(interest_rate):
+def second_part():
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
@@ -206,12 +206,7 @@ def gini_coefficient():
 def dashboard():
 
     first_part()
-    
-    # Time Series Forecast Plot
-    st.subheader("Time Series Plot")
-    time_series_plot()
-    # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
-    
+    second_part()
     
 
     gini_coefficient()
