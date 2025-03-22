@@ -66,7 +66,6 @@ def first_part():
 
     with col1:
         # Interactive Controls
-        st.subheader("Adjust Monetary Parameters")
         interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
         m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
 
@@ -75,9 +74,8 @@ def first_part():
         col4.button("Reset", key="reset_button")
 
     with col2:
-        st.subheader("Column 2")
-        st.write("Duis euismod risus et mauris gravida, a malesuada mi efficitur. Sed dictum, felis at feugiat suscipit, nulla eros tincidunt ligula, a interdum tortor ligula id turpis.")
-        st.write("Nam eu sem nec nulla malesuada fermentum. Quisque imperdiet nulla vel libero viverra, et fermentum arcu congue.")
+        st.subheader("Interest Rate & M2 Supply")
+        st.write("You can adjust the Interest Rate & M2 Supply to and see how the inequality forecast changes under different scenarios.")
 
 
 
