@@ -82,9 +82,6 @@ def time_series_plot():
         gini_values = base_gini + np.random.normal(0, 0.02, len(time))  # Adding some noise
         return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
 
-    # Streamlit UI
-    st.title("Monetary Policy Dashboard")
-
     # 4. Adjust Time Series Based on Interest Rate
     # Simulating the effect of the interest rate on future values
     # Higher interest rates dampen growth in this example
@@ -101,7 +98,7 @@ def time_series_plot():
     time_series_data = pd.Series(data, index=date_range)
 
     # 5. Plot Historical Data and Adjusted Forecast
-    st.write("### Time Series Forecast Visualization")
+    # st.write("### Time Series Forecast Visualization")
     plt.figure(figsize=(10, 6))
     plt.plot(time_series_data, label='Historical Data')
     forecast_index = pd.date_range(start=time_series_data.index[-1] + pd.Timedelta(days=1), periods=10, freq='D')
