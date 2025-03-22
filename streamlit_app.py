@@ -21,8 +21,8 @@ st.markdown(
     body { font-family: Arial, sans-serif; }
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
     .header { text-align: center; color: #4F7849; font-size: 48px; font-weight: bold; }
-    .subheader { text-align: center; font-size: 10px; }
-    .green-box { background-color: #4F7849; color: white; padding: 10px; border-radius: 5px; font-size: 10px }
+    .subheader { text-align: center; font-size: 12px; }
+    .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 10px }
     .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
@@ -30,27 +30,57 @@ st.markdown(
 )
 
 # Header Section
-st.title("How Does Monetary Policy Influence Income Inequality?")
 st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
 st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
 st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve in the United States, plays a critical role in shaping economic conditions. The Federal Reserve operates under a dual mandate: to promote maximum employment and stable prices. However, its policy decisions, such as interest rate changes and quantitative easing, can unintentionally widen income and wealth inequality. Policymakers and financial institutions face significant challenges in addressing unintended consequences, such as widening income inequality and regional disparities. Without accurate tools to measure these effects, decisions are often made in isolation, perpetuating cycles of inequality and hindering inclusive growth. Addressing this gap is essential for building equitable and resilient economic systems.</div>", unsafe_allow_html=True)
 
-# Sidebar Navigation with Icons
-with st.sidebar:
-    selected = option_menu(
-        "Navigation", ["Home", "Dashboard", "Policy Impact", "Gini Coefficient", "About"],
-        icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
-        menu_icon="cast", default_index=1
-    )
+def main():
+    st.sidebar.title("Navigation")
+    with st.sidebar:
+        selected = option_menu(
+            "Navigation", ["Home", "Dashboard", "Our Solution", "About"],
+            icons=["house", "graph-up-arrow", "lightbulb", "info-circle"],
+            menu_icon="cast", default_index=1
+        )
+    
+    if selected == "Dashboard":
+        demo()
+    elif selected == "Home":
+        home()
+    elif selected == "About":
+        about()
+    elif selected == "Our Solution":
+        our_solution()
 
-# Interactive Controls
-st.sidebar.subheader("Adjust Monetary Parameters")
-interest_rate = st.sidebar.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
-m2_supply = st.sidebar.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
+# # Sidebar Navigation with Icons
+# with st.sidebar:
+#     selected = option_menu(
+#         "Navigation", ["Home", "Dashboard", "Policy Impact", "Gini Coefficient", "About"],
+#         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
+#         menu_icon="cast", default_index=1
+#     )
 
-col1, col2 = st.sidebar.columns([1,1])
-col1.button("Submit", key="submit_button")
-col2.button("Reset", key="reset_button")
+def first_part():
+    # Create two columns
+    col1, col2 = st.columns(2)
+
+    with col1:
+        # Interactive Controls
+        st.subheader("Adjust Monetary Parameters")
+        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
+        m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
+
+        col3, col4 = st.columns([1,1])
+        col3.button("Submit", key="submit_button")
+        col4.button("Reset", key="reset_button")
+
+    with col2:
+        st.subheader("Column 2")
+        st.write("Duis euismod risus et mauris gravida, a malesuada mi efficitur. Sed dictum, felis at feugiat suscipit, nulla eros tincidunt ligula, a interdum tortor ligula id turpis.")
+        st.write("Nam eu sem nec nulla malesuada fermentum. Quisque imperdiet nulla vel libero viverra, et fermentum arcu congue.")
+
+
+
 
 def time_series_plot():
     model_filename = 'linear_regression_model.joblib'
@@ -121,7 +151,8 @@ def gini_coefficient():
 
 # Placeholder for content sections
 def dashboard():
-    st.title("Monetary Policy Dashboard")
+
+    first_part()
     
     # Time Series Forecast Plot
     st.subheader("Time Series Plot")
