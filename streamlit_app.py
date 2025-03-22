@@ -197,16 +197,15 @@ def fourth_part():
     with col1:
         st.subheader("Inequality Pulse Check")
         st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
-        st.write("Real-time deep learning estimation of inequality based on indirect economic indicators.")
+        st.write("Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators.")
     
     with col2:
         # Indirect Indicators
         
-        st.image("monetary_pic.png", use_container_width=True)  # Replace with actual image
+        st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
+        st.write("For more information on the indirect economic indicators used to approximate the monthly Gini coefficient, please refer to our Methodologies.")
 
 
-
-# Placeholder for content sections
 def dashboard():
 
     first_part()
