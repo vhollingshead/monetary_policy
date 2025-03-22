@@ -16,6 +16,7 @@ import joblib
 # Set page config
 st.set_page_config(page_title='Monetary Policy & Inequality', page_icon=':chart_with_upwards_trend:', layout='wide')
 
+
 # Custom CSS for Styling
 st.markdown(
     """
@@ -31,28 +32,62 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Header Section
-st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
-st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
-st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve in the United States, plays a critical role in shaping economic conditions. The Federal Reserve operates under a dual mandate: to promote maximum employment and stable prices. However, its policy decisions, such as interest rate changes and quantitative easing, can unintentionally widen income and wealth inequality. Policymakers and financial institutions face significant challenges in addressing unintended consequences, such as widening income inequality and regional disparities. Without accurate tools to measure these effects, decisions are often made in isolation, perpetuating cycles of inequality and hindering inclusive growth. Addressing this gap is essential for building equitable and resilient economic systems.</div>", unsafe_allow_html=True)
 
-def main():
-    st.sidebar.title("Navigation")
-    with st.sidebar:
-        selected = option_menu(
-            "Navigation", ["Home", "Dashboard", "Our Solution", "About"],
-            icons=["house", "graph-up-arrow", "lightbulb", "info-circle"],
-            menu_icon="cast", default_index=1
-        )
+
+def home():
+    # Header Section
+    st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
+    st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve in the United States, plays a critical role in shaping economic conditions. The Federal Reserve operates under a dual mandate: to promote maximum employment and stable prices. However, its policy decisions, such as interest rate changes and quantitative easing, can unintentionally widen income and wealth inequality. Policymakers and financial institutions face significant challenges in addressing unintended consequences, such as widening income inequality and regional disparities. Without accurate tools to measure these effects, decisions are often made in isolation, perpetuating cycles of inequality and hindering inclusive growth. Addressing this gap is essential for building equitable and resilient economic systems.</div>", unsafe_allow_html=True)
+
+def about():
+    st.title("About")
+    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+def our_methodology():
+    st.title("Our Solution")
+    st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
     
-    if selected == "Dashboard":
-        demo()
-    elif selected == "Home":
-        home()
-    elif selected == "About":
-        about()
-    elif selected == "Our Solution":
-        our_solution()
+    st.subheader("High Level Overview")
+    st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+    
+    st.subheader("Methodology")
+    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+    
+    st.subheader("Data pipeline")
+    st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
+    
+    st.subheader("Training dataset (if applicable)")
+    st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    
+    st.subheader("Data pre-processing")
+    st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.")
+    
+    st.subheader("Modeling")
+    st.write("Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
+    
+    st.subheader("Model Evaluation")
+    st.write("Donec odio tempus molestie, porttitor ut, iaculis quis, sem.")
+    
+    st.subheader("Key Learnings & Impact")
+    st.write("Maecenas libero. Curabitur suscipit suscipit tellus.")
+    
+    st.subheader("Key Contributions")
+    st.write("Sed lectus. Integer euismod lacus luctus magna.")
+    
+    st.subheader("Future Work")
+    st.write("Vivamus quis mi. Phasellus a est.")
+    
+    st.subheader("Acknowledgements")
+    st.write("Pellentesque dapibus hendrerit tortor. Praesent egestas tristique nibh.")
+
+def causal_inf():
+    st.title("Causal Inference")
+    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+def use_case():
+    st.title("Use Case")
+    st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
 
 # # Sidebar Navigation with Icons
 # with st.sidebar:
@@ -187,7 +222,7 @@ def third_part():
     
     with col2:
         # Policy Impact Table
-        st.title("Measuring Inequality: Gini Coefficient")
+        st.subheader("Measuring Inequality: Gini Coefficient")
         st.write("We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.")
         st.write("n = total population; I = ith individual, individuals are ranked from lowest to highest income ; X_i = income of ith individual.")
 
@@ -207,14 +242,38 @@ def fourth_part():
 
 
 def dashboard():
+    # Header Section
+    st.markdown("<div class='header'>How Does Monetary Policy Influence Income Inequality?</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
+    st.markdown("<div class='green-box'>Our solution aims to impact how policymakers and institutions evaluate the socioeconomic effects of monetary policy. By integrating machine learning and causal inference techniques, it aims to uncover actionable insights to promote equitable growth, mitigate income disparities, and empower governments to design fairer economic systems. The findings will hopefully shape policy decisions and contribute to global discussions on inequality to foster evidence-based actions that uplift marginalized communities and promote stronger, more resilient economies.", unsafe_allow_html=True)
 
     first_part()
     second_part()
     third_part()
     fourth_part()
 
+def main():
+    with st.sidebar:
+        selected = option_menu(
+            "Navigation", ["Home", "Dashboard", "Methodology", "Causal Inference", "About"],
+            icons=["house", "graph-up-arrow", "lightbulb", "lightbulb", "info-circle"],
+            menu_icon="cast", default_index=0
+        )
+    
+    # Navigate to the selected page
+    if selected == "Dashboard":
+        dashboard()
+    elif selected == "Home":
+        home()
+    elif selected == "About":
+        about()
+    elif selected == "Methodology":
+        our_methodology()
+    elif selected == "Causal Inference":
+        causal_inf()
+
 if __name__ == "__main__":
-    dashboard()
+    main()
 
 #  
 # # Example API call to FRED for economic data
@@ -269,54 +328,7 @@ if __name__ == "__main__":
 
     
 
-# def home():
-#     st.title("Home")
-#     st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
 
-# def about():
-#     st.title("About")
-#     st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-
-# def our_solution():
-#     st.title("Our Solution")
-#     st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
-    
-#     st.subheader("High Level Overview")
-#     st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-    
-#     st.subheader("Methodology")
-#     st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-    
-#     st.subheader("Data pipeline")
-#     st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
-    
-#     st.subheader("Training dataset (if applicable)")
-#     st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-    
-#     st.subheader("Data pre-processing")
-#     st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.")
-    
-#     st.subheader("Modelling")
-#     st.write("Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
-    
-#     st.subheader("Model Evaluation")
-#     st.write("Donec odio tempus molestie, porttitor ut, iaculis quis, sem.")
-    
-#     st.subheader("Key Learnings & Impact")
-#     st.write("Maecenas libero. Curabitur suscipit suscipit tellus.")
-    
-#     st.subheader("Key Contributions")
-#     st.write("Sed lectus. Integer euismod lacus luctus magna.")
-    
-#     st.subheader("Future Work")
-#     st.write("Vivamus quis mi. Phasellus a est.")
-    
-#     st.subheader("Acknowledgements")
-#     st.write("Pellentesque dapibus hendrerit tortor. Praesent egestas tristique nibh.")
-
-# def use_case():
-#     st.title("Use Case")
-#     st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
 
 # if __name__ == "__main__":
 #     main()
