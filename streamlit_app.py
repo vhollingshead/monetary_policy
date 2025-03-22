@@ -188,21 +188,22 @@ def third_part():
     with col2:
         # Policy Impact Table
         st.title("Measuring Inequality: Gini Coefficient")
-        st.write("The Gini coefficient measures income inequality. A score of 1 is total inequality, while 0 represents total equality.")
+        st.write("We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.")
+        st.write("n = total population; I = ith individual, individuals are ranked from lowest to highest income ; X_i = income of ith individual.")
 
+def fourth_part():
+    col1, col2 = st.columns([1, 1], gap="large")
 
-
-
-
-def gini_coefficient():
+    with col1:
+        st.subheader("Inequality Pulse Check")
+        st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
+        st.write("Real-time deep learning estimation of inequality based on indirect economic indicators.")
     
-    # st.image("gini_formula.png", use_container_width=True)  # Replace with actual image
-    
-    st.subheader("Inequality Pulse Check")
-    st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
-    st.write("Real-time deep learning estimation of inequality based on indirect economic indicators.")
-    
-    # st.image("economic_indicators.png", use_container_width=True)  # Replace with actual image
+    with col2:
+        # Indirect Indicators
+        st.image("/workspaces/monetary_policy/monetary_pic.png", use_container_width=True)  # Replace with actual image
+
+
 
 # Placeholder for content sections
 def dashboard():
@@ -210,9 +211,7 @@ def dashboard():
     first_part()
     second_part()
     third_part()
-    
-
-    gini_coefficient()
+    fourth_part()
 
 if __name__ == "__main__":
     dashboard()
