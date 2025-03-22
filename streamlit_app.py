@@ -11,6 +11,8 @@ from pathlib import Path
 import numpy as np
 import joblib
 
+
+
 # Set page config
 st.set_page_config(page_title='Monetary Policy & Inequality', page_icon=':chart_with_upwards_trend:', layout='wide')
 
@@ -60,41 +62,10 @@ def main():
 #         menu_icon="cast", default_index=1
 #     )
 
-def first_part():
-    # Custom CSS for centering the columns
-    st.markdown(
-        """
-        <style>
-        .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
-        .centered-container { display: flex; justify-content: center; align-items: center; }
-        .stColumns { display: flex; justify-content: center; align-items: center; }
-        </style>
-        """,
-        unsafe_allow_html=True
-)
-    # Create a centered container for two columns
-    st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 1], gap="large")
-    
-    with col1:
-        # Interactive Controls
-        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, value=5.0)
-        m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, value=10.0)
-        
-        col3, col4 = st.columns([1, 1])
-        col3.button("Submit", key="submit_button")
-        col4.button("Reset", key="reset_button")
-    
-    with col2:
-        st.subheader("Interest Rate & M2 Supply")
-        st.write("You can adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios.")
-    
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
-
-
 def time_series_plot():
+    interest_rate = st.session_state.interest_rate 
+    m2_supply = st.session_state.m2_supply 
+
     model_filename = 'linear_regression_model.joblib'
     loaded_model = joblib.load(model_filename)
 
@@ -123,10 +94,6 @@ def time_series_plot():
     forecast = timeseries_loaded_model.forecast(steps=10)
     adjusted_forecast = forecast * adjustment_factor  # Adjusting the forecast based on interest rate
 
-    # Display the forecast
-    st.write(f"Predicted Values Adjusted for an Interest Rate of {interest_rate}%:")
-    # st.write(adjusted_forecast.round(2))
-
     # 1. Generate Dummy Time Series Data
     np.random.seed(42)
     date_range = pd.date_range(start='2020-01-01', periods=100, freq='D')
@@ -146,6 +113,80 @@ def time_series_plot():
 
     # Display the plot in Streamlit
     st.pyplot(plt)
+
+# Session state for storing variables
+if 'interest_rate' not in st.session_state:
+    st.session_state.interest_rate = 5.0
+if 'm2_supply' not in st.session_state:
+    st.session_state.m2_supply = 10.0
+
+def first_part():
+    # Custom CSS for centering the columns
+    st.markdown(
+        """
+        <style>
+        .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
+        .centered-container { display: flex; justify-content: center; align-items: center; }
+        .stColumns { display: flex; justify-content: center; align-items: center; }
+        </style>
+        """,
+        unsafe_allow_html=True
+)
+    # Create a centered container for two columns
+    st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 1], gap="large")
+    
+    with col1:
+        # Interactive Controls
+        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, 
+                                    value=st.session_state.interest_rate, key="slider_interest")
+        m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, 
+                                value=st.session_state.m2_supply, key="slider_m2")
+        
+        col3, col4 = st.columns([1, 1])
+        if col3.button("Submit", key="submit_button"):
+            st.session_state.interest_rate = interest_rate  # Save the interest rate value
+            st.session_state.m2_supply= m2_supply  # Save the money supply value
+            st.success(f"Interest rate saved: {st.session_state.interest_rate}%")
+            st.success(f"M2 Supply saved: {st.session_state.m2_supply}%")
+        
+        if col4.button("Reset", key="reset_button"):
+            st.session_state.interest_rate = 5.0  # Reset to default
+            st.session_state.m2_supply = 10.0  # Reset to default
+            st.rerun()
+            
+            col3, col4 = st.columns([1, 1])
+            col3.button("Submit", key="submit_button")
+            col4.button("Reset", key="reset_button")
+    
+    
+    with col2:
+        st.subheader("Interest Rate & M2 Supply")
+        st.write("You can adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios.")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def second_part(interest_rate):
+    col1, col2 = st.columns([1, 1], gap="large")
+
+    with col1:
+        time_series_plot()
+    
+    with col2:
+        # Policy Impact Table
+        st.subheader("Interest Rate & M2 Supply Impact")
+        policy_data = pd.DataFrame({
+            "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
+            "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
+            "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
+        })
+        st.table(policy_data)
+
+
+
+
+
+
 
 def gini_coefficient():
     st.title("Measuring Inequality: Gini Coefficient")
@@ -171,14 +212,7 @@ def dashboard():
     time_series_plot()
     # st.image("time_series_plot.png", use_container_width=True)  # Replace with actual image
     
-    # Policy Impact Table
-    st.subheader("Interest Rate & M2 Supply Impact")
-    policy_data = pd.DataFrame({
-        "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
-        "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
-        "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
-    })
-    st.table(policy_data)
+    
 
     gini_coefficient()
 
