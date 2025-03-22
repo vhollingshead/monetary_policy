@@ -191,8 +191,6 @@ def third_part():
         st.write("We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.")
         st.write("n = total population; I = ith individual, individuals are ranked from lowest to highest income ; X_i = income of ith individual.")
 
-uploaded_file = st.file_uploader("/workspaces/monetary_policy/monetary_pic.png", type=["png"])
-
 def fourth_part():
     col1, col2 = st.columns([1, 1], gap="large")
 
@@ -204,7 +202,7 @@ def fourth_part():
     with col2:
         # Indirect Indicators
         
-        st.image(uploaded_file, use_container_width=True)  # Replace with actual image
+        st.image("monetary_pic.png", use_container_width=True)  # Replace with actual image
 
 
 
