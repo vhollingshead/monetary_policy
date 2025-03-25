@@ -171,9 +171,13 @@ def first_part():
     
     with col1:
         # Interactive Controls
-        interest_rate = st.slider("Interest Rate (%)", min_value=0.0, max_value=10.0, step=0.1, 
+        st.markdown("<div class='subsubheader'>Interest Rate (%)</div>", unsafe_allow_html=True)
+
+        interest_rate = st.slider("", min_value=0.0, max_value=10.0, step=0.1, 
                                     value=st.session_state.interest_rate, key="slider_interest")
-        m2_supply = st.slider("M2 Supply (Trillions)", min_value=0.0, max_value=20.0, step=0.1, 
+        st.markdown("<div class='subsubheader'>M2 Supply (Trillions)</div>", unsafe_allow_html=True)
+        
+        m2_supply = st.slider("", min_value=0.0, max_value=20.0, step=0.1, 
                                 value=st.session_state.m2_supply, key="slider_m2")
         
         col3, col4 = st.columns([1, 1])
