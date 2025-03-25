@@ -103,19 +103,16 @@ st.table(final_ts_df.head())
 # Session state for storing variables
 if 'interest_rate' not in st.session_state:
     st.session_state.interest_rate = 5.0
+else:
+    change_dff = st.session_state.interest_rate 
 if 'm2_supply' not in st.session_state:
     st.session_state.m2_supply = 10.0
+else:
+    change_m2 = st.session_state.m2_supply 
+    percent_change_m2 = change_m2/100
 
 def time_series_plot():
     
-    # last_dff = st.session_state.interest_rate 
-    # last_m2 = st.session_state.m2_supply 
-
-    change_dff = st.session_state.interest_rate 
-    change_m2 = st.session_state.m2_supply 
-
-    percent_change_m2 = change_m2/100
-
     # Get the last observed values for dff and US_M2_USD
     last_dff = final_ts_df['dff'].iloc[-1]
     last_m2 = final_ts_df['US_M2_USD'].iloc[-1]
@@ -161,7 +158,8 @@ def time_series_plot():
     plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
     plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
     plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
-    plt.title('Model 2 - Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
+    plt.title('Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
+    plt.xlim(1990, 2030)
     plt.xlabel('Date')
     plt.ylim(0.45, 0.60)
     plt.ylabel('Gini Coefficient')
