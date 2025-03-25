@@ -236,7 +236,7 @@ def second_part():
 
     st.markdown(
     "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
-    unsafe_allow_html=True
+    unsafe_allow_html=True)
 
 
         
