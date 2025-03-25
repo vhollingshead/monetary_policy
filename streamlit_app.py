@@ -125,7 +125,7 @@ def time_series_plot():
 
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
-    dff_stimulus = np.linspace(last_dff, last_dff * (1+percent_change_dff), future_steps)  # Decrease dff by X% over 5 years
+    dff_stimulus = np.linspace(last_dff, last_dff * (1-percent_change_dff), future_steps)  # Decrease dff by X% over 5 years
     m2_stimulus = np.linspace(last_m2, last_m2 * (1+percent_change_m2), future_steps)  # Increase M2 by X% over 5 years
     exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
     forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
