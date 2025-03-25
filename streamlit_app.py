@@ -171,6 +171,7 @@ def first_part():
     
     with col1:
         time_series_plot()
+        st.markdown("<div class='green-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
         
         
         
@@ -206,7 +207,7 @@ def first_part():
             col3, col4 = st.columns([1, 1])
             col3.button("Submit", key="submit_button")
             col4.button("Reset", key="reset_button")
-        st.markdown("<div class='green-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+        
         # st.write("")
         
 
