@@ -154,6 +154,7 @@ def time_series_plot():
     plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
     plt.title('Model 2 - Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
     plt.xlabel('Date')
+    plt.ylim(0.45, 0.60)
     plt.ylabel('Gini Coefficient')
     plt.legend()
     plt.grid()
@@ -190,9 +191,9 @@ def first_part():
 
         interest_rate = st.slider("", min_value=0.0, max_value=10.0, step=0.1, 
                                     value=st.session_state.interest_rate, key="slider_interest")
-        st.markdown("<div class='subsubheader'>M2 Supply (Trillions)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>M2 Supply (Billion)</div>", unsafe_allow_html=True)
         
-        m2_supply = st.slider("", min_value=0.0, max_value=20.0, step=0.1, 
+        m2_supply = st.slider("", min_value=0.0, max_value=25.0, step=0.1, 
                                 value=st.session_state.m2_supply, key="slider_m2")
         
         
