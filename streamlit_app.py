@@ -93,7 +93,9 @@ def use_case():
 
 uploaded_file_path = "models/final_ts_df_arimax.csv"
 no_index = pd.read_csv(uploaded_file_path)
-final_ts_df = no_index.set_index(no_index.columns[0])
+
+final_ts_df = no_index.rename(columns={no_index.columns[0]: "Date"})
+final_ts_df["Date"] = pd.to_datetime(final_ts_df["Date"])
 
 model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
@@ -156,7 +158,7 @@ def time_series_plot():
 
     # Plot the forecast
     plt.figure(figsize=(12, 6))
-    plt.plot(final_ts_df.index, final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
+    plt.plot(final_ts_df["Date"], final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
     plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
     plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
     plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
