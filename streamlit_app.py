@@ -27,7 +27,7 @@ st.markdown(
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
     .subheader { text-align: center; font-size: 13.5px; }
     .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
-    .grey-box { background-color: #f0f0f0; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
+    .white-box { background-color: white; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
     .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
@@ -212,7 +212,7 @@ def first_part():
         
         
 def one_point_five():
-    st.markdown("<div class='grey-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='white-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
     st.write("")
 
 
@@ -249,9 +249,10 @@ def third_part():
     
     with col2:
         # Policy Impact Table
-        st.subheader("Measuring Inequality: Gini Coefficient")
-        st.write("We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.")
-        st.write("n = total population; I = ith individual, individuals are ranked from lowest to highest income ; X_i = income of ith individual.")
+        st.markdown("<div class='subsubheader'>Measuring Inequality</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.</div>", unsafe_allow_html=True)
+        st.write("")
+        st.markdown("<div class='green-box'>n = total population; I = ith individual, individuals are ranked from lowest to highest income ; X_i = income of ith individual.</div>", unsafe_allow_html=True)
 
 def fourth_part():
     col1, col2 = st.columns([1, 1], gap="large")
