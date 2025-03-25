@@ -95,6 +95,12 @@ uploaded_file_path = "models/final_ts_df_arimax.csv"
 
 final_ts_df = pd.read_csv(uploaded_file_path)
 
+model_filename = 'models/sarimax_model_forecast.joblib'
+results2 = joblib.load(model_filename)
+last_date = final_ts_df.index[-1]
+print(last_date)
+print('thi sis last date tpe:', type(last_date))
+
 def time_series_plot():
     # Function to apply a moving average for smoothing
     def smooth_series(series, window=6):
@@ -105,12 +111,9 @@ def time_series_plot():
     # Define forecasting period (5 years = 60 months) starting from 2023
     future_steps = 60
     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
-    print(last_date)
-    print('thi sis last date tpe:', type(last_date))
+    
     forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=future_steps, freq='MS')
 
-    model_filename = 'models/sarimax_model_forecast.joblib'
-    results2 = joblib.load(model_filename)
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
     dff_stimulus = np.linspace(last_dff, last_dff - 1, future_steps)  # Decrease dff by 1% over 5 years
