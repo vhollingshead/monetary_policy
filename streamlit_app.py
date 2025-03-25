@@ -108,8 +108,12 @@ if 'm2_supply' not in st.session_state:
 
 def time_series_plot():
     
-    last_dff = st.session_state.interest_rate 
-    last_m2 = st.session_state.m2_supply 
+    # last_dff = st.session_state.interest_rate 
+    # last_m2 = st.session_state.m2_supply 
+
+    # Get the last observed values for dff and US_M2_USD
+    last_dff = final_ts_df['dff'].iloc[-1]
+    last_m2 = final_ts_df['US_M2_USD'].iloc[-1]
     # Define forecasting period (5 years = 60 months) starting from 2023
     future_steps = int(60)
     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
