@@ -27,6 +27,7 @@ st.markdown(
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
     .subheader { text-align: center; font-size: 13.5px; }
     .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
+    .grey-box { background-color: #f0f0f0; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
     .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
@@ -171,7 +172,7 @@ def first_part():
     
     with col1:
         time_series_plot()
-        st.markdown("<div class='green-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+        
         
         
         
@@ -210,6 +211,9 @@ def first_part():
         
         # st.write("")
         
+def one_point_five():
+    st.markdown("<div class='grey-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+
 
 def second_part():
     st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply</div>", unsafe_allow_html=True)
@@ -266,6 +270,7 @@ def dashboard():
 
     
     first_part()
+    one_point_five()
     second_part()
     third_part()
     fourth_part()
