@@ -197,6 +197,7 @@ def first_part():
             col3, col4 = st.columns([1, 1])
             col3.button("Submit", key="submit_button")
             col4.button("Reset", key="reset_button")
+        time_series_plot()
         
     
     
@@ -265,7 +266,7 @@ def dashboard():
     st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
     st.markdown("<div class='green-box'>Our solution aims to impact how policymakers and institutions evaluate the socioeconomic effects of monetary policy. By integrating machine learning and causal inference techniques, it aims to uncover actionable insights to promote equitable growth, mitigate income disparities, and empower governments to design fairer economic systems. The findings will hopefully shape policy decisions and contribute to global discussions on inequality to foster evidence-based actions that uplift marginalized communities and promote stronger, more resilient economies.", unsafe_allow_html=True)
 
-    time_series_plot()
+    
     first_part()
     # second_part()
     third_part()
