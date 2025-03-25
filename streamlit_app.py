@@ -95,6 +95,9 @@ uploaded_file_path = "models/final_ts_df_arimax.csv"
 
 final_ts_df = pd.read_csv(uploaded_file_path)
 
+st.table(final_ts_df.head())
+
+
 model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
