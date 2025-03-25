@@ -103,13 +103,12 @@ last_date = final_ts_df.index[-1]
 # Session state for storing variables
 if 'interest_rate' not in st.session_state:
     st.session_state.interest_rate = 5.0
-else:
-    change_dff = st.session_state.interest_rate 
+change_dff = st.session_state.interest_rate  
+
 if 'm2_supply' not in st.session_state:
     st.session_state.m2_supply = 10.0
-else:
-    change_m2 = st.session_state.m2_supply 
-    percent_change_m2 = change_m2/100
+change_m2 = st.session_state.m2_supply  
+percent_change_m2 = change_m2 / 100  
 
 def time_series_plot():
     
@@ -196,30 +195,29 @@ def first_part():
         st.markdown("<div class='subsubheader'>Interest Rate Change (%)</div>", unsafe_allow_html=True)
 
         interest_rate = st.slider("", min_value=0.0, max_value=200.0, step=0.1, 
-                                    value=st.session_state.interest_rate, key="slider_interest")
-        
+                                value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
+
         st.markdown("<div class='subsubheader'>M2 Supply Change (%)</div>", unsafe_allow_html=True)
-        
+
         m2_supply = st.slider("", min_value=0.0, max_value=200.0, step=0.05, 
-                                value=st.session_state.m2_supply, key="slider_m2")
-        
-        
+                            value=st.session_state.get("m2_supply", 10.0), key="slider_m2")
 
         col3, col4 = st.columns([1, 1])
+
+        # Submit button: Updates session state and refreshes UI
         if col3.button("Submit", key="submit_button"):
-            st.session_state.interest_rate = interest_rate  # Save the interest rate value
-            st.session_state.m2_supply= m2_supply  # Save the money supply value
+            st.session_state.interest_rate = interest_rate
+            st.session_state.m2_supply = m2_supply
             st.success(f"Interest rate saved: {st.session_state.interest_rate}%")
             st.success(f"M2 Supply saved: {st.session_state.m2_supply}%")
-        
+            st.rerun()  # Ensures values update properly
+
+        # Reset button: Resets session state and refreshes UI
         if col4.button("Reset", key="reset_button"):
             st.session_state.interest_rate = 5.0  # Reset to default
             st.session_state.m2_supply = 10.0  # Reset to default
-            st.rerun()
-            
-            col3, col4 = st.columns([1, 1])
-            col3.button("Submit", key="submit_button")
-            col4.button("Reset", key="reset_button")
+            st.rerun()  # Ensures sliders reset
+
         
         
         
