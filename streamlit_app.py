@@ -111,6 +111,11 @@ def time_series_plot():
     # last_dff = st.session_state.interest_rate 
     # last_m2 = st.session_state.m2_supply 
 
+    change_dff = st.session_state.interest_rate 
+    change_m2 = st.session_state.m2_supply 
+
+    percent_change_m2 = change_m2/100
+
     # Get the last observed values for dff and US_M2_USD
     last_dff = final_ts_df['dff'].iloc[-1]
     last_m2 = final_ts_df['US_M2_USD'].iloc[-1]
@@ -122,8 +127,8 @@ def time_series_plot():
 
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
-    dff_stimulus = np.linspace(last_dff, last_dff - 1, future_steps)  # Decrease dff by 1% over 5 years
-    m2_stimulus = np.linspace(last_m2, last_m2 * 1.1, future_steps)  # Increase M2 by 10% over 5 years
+    dff_stimulus = np.linspace(last_dff, last_dff - change_dff/100, future_steps)  # Decrease dff by X% over 5 years
+    m2_stimulus = np.linspace(last_m2, last_m2 * (1+percent_change_m2), future_steps)  # Increase M2 by X% over 5 years
     exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
     forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
 
@@ -134,8 +139,8 @@ def time_series_plot():
     forecast_neutral = results2.forecast(steps=future_steps, exog=exog_neutral)
 
     # Scenario 3: Tightening (higher dff, lower US_M2_USD)
-    dff_tightening = np.linspace(last_dff, last_dff + 1, future_steps)  # Increase dff by 1% over 5 years
-    m2_tightening = np.linspace(last_m2, last_m2 * 0.9, future_steps)  # Decrease M2 by 10 over 5 years
+    dff_tightening = np.linspace(last_dff, last_dff + change_dff/100, future_steps)  # Increase dff by 1% over 5 years
+    m2_tightening = np.linspace(last_m2, last_m2 * (1-percent_change_m2), future_steps)  # Decrease M2 by X% over 5 years
     exog_tightening = pd.DataFrame({'dff': dff_tightening, 'US_M2_USD': m2_tightening}, index=forecast_dates)
     forecast_tightening = results2.forecast(steps=future_steps, exog=exog_tightening)
 
@@ -191,13 +196,14 @@ def first_part():
     with col2:
 
         # Interactive Controls
-        st.markdown("<div class='subsubheader'>Interest Rate (%)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Interest Rate Change (%)</div>", unsafe_allow_html=True)
 
-        interest_rate = st.slider("", min_value=0.0, max_value=10.0, step=0.1, 
+        interest_rate = st.slider("", min_value=0.0, max_value=200.0, step=0.1, 
                                     value=st.session_state.interest_rate, key="slider_interest")
-        st.markdown("<div class='subsubheader'>M2 Supply (Billion)</div>", unsafe_allow_html=True)
         
-        m2_supply = st.slider("", min_value=0.0, max_value=25.0, step=0.1, 
+        st.markdown("<div class='subsubheader'>M2 Supply Change (%)</div>", unsafe_allow_html=True)
+        
+        m2_supply = st.slider("", min_value=0.0, max_value=200.0, step=0.05, 
                                 value=st.session_state.m2_supply, key="slider_m2")
         
         
