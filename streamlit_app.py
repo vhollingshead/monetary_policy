@@ -25,15 +25,15 @@ st.markdown(
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
     .header { text-align: center; color: #4F7849; font-size: 48px; font-weight: bold; }
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
-    .tight_subheader { text-align: center; color: #ffbf6d; font-size: 14px; font-weight: bold; }
+    .stim_subheader { text-align: center; color: #ffbf6d; font-size: 14px; font-weight: bold; }
     .neut_subheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
-    .stim_subheader { text-align: center; color: #ff6f6f; font-size: 14px; font-weight: bold; }
+    .tight_subheader { text-align: center; color: #ff6f6f; font-size: 14px; font-weight: bold; }
     .subheader { text-align: center; font-size: 13.5px; }
     .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
     .white-box { background-color: white; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
-    .tight-box { background-color: #ffbf6d; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
-    .neut-box { background-color: #4F7849; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
-    .stim-box { background-color: #ff6f6f; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
+    .stim-box { background-color: #ff9e11; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
+    .neut-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
+    .tight-box { background-color: #ff6f6f; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
     .large-number { text-align: center; font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
@@ -230,7 +230,7 @@ def first_part():
         
         
 def one_point_five():
-    st.markdown("<div class='white-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='white-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we project the interest rate and M2 supply % change over a 5 year period.</div>", unsafe_allow_html=True)
     st.write("")
 
 
@@ -240,11 +240,9 @@ def second_part():
     col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
     with col1:
-        st.markdown("<div class='tigh_subheader'>Tightening</div>", unsafe_allow_html=True)
+        st.markdown("<div class='tight_subheader'>Tightening</div>", unsafe_allow_html=True)
         
-        st.markdown("<div class='tight-box'>Decrease Interest Rate by XX %, Decrease M2 Supply by XX % over 5 years. </div>", unsafe_allow_html=True)
-        st.write("")
-        st.markdown("<div class='tight-box'>This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit. </div>", unsafe_allow_html=True)
+        st.markdown("<div class='tight-box'>The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. </div>", unsafe_allow_html=True)
         
         
         
@@ -252,10 +250,12 @@ def second_part():
     st.markdown("</div>", unsafe_allow_html=True)
     
     with col2:
-        st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. No adjustments are made to interest rate or M2. </div>", unsafe_allow_html=True)
+        st.markdown("<div class='neut_subheader'>Neutral</div>", unsafe_allow_html=True)
+        st.markdown("<div class='neut-box'>The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. No adjustments are made to interest rate or M2. </div>", unsafe_allow_html=True)
         st.write("")
     with col3:
-        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. We increase interest rate by 1 percent and decrease M2 by 10 percent over 5 years. </div>", unsafe_allow_html=True)
+        st.markdown("<div class='stim_subheader'>Stimulus</div>", unsafe_allow_html=True)
+        st.markdown("<div class='stim-box'>The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. </div>", unsafe_allow_html=True)
 
     st.markdown(
     "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
