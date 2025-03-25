@@ -108,6 +108,8 @@ change_dff = st.session_state.interest_rate
 if 'm2_supply' not in st.session_state:
     st.session_state.m2_supply = 10.0
 change_m2 = st.session_state.m2_supply  
+
+percent_change_dff = change_dff/100
 percent_change_m2 = change_m2 / 100  
 
 def time_series_plot():
@@ -123,7 +125,7 @@ def time_series_plot():
 
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
-    dff_stimulus = np.linspace(last_dff, last_dff - change_dff/100, future_steps)  # Decrease dff by X% over 5 years
+    dff_stimulus = np.linspace(last_dff, last_dff * (1+percent_change_dff), future_steps)  # Decrease dff by X% over 5 years
     m2_stimulus = np.linspace(last_m2, last_m2 * (1+percent_change_m2), future_steps)  # Increase M2 by X% over 5 years
     exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
     forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
@@ -135,7 +137,7 @@ def time_series_plot():
     forecast_neutral = results2.forecast(steps=future_steps, exog=exog_neutral)
 
     # Scenario 3: Tightening (higher dff, lower US_M2_USD)
-    dff_tightening = np.linspace(last_dff, last_dff + change_dff/100, future_steps)  # Increase dff by 1% over 5 years
+    dff_tightening = np.linspace(last_dff, last_dff * (1+percent_change_dff), future_steps)  # Increase dff by 1% over 5 years
     m2_tightening = np.linspace(last_m2, last_m2 * (1-percent_change_m2), future_steps)  # Decrease M2 by X% over 5 years
     exog_tightening = pd.DataFrame({'dff': dff_tightening, 'US_M2_USD': m2_tightening}, index=forecast_dates)
     forecast_tightening = results2.forecast(steps=future_steps, exog=exog_tightening)
