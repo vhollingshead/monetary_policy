@@ -180,6 +180,8 @@ def first_part():
         m2_supply = st.slider("", min_value=0.0, max_value=20.0, step=0.1, 
                                 value=st.session_state.m2_supply, key="slider_m2")
         
+        time_series_plot()
+
         col3, col4 = st.columns([1, 1])
         if col3.button("Submit", key="submit_button"):
             st.session_state.interest_rate = interest_rate  # Save the interest rate value
@@ -262,7 +264,7 @@ def dashboard():
     st.markdown("<div class='green-box'>Our solution aims to impact how policymakers and institutions evaluate the socioeconomic effects of monetary policy. By integrating machine learning and causal inference techniques, it aims to uncover actionable insights to promote equitable growth, mitigate income disparities, and empower governments to design fairer economic systems. The findings will hopefully shape policy decisions and contribute to global discussions on inequality to foster evidence-based actions that uplift marginalized communities and promote stronger, more resilient economies.", unsafe_allow_html=True)
 
     first_part()
-    second_part()
+    # second_part()
     third_part()
     fourth_part()
 
