@@ -98,8 +98,8 @@ final_ts_df = pd.read_csv(uploaded_file_path)
 model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
-print(last_date)
-print('thi sis last date tpe:', type(last_date))
+st.write(last_date)
+st.write('thi sis last date tpe:', type(last_date))
 
 def time_series_plot():
     # Function to apply a moving average for smoothing
