@@ -214,7 +214,7 @@ def first_part():
     with col2:
 
         # Interactive Controls
-        st.markdown("<div class='subsubheader'>Interest Rate Change (By Percentage Point)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Interest Rate Change (by % point)</div>", unsafe_allow_html=True)
 
         interest_rate = st.slider("", min_value=0.0, max_value=20.0, step=0.25, 
                                 value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
