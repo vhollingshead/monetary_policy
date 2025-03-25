@@ -207,7 +207,7 @@ def first_part():
         col3, col4 = st.columns([1, 1])
 
         # Submit button: Updates session state and refreshes UI
-        if col3.button("Submit", key="submit_button", use_container_width=True):
+        if col3.button("✅", key="submit_button"):
             st.session_state.interest_rate = interest_rate
             st.session_state.m2_supply = m2_supply
             st.rerun()  # Ensures values update properly
@@ -215,7 +215,7 @@ def first_part():
             st.success(f"M2 Supply saved: {st.session_state.m2_supply}%")
 
         # Reset button: Resets session state and refreshes UI
-        if col4.button("Reset", key="reset_button", use_container_width=True):
+        if col4.button("❌", key="reset_button"):
             st.session_state.interest_rate = 5.0  # Reset to default
             st.session_state.m2_supply = 10.0  # Reset to default
             st.rerun()  # Ensures sliders reset
