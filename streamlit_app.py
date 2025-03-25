@@ -249,7 +249,6 @@ def third_part():
         st.markdown("<div class='white-box'>n = total population; i = ith individual, individuals are ranked from lowest to highest income ; x_i = income share of ith individual.</div>", unsafe_allow_html=True)
 
     with col2:
-        # Policy Impact Table
         st.markdown("<div class='subsubheader'>Measuring Inequality</div>", unsafe_allow_html=True)
         st.markdown("<div class='green-box'>We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.</div>", unsafe_allow_html=True)
         # st.write("")
@@ -259,15 +258,16 @@ def fourth_part():
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
-        st.subheader("Inequality Pulse Check")
+        st.markdown("<div class='subsubheader'>Inequality Pulse Check</div>", unsafe_allow_html=True)
         st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
-        st.write("Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators.")
+        st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators.</div>", unsafe_allow_html=True)
     
     with col2:
         # Indirect Indicators
         
         st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
-        st.write("For more information on the indirect economic indicators used to approximate the monthly Gini coefficient, please refer to our Methodologies.")
+        st.markdown("<div class='white-box'>For more information on the indirect economic indicators used to approximate the monthly Gini coefficient, please refer to our Methodologies.</div>", unsafe_allow_html=True)
+        st.write("")
 
 
 def dashboard():
