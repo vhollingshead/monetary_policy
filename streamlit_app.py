@@ -115,7 +115,7 @@ def time_series_plot():
     future_steps = 60
     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
     
-    forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=future_steps, freq='MS')
+    forecast_dates = pd.date_range('2023-03-02', periods=future_steps, freq='MS')
 
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
