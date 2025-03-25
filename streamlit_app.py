@@ -98,7 +98,7 @@ model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
-st.table(final_ts_df.tail)
+st.table(final_ts_df.tail())
 
 # Session state for storing variables
 if 'interest_rate' not in st.session_state:
