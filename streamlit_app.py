@@ -91,15 +91,7 @@ def use_case():
     st.title("Use Case")
     st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
 
-# # Sidebar Navigation with Icons
-# with st.sidebar:
-#     selected = option_menu(
-#         "Navigation", ["Home", "Dashboard", "Policy Impact", "Gini Coefficient", "About"],
-#         icons=["house", "graph-up-arrow", "lightbulb", "clipboard-data", "info-circle"],
-#         menu_icon="cast", default_index=1
-#     )
-
-uploaded_file_path = "/workspaces/monetary_policy/models/final_ts_df_arimax.csv"
+uploaded_file_path = "models/final_ts_df_arimax.csv"
 
 final_ts_df = pd.read_csv(uploaded_file_path)
 
