@@ -99,54 +99,66 @@ def use_case():
 #         menu_icon="cast", default_index=1
 #     )
 
+uploaded_file_path = "/workspaces/monetary_policy/models/final_ts_df_arimax.csv"
+
+final_ts_df = pd.read_csv(uploaded_file_path)
+
 def time_series_plot():
-    interest_rate = st.session_state.interest_rate 
-    m2_supply = st.session_state.m2_supply 
+    # Function to apply a moving average for smoothing
+    def smooth_series(series, window=6):
+        return series.rolling(window=window, min_periods=1).mean()
+    
+    last_dff = st.session_state.interest_rate 
+    last_m2 = st.session_state.m2_supply 
+    # Define forecasting period (5 years = 60 months) starting from 2023
+    future_steps = 60
+    last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
+    forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=future_steps, freq='MS')
 
-    model_filename = 'linear_regression_model.joblib'
-    loaded_model = joblib.load(model_filename)
+    model_filename = 'models/sarimax_model_forecast.joblib'
+    results2 = joblib.load(model_filename)
 
-    # Load the time series trained model
-    timeseries_model_filename = "time_series_arima_model.joblib"
-    timeseries_loaded_model = joblib.load(timeseries_model_filename)
+    # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
+    dff_stimulus = np.linspace(last_dff, last_dff - 1, future_steps)  # Decrease dff by 1% over 5 years
+    m2_stimulus = np.linspace(last_m2, last_m2 * 1.1, future_steps)  # Increase M2 by 10% over 5 years
+    exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
+    forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
 
+    # Scenario 2: Neutral (dff and US_M2_USD stay the same)
+    dff_neutral = np.full(future_steps, last_dff)
+    m2_neutral = np.full(future_steps, last_m2)
+    exog_neutral = pd.DataFrame({'dff': dff_neutral, 'US_M2_USD': m2_neutral}, index=forecast_dates)
+    forecast_neutral = results2.forecast(steps=future_steps, exog=exog_neutral)
 
-    # Generate dummy time series data
-    def generate_data(interest_rate):
-        np.random.seed(42)
-        time = pd.date_range(start="2020-01-01", periods=50, freq='M')
-        base_gini = 0.35 + (interest_rate * 0.005)  # Simulated effect of interest rate on Gini coefficient
-        gini_values = base_gini + np.random.normal(0, 0.02, len(time))  # Adding some noise
-        return pd.DataFrame({"Time": time, "Gini Coefficient": gini_values})
+    # Scenario 3: Tightening (higher dff, lower US_M2_USD)
+    dff_tightening = np.linspace(last_dff, last_dff + 1, future_steps)  # Increase dff by 1% over 5 years
+    m2_tightening = np.linspace(last_m2, last_m2 * 0.9, future_steps)  # Decrease M2 by 10 over 5 years
+    exog_tightening = pd.DataFrame({'dff': dff_tightening, 'US_M2_USD': m2_tightening}, index=forecast_dates)
+    forecast_tightening = results2.forecast(steps=future_steps, exog=exog_tightening)
 
-    # 4. Adjust Time Series Based on Interest Rate
-    # Simulating the effect of the interest rate on future values
-    # Higher interest rates dampen growth in this example
-    adjustment_factor = 1 - (interest_rate / 100)  # Reduces future forecast values based on interest rate
+    # Transform forecasts back to Gini scale (reverse differencing)
+    last_gini = final_ts_df['gini_coefficient'].iloc[-1]  # Last observed Gini
+    forecast_gini_stimulus = last_gini + np.cumsum(forecast_stimulus)
+    forecast_gini_neutral = last_gini + np.cumsum(forecast_neutral)
+    forecast_gini_tightening = last_gini + np.cumsum(forecast_tightening)
 
-    # Generate forecast for the next 10 days
-    forecast = timeseries_loaded_model.forecast(steps=10)
-    adjusted_forecast = forecast * adjustment_factor  # Adjusting the forecast based on interest rate
+    # Create DataFrames for each scenario's forecast
+    forecast_df_stimulus = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Stimulus)': forecast_gini_stimulus})
+    forecast_df_neutral = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Neutral)': forecast_gini_neutral})
+    forecast_df_tightening = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Tightening)': forecast_gini_tightening})
 
-    # 1. Generate Dummy Time Series Data
-    np.random.seed(42)
-    date_range = pd.date_range(start='2020-01-01', periods=100, freq='D')
-    data = 50 + np.arange(100) * 0.5 + np.random.normal(0, 2, 100)
-    time_series_data = pd.Series(data, index=date_range)
-
-    # 5. Plot Historical Data and Adjusted Forecast
-    # st.write("### Time Series Forecast Visualization")
-    plt.figure(figsize=(10, 6))
-    plt.plot(time_series_data, label='Historical Data')
-    forecast_index = pd.date_range(start=time_series_data.index[-1] + pd.Timedelta(days=1), periods=10, freq='D')
-    plt.plot(forecast_index, adjusted_forecast, label=f'Forecast (Adjusted for {interest_rate}%)', color='red')
-    plt.title('Time Series Forecast Adjusted by Interest Rate')
+    # Plot the forecast
+    plt.figure(figsize=(12, 6))
+    plt.plot(final_ts_df.index, final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
+    plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
+    plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
+    plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
+    plt.title('Model 2 - Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
     plt.xlabel('Date')
-    plt.ylabel('Value')
+    plt.ylabel('Gini Coefficient')
     plt.legend()
-
-    # Display the plot in Streamlit
-    st.pyplot(plt)
+    plt.grid()
+    plt.show()
 
 # Session state for storing variables
 if 'interest_rate' not in st.session_state:
@@ -175,9 +187,6 @@ def first_part():
         
         
         
-        
-    
-    
     
     with col2:
 
@@ -223,17 +232,17 @@ def second_part():
 
     with col1:
         
-        st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. In this scenario, we decrease the interest rate by 1 percent and increase M2 by 10 percent over 5 years. </div>", unsafe_allow_html=True)
         # st.write("")
         
     
     st.markdown("</div>", unsafe_allow_html=True)
     
     with col2:
-        st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. In this scenario, financial conditions remain steady, and inequality trends may follow broader economic factors like wage growth and employment levels.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. No adjustments are made to interest rate or M2. </div>", unsafe_allow_html=True)
         st.write("")
     with col3:
-        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. We increase interest rate by 1 percent and decrease M2 by 10 percent over 5 years. </div>", unsafe_allow_html=True)
 
     st.markdown(
     "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
