@@ -232,9 +232,12 @@ def second_part():
         st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. In this scenario, financial conditions remain steady, and inequality trends may follow broader economic factors like wage growth and employment levels.</div>", unsafe_allow_html=True)
         st.write("")
     with col3:
-        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth, though it may also risk inflation if not managed carefully.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth.</div>", unsafe_allow_html=True)
 
-    st.divider()
+    st.markdown(
+    "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
+    unsafe_allow_html=True
+
 
         
 
