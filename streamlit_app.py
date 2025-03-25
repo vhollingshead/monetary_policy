@@ -28,7 +28,7 @@ st.markdown(
     .subheader { text-align: center; font-size: 13.5px; }
     .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
     .white-box { background-color: white; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
-    .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
+    .large-number { text-align: center; font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
     unsafe_allow_html=True
