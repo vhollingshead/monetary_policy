@@ -25,9 +25,15 @@ st.markdown(
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
     .header { text-align: center; color: #4F7849; font-size: 48px; font-weight: bold; }
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
+    .tight_subheader { text-align: center; color: #ffbf6d; font-size: 14px; font-weight: bold; }
+    .neut_subheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
+    .stim_subheader { text-align: center; color: #ff6f6f; font-size: 14px; font-weight: bold; }
     .subheader { text-align: center; font-size: 13.5px; }
     .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
     .white-box { background-color: white; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
+    .tight-box { background-color: #ffbf6d; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
+    .neut-box { background-color: #4F7849; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
+    .stim-box { background-color: #ff6f6f; color: black; padding: 12px; border-radius: 5px; font-size: 12px }
     .large-number { text-align: center; font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
@@ -234,9 +240,13 @@ def second_part():
     col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
     with col1:
+        st.markdown("<div class='tigh_subheader'>Tightening</div>", unsafe_allow_html=True)
         
-        st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. In this scenario, we decrease the interest rate by 1 percent and increase M2 by 10 percent over 5 years. </div>", unsafe_allow_html=True)
-        # st.write("")
+        st.markdown("<div class='tight-box'>Decrease Interest Rate by XX %, Decrease M2 Supply by XX % over 5 years. </div>", unsafe_allow_html=True)
+        st.write("")
+        st.markdown("<div class='tight-box'>This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit. </div>", unsafe_allow_html=True)
+        
+        
         
     
     st.markdown("</div>", unsafe_allow_html=True)
