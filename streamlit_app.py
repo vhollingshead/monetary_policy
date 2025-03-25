@@ -98,7 +98,7 @@ model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
-st.table(final_ts_df.head())
+# st.table(final_ts_df.head())
 
 # Session state for storing variables
 if 'interest_rate' not in st.session_state:
@@ -159,7 +159,6 @@ def time_series_plot():
     plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
     plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
     plt.title('Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
-    plt.xlim(1990, 2030)
     plt.xlabel('Date')
     plt.ylim(0.45, 0.60)
     plt.ylabel('Gini Coefficient')
