@@ -242,7 +242,7 @@ def second_part():
     with col1:
         st.markdown("<div class='tight_subheader'>Tightening</div>", unsafe_allow_html=True)
         
-        st.markdown("<div class='tight-box'>The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. </div>", unsafe_allow_html=True)
+        st.markdown("<div class='tight-box'>The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially curbing asset inflation and stabilizing prices, helping lower-income households.</div>", unsafe_allow_html=True)
         
         
         
