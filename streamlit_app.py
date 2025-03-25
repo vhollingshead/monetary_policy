@@ -179,9 +179,9 @@ def time_series_plot():
     # Plot the forecast
     plt.figure(figsize=(12, 6))
     plt.plot(final_ts_df["Date"], final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
-    plt.plot(forecast_dates, forecast_df_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
-    plt.plot(forecast_dates, forecast_df_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
-    plt.plot(forecast_dates, forecast_df_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
+    plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
+    plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
+    plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
     plt.title('Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
     plt.xlabel('Date')
     plt.ylim(0.45, 0.60)
