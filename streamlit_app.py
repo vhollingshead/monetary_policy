@@ -209,10 +209,11 @@ def first_part():
             col3.button("Submit", key="submit_button")
             col4.button("Reset", key="reset_button")
         
-        # st.write("")
+        
         
 def one_point_five():
     st.markdown("<div class='grey-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+    st.write("")
 
 
 def second_part():
@@ -232,6 +233,8 @@ def second_part():
         st.write("")
     with col3:
         st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth, though it may also risk inflation if not managed carefully.</div>", unsafe_allow_html=True)
+
+    st.divider()
 
         
 
