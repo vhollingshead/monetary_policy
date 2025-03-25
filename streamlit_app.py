@@ -200,8 +200,14 @@ def first_part():
     with col2:
         st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply</div>", unsafe_allow_html=True)
         st.markdown("<div class='green-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
+        st.write("")
         st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit.</div>", unsafe_allow_html=True)
+        st.write("")
+
+        
         st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. In this scenario, financial conditions remain steady, and inequality trends may follow broader economic factors like wage growth and employment levels.</div>", unsafe_allow_html=True)
+        st.write("")
+        
         st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth, though it may also risk inflation if not managed carefully.</div>", unsafe_allow_html=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
