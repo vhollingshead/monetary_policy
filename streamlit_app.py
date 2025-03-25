@@ -109,7 +109,7 @@ def time_series_plot():
     last_dff = st.session_state.interest_rate 
     last_m2 = st.session_state.m2_supply 
     # Define forecasting period (5 years = 60 months) starting from 2023
-    future_steps = 60
+    future_steps = int(60)
     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
     
     forecast_dates = pd.date_range('2023-03-02', periods=future_steps, freq='MS')
