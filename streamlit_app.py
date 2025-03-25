@@ -218,6 +218,7 @@ def one_point_five():
 
 def second_part():
     st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply Scenarios and Potential Outcomes</div>", unsafe_allow_html=True)
+    st.write("")
     col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
     with col1:
@@ -250,6 +251,7 @@ def third_part():
 
     with col2:
         st.markdown("<div class='subsubheader'>Measuring Inequality</div>", unsafe_allow_html=True)
+        st.write("")
         st.markdown("<div class='green-box'>We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.</div>", unsafe_allow_html=True)
         # st.write("")
 
