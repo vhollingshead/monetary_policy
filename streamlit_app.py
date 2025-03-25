@@ -118,7 +118,6 @@ if 'm2_supply' not in st.session_state:
     st.session_state.m2_supply = 10.0
 change_m2 = st.session_state.m2_supply  
 
-percent_change_dff = change_dff/100
 percent_change_m2 = change_m2 / 100  
 
 def time_series_plot():
@@ -134,7 +133,7 @@ def time_series_plot():
 
 
     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
-    dff_stimulus = np.linspace(last_dff, last_dff * (1-percent_change_dff), future_steps)  # Decrease dff by X% over 5 years
+    dff_stimulus = np.linspace(last_dff, last_dff - change_dff, future_steps)  # Decrease dff by X% over 5 years
     m2_stimulus = np.linspace(last_m2, last_m2 * (1+percent_change_m2), future_steps)  # Increase M2 by X% over 5 years
     exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
     forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
@@ -146,16 +145,31 @@ def time_series_plot():
     forecast_neutral = results2.forecast(steps=future_steps, exog=exog_neutral)
 
     # Scenario 3: Tightening (higher dff, lower US_M2_USD)
-    dff_tightening = np.linspace(last_dff, last_dff * (1+percent_change_dff), future_steps)  # Increase dff by 1% over 5 years
+    dff_tightening = np.linspace(last_dff, last_dff + change_dff, future_steps)  # Increase dff by X% over 5 years
     m2_tightening = np.linspace(last_m2, last_m2 * (1-percent_change_m2), future_steps)  # Decrease M2 by X% over 5 years
     exog_tightening = pd.DataFrame({'dff': dff_tightening, 'US_M2_USD': m2_tightening}, index=forecast_dates)
     forecast_tightening = results2.forecast(steps=future_steps, exog=exog_tightening)
 
+    # Scale down the forecasted first differences
+    scaling_factor = 0.3  # Adjust this to control magnitude (
+
+    forecast_stimulus_scaled = forecast_stimulus * scaling_factor
+    forecast_neutral_scaled = forecast_neutral * scaling_factor
+    forecast_tightening_scaled = forecast_tightening * scaling_factor
+
     # Transform forecasts back to Gini scale (reverse differencing)
     last_gini = final_ts_df['gini_coefficient'].iloc[-1]  # Last observed Gini
-    forecast_gini_stimulus = last_gini + np.cumsum(forecast_stimulus)
-    forecast_gini_neutral = last_gini + np.cumsum(forecast_neutral)
-    forecast_gini_tightening = last_gini + np.cumsum(forecast_tightening)
+    forecast_gini_stimulus = last_gini + np.cumsum(forecast_stimulus_scaled)
+    forecast_gini_neutral = last_gini + np.cumsum(forecast_neutral_scaled)
+    forecast_gini_tightening = last_gini + np.cumsum(forecast_tightening_scaled)
+
+    # Smooth forecasted series
+    def smooth_series(series, window=6):
+        return series.rolling(window=window, min_periods=1).mean()
+
+    forecast_gini_stimulus = smooth_series(forecast_gini_stimulus)
+    forecast_gini_neutral = smooth_series(forecast_gini_neutral)
+    forecast_gini_tightening = smooth_series(forecast_gini_tightening)
 
     # Create DataFrames for each scenario's forecast
     forecast_df_stimulus = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Stimulus)': forecast_gini_stimulus})
@@ -165,9 +179,9 @@ def time_series_plot():
     # Plot the forecast
     plt.figure(figsize=(12, 6))
     plt.plot(final_ts_df["Date"], final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
-    plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
-    plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
-    plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
+    plt.plot(forecast_dates, forecast_df_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
+    plt.plot(forecast_dates, forecast_df_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
+    plt.plot(forecast_dates, forecast_df_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
     plt.title('Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
     plt.xlabel('Date')
     plt.ylim(0.45, 0.60)
@@ -200,14 +214,14 @@ def first_part():
     with col2:
 
         # Interactive Controls
-        st.markdown("<div class='subsubheader'>Interest Rate Change (%)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Interest Rate Change (By Percentage Point)</div>", unsafe_allow_html=True)
 
-        interest_rate = st.slider("", min_value=0.0, max_value=200.0, step=0.1, 
+        interest_rate = st.slider("", min_value=0.0, max_value=20.0, step=0.25, 
                                 value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
 
         st.markdown("<div class='subsubheader'>M2 Supply Change (%)</div>", unsafe_allow_html=True)
 
-        m2_supply = st.slider("", min_value=0.0, max_value=200.0, step=0.05, 
+        m2_supply = st.slider("", min_value=0.0, max_value=100.0, step=0.05, 
                             value=st.session_state.get("m2_supply", 10.0), key="slider_m2")
 
         col3, col4 = st.columns([1, 1])
@@ -230,7 +244,7 @@ def first_part():
         
         
 def one_point_five():
-    st.markdown("<div class='white-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we project the interest rate and M2 supply % change over a 5 year period.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios. Interest Rate Change is by percentage point, for example, a change of 2 percentage points will increase an original interest rate of 4% to a new interest rate of 6%. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we project the interest rate and M2 supply % change over a 5 year period.</div>", unsafe_allow_html=True)
     st.write("")
 
 
