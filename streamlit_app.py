@@ -167,7 +167,7 @@ def first_part():
 )
     # Create a centered container for two columns
     st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 1], gap="large")
+    col1, col2 = st.columns([0.7, 0.3], gap="large")
     
     with col1:
         # Interactive Controls
