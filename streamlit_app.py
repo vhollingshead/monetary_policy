@@ -105,6 +105,8 @@ def time_series_plot():
     # Define forecasting period (5 years = 60 months) starting from 2023
     future_steps = 60
     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
+    print(last_date)
+    print('thi sis last date tpe:', type(last_date))
     forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=future_steps, freq='MS')
 
     model_filename = 'models/sarimax_model_forecast.joblib'
