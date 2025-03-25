@@ -170,6 +170,15 @@ def first_part():
     col1, col2 = st.columns([0.7, 0.3], gap="large")
     
     with col1:
+        time_series_plot()
+        
+        
+        
+    
+    
+    
+    with col2:
+
         # Interactive Controls
         st.markdown("<div class='subsubheader'>Interest Rate (%)</div>", unsafe_allow_html=True)
 
@@ -197,41 +206,29 @@ def first_part():
             col3, col4 = st.columns([1, 1])
             col3.button("Submit", key="submit_button")
             col4.button("Reset", key="reset_button")
-        time_series_plot()
-        
-    
-    
-    
-    with col2:
-        st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply</div>", unsafe_allow_html=True)
         st.markdown("<div class='green-box'>Adjust the Interest Rate & M2 Supply to see how the inequality forecast changes under different scenarios. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we assume a 5% M2 Supply increase year over year to produce the 5 year projection.</div>", unsafe_allow_html=True)
-        st.write("")
-        st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit.</div>", unsafe_allow_html=True)
-        st.write("")
-
+        # st.write("")
         
-        st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. In this scenario, financial conditions remain steady, and inequality trends may follow broader economic factors like wage growth and employment levels.</div>", unsafe_allow_html=True)
-        st.write("")
-        
-        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth, though it may also risk inflation if not managed carefully.</div>", unsafe_allow_html=True)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
 
 def second_part():
-    col1, col2 = st.columns([1, 1], gap="large")
+    st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply</div>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
     with col1:
-        time_series_plot()
+        
+        st.markdown("<div class='green-box'>Tightening: The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially increasing inequality as lower-income households face higher borrowing costs and reduced access to credit.</div>", unsafe_allow_html=True)
+        # st.write("")
+        
+    
+    st.markdown("</div>", unsafe_allow_html=True)
     
     with col2:
-        # Policy Impact Table
-        st.subheader("Interest Rate & M2 Supply Impact")
-        policy_data = pd.DataFrame({
-            "Policy": ["Tightening (Stimulus)", "Neutral (Green)", "Stimulus (Orange)"],
-            "Rates": ["Higher, Slower M2 Growth", "Stable Rates, Stable M2", "Lower Rates, Fast M2 Growth"],
-            "Inequality Impact": ["Decreases Sharply", "Decreases Moderately", "Increases Sharply"]
-        })
-        st.table(policy_data)
+        st.markdown("<div class='green-box'>Neutral: The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. In this scenario, financial conditions remain steady, and inequality trends may follow broader economic factors like wage growth and employment levels.</div>", unsafe_allow_html=True)
+        st.write("")
+    with col3:
+        st.markdown("<div class='green-box'>Stimulus: The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. This can boost economic activity and job creation, potentially reducing inequality by increasing access to credit and stimulating wage growth, though it may also risk inflation if not managed carefully.</div>", unsafe_allow_html=True)
+
+        
 
 def third_part():
     col1, col2 = st.columns([1, 1], gap="large")
@@ -268,7 +265,7 @@ def dashboard():
 
     
     first_part()
-    # second_part()
+    second_part()
     third_part()
     fourth_part()
 
