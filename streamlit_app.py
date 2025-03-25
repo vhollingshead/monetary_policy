@@ -101,8 +101,6 @@ st.table(final_ts_df.head())
 model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
-st.write(last_date)
-st.write('thi sis last date tpe:', type(last_date))
 
 def time_series_plot():
     # Function to apply a moving average for smoothing
