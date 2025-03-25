@@ -187,10 +187,7 @@ def first_part():
     
     with col1:
         time_series_plot()
-        
-        
-        
-    
+      
     with col2:
 
         # Interactive Controls
@@ -210,9 +207,9 @@ def first_part():
         if col3.button("Submit", key="submit_button"):
             st.session_state.interest_rate = interest_rate
             st.session_state.m2_supply = m2_supply
+            st.rerun()  # Ensures values update properly
             st.success(f"Interest rate saved: {st.session_state.interest_rate}%")
             st.success(f"M2 Supply saved: {st.session_state.m2_supply}%")
-            st.rerun()  # Ensures values update properly
 
         # Reset button: Resets session state and refreshes UI
         if col4.button("Reset", key="reset_button"):
