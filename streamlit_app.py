@@ -155,7 +155,7 @@ def time_series_plot():
     plt.ylabel('Gini Coefficient')
     plt.legend()
     plt.grid()
-    plt.show()
+    st.pyplot(plt)
 
 
 
