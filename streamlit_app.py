@@ -217,7 +217,7 @@ def one_point_five():
 
 
 def second_part():
-    st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply Scenarios and Potential Outcomes</div>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
     with col1:
