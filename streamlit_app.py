@@ -98,10 +98,13 @@ model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
+# Session state for storing variables
+if 'interest_rate' not in st.session_state:
+    st.session_state.interest_rate = 5.0
+if 'm2_supply' not in st.session_state:
+    st.session_state.m2_supply = 10.0
+
 def time_series_plot():
-    # Function to apply a moving average for smoothing
-    def smooth_series(series, window=6):
-        return series.rolling(window=window, min_periods=1).mean()
     
     last_dff = st.session_state.interest_rate 
     last_m2 = st.session_state.m2_supply 
@@ -154,11 +157,7 @@ def time_series_plot():
     plt.grid()
     plt.show()
 
-# Session state for storing variables
-if 'interest_rate' not in st.session_state:
-    st.session_state.interest_rate = 5.0
-if 'm2_supply' not in st.session_state:
-    st.session_state.m2_supply = 10.0
+
 
 def first_part():
     # Custom CSS for centering the columns
