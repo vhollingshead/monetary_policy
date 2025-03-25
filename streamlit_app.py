@@ -252,6 +252,10 @@ def third_part():
         st.markdown("<div class='subsubheader'>Measuring Inequality</div>", unsafe_allow_html=True)
         st.markdown("<div class='green-box'>We measure inequality using the Gini coefficient. The Gini coefficient measures the income spread between the highest and lowest earners within a population. A measure of 1 is total inequality and a measure of 0 is total equality.</div>", unsafe_allow_html=True)
         # st.write("")
+
+    st.markdown(
+    "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
+    unsafe_allow_html=True)
         
 
 def fourth_part():
@@ -260,14 +264,13 @@ def fourth_part():
     with col1:
         st.markdown("<div class='subsubheader'>Inequality Pulse Check</div>", unsafe_allow_html=True)
         st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
-        st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
     
     with col2:
         # Indirect Indicators
         
         st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
-        st.markdown("<div class='white-box'>For more information on the indirect economic indicators used to approximate the monthly Gini coefficient, please refer to our Methodologies.</div>", unsafe_allow_html=True)
-        st.write("")
+
 
 
 def dashboard():
