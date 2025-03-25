@@ -24,9 +24,9 @@ st.markdown(
     body { font-family: Arial, sans-serif; }
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
     .header { text-align: center; color: #4F7849; font-size: 48px; font-weight: bold; }
-    .subsubheader { text-align: center; color: #4F7849; font-size: 12px; font-weight: bold; }
-    .subheader { text-align: center; font-size: 12px; }
-    .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 10px }
+    .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
+    .subheader { text-align: center; font-size: 13.5px; }
+    .green-box { background-color: #4F7849; color: white; padding: 12px; border-radius: 5px; font-size: 12px }
     .large-number { font-size: 40px; font-weight: bold; color: #4F7849; }
     </style>
     """,
