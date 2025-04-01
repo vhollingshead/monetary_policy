@@ -107,6 +107,7 @@ model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
+
 # st.table(final_ts_df.head())
 
 # Session state for storing variables
@@ -285,18 +286,18 @@ def first_part():
     with col1:
         forecast_df, yearly_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
         forecast_df
-        # yearly_summary
+        yearly_summary
     with col2:
 
         # Interactive Controls
         st.markdown("<div class='subsubheader'>Interest Rate Change (by % point)</div>", unsafe_allow_html=True)
 
-        interest_rate = st.slider("", min_value=0.0, max_value=20.0, step=0.25, 
+        interest_rate = st.slider("", min_value=-5.0, max_value=10.0, step=0.25, 
                                 value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
 
         st.markdown("<div class='subsubheader'>M2 Supply Change (%)</div>", unsafe_allow_html=True)
 
-        m2_supply = st.slider("", min_value=0.0, max_value=100.0, step=0.05, 
+        m2_supply = st.slider("", min_value=-50.0, max_value=50.0, step=0.05, 
                             value=st.session_state.get("m2_supply", 10.0), key="slider_m2")
 
         col3, col4 = st.columns([1, 1])
