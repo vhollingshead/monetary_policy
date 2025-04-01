@@ -321,7 +321,7 @@ def first_part():
         
         
 def one_point_five():
-    st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios. Interest Rate Change is by percentage point, for example, a change of 2 percentage points will increase an original interest rate of 4% to a new interest rate of 6%. There are three main scenarios: tightening, neutral, and stimulus. In each scenario, we project the interest rate and M2 supply % change over a 5 year period.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='white-box'></div>", unsafe_allow_html=True)
     st.write("")
 
 
