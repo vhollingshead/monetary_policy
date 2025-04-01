@@ -10,7 +10,7 @@ import math
 from pathlib import Path
 import numpy as np
 import joblib
-
+import plotly.graph_objects as go
 
 
 # Set page config
@@ -190,85 +190,6 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
 
     return forecast_df, yearly_summary
 
-
-
-
-
-
-# def time_series_plot():
-    
-#     # Get the last observed values for dff and US_M2_USD
-#     last_dff = final_ts_df['dff'].iloc[-1]
-#     last_m2 = final_ts_df['US_M2_USD'].iloc[-1]
-#     # Define forecasting period (5 years = 60 months) starting from 2023
-#     future_steps = int(60)
-#     last_date = final_ts_df.index[-1]  # Last date in 2023 (2023-03-01)
-    
-#     forecast_dates = pd.date_range('2023-03-02', periods=future_steps, freq='MS')
-
-
-#     # Scenario 1: Stimulus (lower dff, higher US_M2_USD)
-#     dff_stimulus = np.linspace(last_dff, last_dff - change_dff, future_steps)  # Decrease dff by X% over 5 years
-#     m2_stimulus = np.linspace(last_m2, last_m2 * (1+percent_change_m2), future_steps)  # Increase M2 by X% over 5 years
-#     exog_stimulus = pd.DataFrame({'dff': dff_stimulus, 'US_M2_USD': m2_stimulus}, index=forecast_dates)
-#     forecast_stimulus = results2.forecast(steps=future_steps, exog=exog_stimulus)
-
-#     # Scenario 2: Neutral (dff and US_M2_USD stay the same)
-#     dff_neutral = np.full(future_steps, last_dff)
-#     m2_neutral = np.full(future_steps, last_m2)
-#     exog_neutral = pd.DataFrame({'dff': dff_neutral, 'US_M2_USD': m2_neutral}, index=forecast_dates)
-#     forecast_neutral = results2.forecast(steps=future_steps, exog=exog_neutral)
-
-#     # Scenario 3: Tightening (higher dff, lower US_M2_USD)
-#     dff_tightening = np.linspace(last_dff, last_dff + change_dff, future_steps)  # Increase dff by X% over 5 years
-#     m2_tightening = np.linspace(last_m2, last_m2 * (1-percent_change_m2), future_steps)  # Decrease M2 by X% over 5 years
-#     exog_tightening = pd.DataFrame({'dff': dff_tightening, 'US_M2_USD': m2_tightening}, index=forecast_dates)
-#     forecast_tightening = results2.forecast(steps=future_steps, exog=exog_tightening)
-
-#     # Scale down the forecasted first differences
-#     scaling_factor = 0.3  # Adjust this to control magnitude (
-
-#     forecast_stimulus_scaled = forecast_stimulus * scaling_factor
-#     forecast_neutral_scaled = forecast_neutral * scaling_factor
-#     forecast_tightening_scaled = forecast_tightening * scaling_factor
-
-#     # Transform forecasts back to Gini scale (reverse differencing)
-#     last_gini = final_ts_df['gini_coefficient'].iloc[-1]  # Last observed Gini
-#     forecast_gini_stimulus = last_gini + np.cumsum(forecast_stimulus_scaled)
-#     forecast_gini_neutral = last_gini + np.cumsum(forecast_neutral_scaled)
-#     forecast_gini_tightening = last_gini + np.cumsum(forecast_tightening_scaled)
-
-#     # Smooth forecasted series
-#     def smooth_series(series, window=6):
-#         return series.rolling(window=window, min_periods=1).mean()
-
-#     forecast_gini_stimulus = smooth_series(forecast_gini_stimulus)
-#     forecast_gini_neutral = smooth_series(forecast_gini_neutral)
-#     forecast_gini_tightening = smooth_series(forecast_gini_tightening)
-
-#     # Create DataFrames for each scenario's forecast
-#     forecast_df_stimulus = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Stimulus)': forecast_gini_stimulus})
-#     forecast_df_neutral = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Neutral)': forecast_gini_neutral})
-#     forecast_df_tightening = pd.DataFrame({'Date': forecast_dates, 'Forecasted Gini (Tightening)': forecast_gini_tightening})
-
-#     # Plot the forecast
-#     plt.figure(figsize=(12, 6))
-#     plt.plot(final_ts_df["Date"], final_ts_df['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
-#     plt.plot(forecast_dates, forecast_gini_stimulus, label='Forecasted Gini (Stimulus)', color='orange', linestyle='--')
-#     plt.plot(forecast_dates, forecast_gini_neutral, label='Forecasted Gini (Neutral)', color='green', linestyle='--')
-#     plt.plot(forecast_dates, forecast_gini_tightening, label='Forecasted Gini (Tightening)', color='red', linestyle='--')
-#     plt.title('Gini Coefficient: Historical and Forecasted (5 Years) Under Different Scenarios')
-#     plt.xlabel('Date')
-#     plt.ylim(0.45, 0.60)
-#     plt.ylabel('Gini Coefficient')
-#     plt.legend()
-#     plt.grid()
-#     st.pyplot(plt)
-
-
-
-
-
 def first_part():
     # Custom CSS for centering the columns
     st.markdown(
@@ -348,14 +269,58 @@ def third_part():
     st.markdown(
     "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
     unsafe_allow_html=True)
-        
+
+def inequality_pulse_check():
+
+    # Simulated model prediction (replace with real model prediction)
+    value = st.slider("Model Prediction", 0.0, 1.0, 0.65, 0.01)
+
+    # Define color bands
+    if value < 0.25:
+        color = "green"
+        label = "Low Risk"
+    elif value < 0.65:
+        color = "yellow"
+        label = "Medium Risk"
+    else:
+        color = "red"
+        label = "High Risk"
+
+    # Create Plotly gauge (odometer-style)
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number+delta",
+        value=value,
+        number={'suffix': "", 'font': {'size': 36}},
+        title={'text': f"<b>{label}</b>", 'font': {'size': 24}},
+        gauge={
+            'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
+            'bar': {'color': color},
+            'steps': [
+                {'range': [0, 0.25], 'color': 'lightgreen'},
+                {'range': [0.25, 0.65], 'color': 'khaki'},
+                {'range': [0.65, 1.0], 'color': 'lightcoral'}
+            ],
+            'threshold': {
+                'line': {'color': color, 'width': 4},
+                'thickness': 0.75,
+                'value': value
+            }
+        }
+    ))
+
+    fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.write(f"🔢 Current prediction value: **{value:.2f}** — *{label}*")
+
 
 def fourth_part():
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
-        st.markdown("<div class='subsubheader'>Inequality Pulse Check</div>", unsafe_allow_html=True)
-        st.markdown("<div class='large-number'>2.95</div>", unsafe_allow_html=True)
+        
+        st.markdown("<div class='subsubheader'>🚦 Inequality Pulse Check 🚦 </div>", unsafe_allow_html=True)
+        inequality_pulse_check()
         st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
     
     with col2:
