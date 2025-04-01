@@ -267,6 +267,8 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
 
 
 
+
+
 def first_part():
     # Custom CSS for centering the columns
     st.markdown(
@@ -289,7 +291,7 @@ def first_part():
     with col2:
 
         # Interactive Controls
-        st.markdown("<div class='subsubheader'>Interest Rate Change (by % point)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Interest Rate Change (Annual Change)</div>", unsafe_allow_html=True)
 
         interest_rate = st.slider("", min_value=-5.0, max_value=10.0, step=0.25, 
                                 value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
@@ -315,7 +317,7 @@ def first_part():
             st.session_state.m2_supply = 10.0  # Reset to default
             st.rerun()  # Ensures sliders reset
         
-        st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios. Interest Rate Change is by percentage point, for example, a change of 2 percentage points will increase an original interest rate of 4% to a new interest rate of 6%. For each scenario, we project the interest rate and M2 supply % change over a 5 year period.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios.</div>", unsafe_allow_html=True)
 
         
         
