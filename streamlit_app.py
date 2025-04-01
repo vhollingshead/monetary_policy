@@ -25,6 +25,7 @@ st.markdown(
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
     .header { text-align: center; color: #4F7849; font-size: 48px; font-weight: bold; }
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
+    .ind_subsubheader { text-align: center; color: black; font-size: 14px; }
     .stim_subheader { text-align: center; color: #ffbf6d; font-size: 14px; font-weight: bold; }
     .neut_subheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
     .tight_subheader { text-align: center; color: #ff6f6f; font-size: 14px; font-weight: bold; }
@@ -328,11 +329,11 @@ def fourth_part():
     
     with col2:
         # Indirect Indicators
-        st.markdown("<div class='subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>Securities Held Outright: Mortgage-Backed Securities (WSHOMCB)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>Total Assets: Securities: Mortgage-Backed Securities  (QBPBSTASSCMRTSEC)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>Securities Held Outright: Mortgage-Backed Securities (WSHOMCB)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>Total Assets: Securities: Mortgage-Backed Securities  (QBPBSTASSCMRTSEC)</div>", unsafe_allow_html=True)
         
         
         # st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
