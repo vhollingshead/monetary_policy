@@ -285,6 +285,7 @@ def first_part():
     with col1:
         forecast_df, yearly_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
         forecast_df
+        yearly_summary
     with col2:
 
         # Interactive Controls
@@ -322,11 +323,9 @@ def one_point_five():
     st.write("")
 
 
-def second_part(yearly_summary):
+def second_part():
     st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply Scenarios and Potential Outcomes</div>", unsafe_allow_html=True)
     st.write("")
-
-    yearly_summary
     
     # col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
@@ -397,7 +396,7 @@ def dashboard():
     
     first_part()
     one_point_five()
-    second_part(yearly_summary)
+    second_part()
     third_part()
     fourth_part()
 
