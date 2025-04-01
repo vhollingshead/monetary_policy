@@ -284,9 +284,7 @@ def first_part():
     col1, col2 = st.columns([0.7, 0.3], gap="large")
     
     with col1:
-        forecast_df, yearly_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
-        forecast_df
-        yearly_summary
+        forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
     with col2:
 
         # Interactive Controls
