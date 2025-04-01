@@ -329,9 +329,9 @@ def fourth_part():
     
     with col2:
         # Indirect Indicators
-        st.write("5.6")
+
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
-        st.write("5.6")
+        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
         st.write("5.6")
         st.markdown("<div class='ind_subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
