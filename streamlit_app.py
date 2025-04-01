@@ -172,7 +172,7 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
 
     # 📈 Plot
     plt.figure(figsize=(12, 6))
-    plt.plot(data.index, data['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
+    plt.plot(data["Date"], data['gini_coefficient'], label='Historical Gini Coefficient', color='blue')
     plt.plot(forecast_df.index, forecast_df['Forecasted Gini'], label='Forecasted Gini Coefficient',
              color='red', linestyle='--')
     plt.fill_between(forecast_df.index,
