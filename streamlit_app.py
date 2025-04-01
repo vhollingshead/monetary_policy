@@ -287,7 +287,7 @@ def inequality_pulse_check():
         label = "High Inequality"
 
     # Create Plotly gauge (odometer-style)
-    st.markdown("<div class='subsubheader'>f"<b>{label}</b>" </div>", unsafe_allow_html=True)
+    st.markdown("<div class='subsubheader'>" + label + "</div>", unsafe_allow_html=True)
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=value,
