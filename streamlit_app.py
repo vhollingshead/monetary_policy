@@ -141,7 +141,7 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
     # last_date = data.index[-1]
     forecast_dates = pd.date_range(start='2023-03-02', periods=future_steps, freq='MS')
 
-    last_dff = data['DFF'].iloc[-1]
+    last_dff = data['dff'].iloc[-1]
     last_m2 = data['US_M2_USD'].iloc[-1]
     last_gini = data['gini_coefficient'].iloc[-1]
 
