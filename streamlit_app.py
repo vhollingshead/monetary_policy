@@ -139,7 +139,7 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
     scaling_factor = 0.1
 
     last_date = data.index[-1]
-    forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=future_steps, freq='MS')
+    forecast_dates = pd.date_range(start='2023-03-02', periods=future_steps, freq='MS')
 
     last_dff = data['DFF'].iloc[-1]
     last_m2 = data['US_M2_USD'].iloc[-1]
