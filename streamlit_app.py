@@ -312,11 +312,10 @@ def inequality_pulse_check():
 
 
 def fourth_part():
+    st.markdown("<div class='subsubheader'>🚦 Inequality Pulse Check 🚦 </div>", unsafe_allow_html=True)
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
-        
-        st.markdown("<div class='subsubheader'>🚦 Inequality Pulse Check 🚦 </div>", unsafe_allow_html=True)
         inequality_pulse_check()
         st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
     
