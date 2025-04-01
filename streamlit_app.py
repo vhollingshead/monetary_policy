@@ -290,7 +290,7 @@ def inequality_pulse_check():
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=value,
-        number={'suffix': "", 'font': {'size': 14}},
+        number={'suffix': "", 'color': color, 'font': {'size': 30}},
         gauge={
             'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
             'bar': {'color': color},
