@@ -328,8 +328,14 @@ def fourth_part():
     
     with col2:
         # Indirect Indicators
+        st.markdown("<div class='subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Securities Held Outright: Mortgage-Backed Securities (WSHOMCB)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subsubheader'>Total Assets: Securities: Mortgage-Backed Securities  (QBPBSTASSCMRTSEC)</div>", unsafe_allow_html=True)
         
-        st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
+        
+        # st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
 
 
 
