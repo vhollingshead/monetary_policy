@@ -283,8 +283,8 @@ def first_part():
     col1, col2 = st.columns([0.7, 0.3], gap="large")
     
     with col1:
-        forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
-      
+        forecast_df, yearly_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
+        forecast_df
     with col2:
 
         # Interactive Controls
@@ -322,32 +322,35 @@ def one_point_five():
     st.write("")
 
 
-def second_part():
+def second_part(yearly_summary):
     st.markdown("<div class='subsubheader'>Interest Rate & M2 Supply Scenarios and Potential Outcomes</div>", unsafe_allow_html=True)
     st.write("")
-    col1, col2, col3 = st.columns([1, 1, 1], gap="large")
 
-    with col1:
-        st.markdown("<div class='tight_subheader'>Tightening</div>", unsafe_allow_html=True)
+    yearly_summary
+    
+    # col1, col2, col3 = st.columns([1, 1, 1], gap="large")
+
+    # with col1:
+    #     st.markdown("<div class='tight_subheader'>Tightening</div>", unsafe_allow_html=True)
         
-        st.markdown("<div class='tight-box'>The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially curbing asset inflation and stabilizing prices, helping lower-income households.</div>", unsafe_allow_html=True)
+    #     st.markdown("<div class='tight-box'>The Federal Reserve raises interest rates and reduces the M2 money supply to curb inflation. This restricts borrowing and spending, slowing down economic growth and potentially curbing asset inflation and stabilizing prices, helping lower-income households.</div>", unsafe_allow_html=True)
         
         
         
     
-    st.markdown("</div>", unsafe_allow_html=True)
+    # st.markdown("</div>", unsafe_allow_html=True)
     
-    with col2:
-        st.markdown("<div class='neut_subheader'>Neutral</div>", unsafe_allow_html=True)
-        st.markdown("<div class='neut-box'>The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. No adjustments are made to interest rate or M2. </div>", unsafe_allow_html=True)
-        st.write("")
-    with col3:
-        st.markdown("<div class='stim_subheader'>Stimulus</div>", unsafe_allow_html=True)
-        st.markdown("<div class='stim-box'>The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. </div>", unsafe_allow_html=True)
+    # with col2:
+    #     st.markdown("<div class='neut_subheader'>Neutral</div>", unsafe_allow_html=True)
+    #     st.markdown("<div class='neut-box'>The Federal Reserve maintains interest rates and the M2 supply at stable levels, balancing inflation control and economic growth. No adjustments are made to interest rate or M2. </div>", unsafe_allow_html=True)
+    #     st.write("")
+    # with col3:
+    #     st.markdown("<div class='stim_subheader'>Stimulus</div>", unsafe_allow_html=True)
+    #     st.markdown("<div class='stim-box'>The Federal Reserve lowers interest rates and expands the M2 money supply to encourage borrowing and spending. </div>", unsafe_allow_html=True)
 
-    st.markdown(
-    "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
-    unsafe_allow_html=True)
+    # st.markdown(
+    # "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
+    # unsafe_allow_html=True)
 
 
         
@@ -394,7 +397,7 @@ def dashboard():
     
     first_part()
     one_point_five()
-    second_part()
+    second_part(yearly_summary)
     third_part()
     fourth_part()
 
