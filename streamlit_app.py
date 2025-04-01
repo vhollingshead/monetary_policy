@@ -286,11 +286,17 @@ def inequality_pulse_check():
         color = "red"
         label = "High Inequality"
 
-    # Create Plotly gauge (odometer-style)
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=value,
-        number={'suffix': "", 'color': color, 'font': {'size': 30}},
+        number={
+            'suffix': "",
+            'font': {
+                'size': 30,
+                'color': '#4F7849',
+                'family': 'Arial Black'  
+            }
+        },
         gauge={
             'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
             'bar': {'color': color},
@@ -306,6 +312,7 @@ def inequality_pulse_check():
             }
         }
     ))
+
 
     fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
     st.plotly_chart(fig, use_container_width=True)
@@ -343,7 +350,7 @@ def main():
     with st.sidebar:
         selected = option_menu(
             "Navigation", ["Home", "Dashboard", "Methodology", "Causal Inference", "About"],
-            icons=["house", "graph-up-arrow", "lightbulb", "lightbulb", "info-circle"],
+            icons=["house", "graph-up-arrow", "clipboard-data", "lightbulb", "info-circle"],
             menu_icon="cast", default_index=0
         )
     
