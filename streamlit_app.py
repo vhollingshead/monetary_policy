@@ -273,7 +273,7 @@ def third_part():
 def inequality_pulse_check():
 
     # Simulated model prediction (replace with real model prediction)
-    value = st.slider("Model Prediction", 0.0, 1.0, 0.65, 0.01)
+    value = 2.95
 
     # Define color bands
     if value < 0.25:
@@ -380,46 +380,3 @@ if __name__ == "__main__":
 #     else:
 #         st.error("Failed to fetch data from FRED API.")
 #         return None
-
-
-
-
-
-
-
-
-# Version 3/21 Below # 
-
-
-# # Set the title and favicon that appear in the Browser's tab bar.
-# st.set_page_config(
-#     page_title='Monetary Policy Dashboard_hellooo',
-#     page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
-# )
-
-# # -----------------------------------------------------------------------------
-# # Declare some useful functions.
-
-# def main():
-#     st.sidebar.title("Navigation")
-#     selection = st.sidebar.radio("Go to", ["Product (MVP)","About", "Our Solution", "Home", "Use Case"])
-    
-#     if selection == "Product (MVP)":
-#         demo()
-#     elif selection == "Home":
-#         home()
-#     elif selection == "About":
-#         about()
-#     elif selection == "Our Solution":
-#         our_solution()
-#     elif selection == "Use Case":
-#         use_case()
-
-
-
-    
-
-
-
-# if __name__ == "__main__":
-#     main()
