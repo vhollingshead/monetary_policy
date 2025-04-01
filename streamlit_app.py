@@ -285,7 +285,7 @@ def first_part():
     with col1:
         forecast_df, yearly_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
         forecast_df
-        yearly_summary
+        # yearly_summary
     with col2:
 
         # Interactive Controls
