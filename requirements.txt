@@ -5,3 +5,4 @@ joblib
 scikit-learn
 statsmodels
 streamlit_option_menu
+plotly
