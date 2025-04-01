@@ -287,11 +287,10 @@ def inequality_pulse_check():
         label = "High Inequality"
 
     # Create Plotly gauge (odometer-style)
-    st.markdown("<div class='subsubheader'>" + label + "</div>", unsafe_allow_html=True)
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=value,
-        number={'suffix': "", 'font': {'size': 36}},
+        number={'suffix': "", 'font': {'size': 14}},
         gauge={
             'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
             'bar': {'color': color},
