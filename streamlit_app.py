@@ -273,25 +273,25 @@ def third_part():
 def inequality_pulse_check():
 
     # Simulated model prediction (replace with real model prediction)
-    value = 2.95
+    value = 0.66
 
     # Define color bands
     if value < 0.25:
         color = "green"
-        label = "Low Risk"
+        label = "Low Inequality"
     elif value < 0.65:
         color = "yellow"
-        label = "Medium Risk"
+        label = "Medium Inequality"
     else:
         color = "red"
-        label = "High Risk"
+        label = "High Inequality"
 
     # Create Plotly gauge (odometer-style)
+    st.markdown("<div class='subsubheader'>f"<b>{label}</b>" </div>", unsafe_allow_html=True)
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=value,
         number={'suffix': "", 'font': {'size': 36}},
-        title={'text': f"<b>{label}</b>", 'font': {'size': 24}},
         gauge={
             'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
             'bar': {'color': color},
@@ -310,8 +310,6 @@ def inequality_pulse_check():
 
     fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
     st.plotly_chart(fig, use_container_width=True)
-
-    st.write(f"🔢 Current prediction value: **{value:.2f}** — *{label}*")
 
 
 def fourth_part():
