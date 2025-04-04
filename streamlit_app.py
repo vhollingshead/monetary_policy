@@ -394,6 +394,9 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
 def fourth_part(value = 0.67):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
+    
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
@@ -402,13 +405,13 @@ def fourth_part(value = 0.67):
         # value = 0.67  # Your value between 0 and 1
         # st.write("Inequality")
         # st.progress(value)
-        st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
+        
     
     with col2:
         # Indirect Indicators
         st.write("")
         st.write("")
-        st.metric(label="Gini Coefficient", value=value, delta="-0.02")
+        st.metric(label="Gini Coefficient", value=value)
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
