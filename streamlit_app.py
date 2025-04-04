@@ -393,6 +393,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
 
 def fourth_part(value = 0.67):
+    date = "April 14, 2025"
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
@@ -411,7 +412,7 @@ def fourth_part(value = 0.67):
         # Indirect Indicators
         st.write("")
         st.write("")
-        st.markdown(f"<h2 style='color:#4F7849; text-align:center;'>Inequality Score",unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>Gini Coefficient as of {date}</div>", unsafe_allow_html=True)
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>0.67</b></h2>",unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
