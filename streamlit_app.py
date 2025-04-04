@@ -12,6 +12,7 @@ import numpy as np
 import joblib
 import plotly.graph_objects as go
 import plotly.express as px
+import plotly.graph_objects as go
 
 
 # Set page config
@@ -325,12 +326,14 @@ def inequality_display():
     ci_lower = 0.60
     ci_upper = 0.74
 
-    # Calculate error margins from the value
+    # Error bars
     error_y = ci_upper - value
     error_y_minus = value - ci_lower
 
+    # Create data
     df = pd.DataFrame({'Metric': ['Score'], 'Value': [value]})
 
+    # Base bar chart
     fig = px.bar(
         df,
         x='Metric',
@@ -339,20 +342,54 @@ def inequality_display():
         range_y=[0, 1],
         error_y=[error_y],
         error_y_minus=[error_y_minus],
-        text=[f"{value:.2f}"]
+        text=None
     )
 
-    # Customize layout
     fig.update_traces(
-        textposition='outside',
         marker_color='royalblue',
-        width=0.5
+        width=0.4
     )
+
+    # Add custom value label to the right of the bar
+    fig.add_annotation(
+        x=0,  # bar x-position
+        y=value,
+        text=f"<b>{value:.2f}</b>",
+        showarrow=False,
+        xanchor='left',
+        yanchor='middle',
+        font=dict(size=16, color='black'),
+        xshift=30  # pushes the label to the right of the bar
+    )
+
+    # Add top and bottom annotations
+    fig.add_annotation(
+        x=0, y=0,
+        text="Perfect Equality",
+        showarrow=False,
+        yanchor='bottom',
+        xanchor='left',
+        font=dict(size=12, color="green")
+    )
+
+    fig.add_annotation(
+        x=0, y=1,
+        text="Perfect Inequality",
+        showarrow=False,
+        yanchor='top',
+        xanchor='left',
+        font=dict(size=12, color="red")
+    )
+
+    # Clean up layout
     fig.update_layout(
         showlegend=False,
         xaxis_title=None,
         yaxis_title=None,
-        height=400
+        height=450,
+        margin=dict(l=40, r=40, t=20, b=20),
+        xaxis=dict(showgrid=False, showticklabels=False),
+        yaxis=dict(showgrid=False)
     )
 
     st.plotly_chart(fig, use_container_width=True)
