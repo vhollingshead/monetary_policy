@@ -11,6 +11,7 @@ from pathlib import Path
 import numpy as np
 import joblib
 import plotly.graph_objects as go
+import plotly.express as px
 
 
 # Set page config
@@ -318,6 +319,13 @@ def inequality_pulse_check():
     fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
     st.plotly_chart(fig, use_container_width=True)
 
+def inequality_display():
+    value = 0.67
+    df = pd.DataFrame({'Metric': ['Score'], 'Value': [value]})
+
+    fig = px.bar(df, x='Value', y='Metric', orientation='h', range_x=[0, 1], height=100)
+    fig.update_layout(showlegend=False, xaxis_title=None, yaxis_title=None)
+    st.plotly_chart(fig)
 
 
 def fourth_part():
@@ -326,9 +334,10 @@ def fourth_part():
 
     with col1:
         # inequality_pulse_check()
-        value = 0.67  # Your value between 0 and 1
-        st.write("Inequality")
-        st.progress(value)
+        inequality_display()
+        # value = 0.67  # Your value between 0 and 1
+        # st.write("Inequality")
+        # st.progress(value)
         st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
     
     with col2:
