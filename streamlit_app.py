@@ -361,7 +361,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     # Add top and bottom annotations
     fig.add_annotation(
-        x=1, y=0,
+        x=-1, y=0,
         text="Perfect Equality",
         showarrow=False,
         yanchor='bottom',
@@ -370,7 +370,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
     )
 
     fig.add_annotation(
-        x=1, y=1,
+        x=-1, y=1,
         text="Perfect Inequality",
         showarrow=False,
         yanchor='top',
@@ -396,7 +396,7 @@ def fourth_part(value = 0.67):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
-    
+
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
