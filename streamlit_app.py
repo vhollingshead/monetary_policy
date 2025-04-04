@@ -411,7 +411,7 @@ def fourth_part(value = 0.67):
         # Indirect Indicators
         st.write("")
         st.write("")
-        st.markdown(f"<h2 style='color:#4F7849; text-align:center;'>"Gini Coefficient as of " + "April 18, 2025"</h2>",unsafe_allow_html=True)
+        st.markdown(f"<h2 style='color:#4F7849; text-align:center;'>Inequality Score",unsafe_allow_html=True)
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>0.67</b></h2>",unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
