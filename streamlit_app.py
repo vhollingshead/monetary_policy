@@ -323,7 +323,7 @@ def inequality_display():
     value = 0.67
     df = pd.DataFrame({'Metric': ['Score'], 'Value': [value]})
 
-    fig = px.bar(df, x='Value', y='Metric', orientation='h', range_x=[0, 1], height=100)
+    fig = px.bar(df, x='Value', y='Metric', orientation='v', range_x=[0, 1], height=100)
     fig.update_layout(showlegend=False, xaxis_title=None, yaxis_title=None)
     st.plotly_chart(fig)
 
