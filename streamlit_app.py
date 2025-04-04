@@ -321,10 +321,7 @@ def inequality_pulse_check():
     st.plotly_chart(fig, use_container_width=True)
 
 
-def inequality_display():
-    value = 0.67
-    ci_lower = 0.60
-    ci_upper = 0.74
+def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     # Error bars
     error_y = ci_upper - value
@@ -364,21 +361,21 @@ def inequality_display():
 
     # Add top and bottom annotations
     fig.add_annotation(
-        x=0, y=0,
+        x=1, y=0,
         text="Perfect Equality",
         showarrow=False,
         yanchor='bottom',
         xanchor='left',
-        font=dict(size=12, color="green")
+        font=dict(size=12, color="black")
     )
 
     fig.add_annotation(
-        x=0, y=1,
+        x=1, y=1,
         text="Perfect Inequality",
         showarrow=False,
         yanchor='top',
         xanchor='left',
-        font=dict(size=12, color="red")
+        font=dict(size=12, color="black")
     )
 
     # Clean up layout
@@ -395,7 +392,7 @@ def inequality_display():
     st.plotly_chart(fig, use_container_width=True)
 
 
-def fourth_part():
+def fourth_part(value = 0.67):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
     col1, col2 = st.columns([1, 1], gap="large")
 
@@ -411,6 +408,7 @@ def fourth_part():
         # Indirect Indicators
         st.write("")
         st.write("")
+        st.metric(label="Gini Coefficient", value=value, delta="-0.02")
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
