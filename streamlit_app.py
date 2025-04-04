@@ -319,13 +319,43 @@ def inequality_pulse_check():
     fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
     st.plotly_chart(fig, use_container_width=True)
 
+
 def inequality_display():
     value = 0.67
+    ci_lower = 0.60
+    ci_upper = 0.74
+
+    # Calculate error margins from the value
+    error_y = ci_upper - value
+    error_y_minus = value - ci_lower
+
     df = pd.DataFrame({'Metric': ['Score'], 'Value': [value]})
 
-    fig = px.bar(df, x='Value', y='Metric', orientation='h', range_x=[0, 1], height=100)
-    fig.update_layout(showlegend=False, xaxis_title=None, yaxis_title=None)
-    st.plotly_chart(fig)
+    fig = px.bar(
+        df,
+        x='Metric',
+        y='Value',
+        orientation='v',
+        range_y=[0, 1],
+        error_y=[error_y],
+        error_y_minus=[error_y_minus],
+        text=[f"{value:.2f}"]
+    )
+
+    # Customize layout
+    fig.update_traces(
+        textposition='outside',
+        marker_color='royalblue',
+        width=0.5
+    )
+    fig.update_layout(
+        showlegend=False,
+        xaxis_title=None,
+        yaxis_title=None,
+        height=400
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def fourth_part():
