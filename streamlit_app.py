@@ -171,7 +171,9 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
         'Gini Lower': forecast_gini_lower
     }).set_index('Date')
 
-    # yearly_summary = forecast_df[forecast_df.index.strftime('%m-%d') == '12-01']
+    yearly_summary = forecast_df[forecast_df.index.strftime('%m-%d') == '12-01']
+    year_only_summary = yearly_summary.copy()
+    year_only_summary.index = year_only_summary.index.year
 
     # 📈 Plot
     plt.figure(figsize=(12, 6))
@@ -192,7 +194,7 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
 
 
     # return forecast_df, yearly_summary
-    return forecast_df
+    return forecast_df, year_only_summary
 
 def first_part():
     # Custom CSS for centering the columns
@@ -211,8 +213,8 @@ def first_part():
     col1, col2 = st.columns([0.7, 0.3], gap="large")
     
     with col1:
-        forecast_df = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
-        forecast_df
+        forecast_df, year_only_summary = forecast_gini(final_ts_df, results2, change_dff, percent_change_m2)
+        year_only_summary
     with col2:
 
         # Interactive Controls
