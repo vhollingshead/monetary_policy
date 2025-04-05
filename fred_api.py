@@ -148,8 +148,8 @@ def fred_api_funct():
     print("this is fred_data_daily the head")
     print(fred_data['CPILFESL'].head())
 
-    # monthly_start_avg = fred_data_daily.resample('M').mean()
+    monthly_start_avg = fred_data_daily.resample('M').mean()
 
     # return monthly_start_avg
-    return fred_data_daily
+    return monthly_start_avg
 
