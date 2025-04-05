@@ -7,3 +7,5 @@ statsmodels
 streamlit_option_menu
 plotly
 fredapi
+pandas_datareader
+datetime
