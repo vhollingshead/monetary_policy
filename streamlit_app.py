@@ -276,53 +276,6 @@ def third_part():
     "<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",
     unsafe_allow_html=True)
 
-def inequality_pulse_check():
-
-    # Simulated model prediction (replace with real model prediction)
-    value = 0.66
-
-    # Define color bands
-    if value < 0.25:
-        color = "green"
-        label = "Low Inequality"
-    elif value < 0.65:
-        color = "yellow"
-        label = "Medium Inequality"
-    else:
-        color = "red"
-        label = "High Inequality"
-
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number+delta",
-        value=value,
-        number={
-            'suffix': "",
-            'font': {
-                'size': 30,
-                'color': '#4F7849',
-                'family': 'Arial Black'  
-            }
-        },
-        gauge={
-            'axis': {'range': [0, 1], 'tickwidth': 1, 'tickcolor': "darkgray"},
-            'bar': {'color': color},
-            'steps': [
-                {'range': [0, 0.25], 'color': 'lightgreen'},
-                {'range': [0.25, 0.65], 'color': 'khaki'},
-                {'range': [0.65, 1.0], 'color': 'lightcoral'}
-            ],
-            'threshold': {
-                'line': {'color': color, 'width': 4},
-                'thickness': 0.75,
-                'value': value
-            }
-        }
-    ))
-
-
-    fig.update_layout(height=400, margin=dict(t=60, b=0, l=20, r=20))
-    st.plotly_chart(fig, use_container_width=True)
-
 
 def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
@@ -403,11 +356,7 @@ def fourth_part(value = 0.67):
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
-        # inequality_pulse_check()
         inequality_display()
-        # value = 0.67  # Your value between 0 and 1
-        # st.write("Inequality")
-        # st.progress(value)
         
     
     with col2:
@@ -416,6 +365,8 @@ def fourth_part(value = 0.67):
         st.write("")
         st.markdown("<div class='ind_subsubheader'>Gini Coefficient as of {date}</div>", unsafe_allow_html=True)
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>0.67</b></h2>",unsafe_allow_html=True)
+        st.markdown("<div class='ind_subsubheader'>Gini Lower = 0.54, Gini Upper = 0.69</div>", unsafe_allow_html=True)
+        st.write("")
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
