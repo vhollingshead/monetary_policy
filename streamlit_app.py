@@ -343,14 +343,14 @@ monthly_start_avg = fred_api_funct()
 # total_assets_value = monthly_start_avg['WSHOMCB'] # need to fix
 
 # Sample access to columns (assuming monthly_start_avg is a DataFrame with a datetime index)
-cc_value = monthly_start_avg['WSHOMCB'].iloc[-1]
+cc_value = monthly_start_avg['WSHOMCB'].iloc[-1] # need to fix
 cpi_value = monthly_start_avg['CPILFESL'].iloc[-1]
 m2_value = monthly_start_avg['M2REAL'].iloc[-1]
 mbs_value = monthly_start_avg['WSHOMCB'].iloc[-1]
 total_assets_value = monthly_start_avg['WALCL'].iloc[-1]  # Fixed from WSHOMCB
 
 # Get the corresponding dates (index values)
-cc_date = monthly_start_avg['WSHOMCB'].index[-1]
+cc_date = monthly_start_avg['WSHOMCB'].index[-1] # need to fix
 cpi_date = monthly_start_avg['CPILFESL'].index[-1]
 m2_date = monthly_start_avg['M2REAL'].index[-1]
 mbs_date = monthly_start_avg['WSHOMCB'].index[-1]
@@ -358,6 +358,8 @@ total_assets_date = monthly_start_avg['WALCL'].index[-1]
 
 # Store the dates in a list
 last_updated_dates = [cc_date, cpi_date, m2_date, mbs_date, total_assets_date]
+
+st.table(last_updated_dates)
 
 # Print the list of dates
 print("Dates of the last available data points:")
