@@ -355,8 +355,7 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643
         st.markdown(f"<div class='ind_subsubheader'>Gini Coefficient as of {date}</div>", unsafe_allow_html=True)
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>{value}</b></h2>", unsafe_allow_html=True)
         st.markdown(f"<div class='ind_subsubheader'>Gini Lower = {ci_lower}, Gini Upper = {ci_upper}</div>", unsafe_allow_html=True)
-        st.write("")
-        
+
         st.markdown("<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",unsafe_allow_html=True)
         
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
@@ -391,14 +390,33 @@ def dashboard():
     third_part()
     fourth_part()
 
+from streamlit_option_menu import option_menu
+
 def main():
     with st.sidebar:
         selected = option_menu(
-            "Navigation", ["Home", "Dashboard", "Methodology", "Causal Inference", "About"],
+            "Navigation",
+            ["Home", "Dashboard", "Methodology", "Causal Inference", "About"],
             icons=["house", "graph-up-arrow", "clipboard-data", "lightbulb", "info-circle"],
-            menu_icon="cast", default_index=0
+            menu_icon="cast",
+            default_index=0,
+            styles={
+                "container": {"padding": "5px", "background-color": "#f0f2f6"},
+                "icon": {"color": "black", "font-size": "18px"},
+                "nav-link": {
+                    "font-size": "16px",
+                    "text-align": "left",
+                    "margin": "0px",
+                    "color": "black",
+                    "background-color": "#e0e0e0"  # Unselected background color
+                },
+                "nav-link-selected": {
+                    "background-color": "#4F7849",
+                    "color": "white"
+                }
+            }
         )
-    
+
     # Navigate to the selected page
     if selected == "Dashboard":
         dashboard()
@@ -410,6 +428,7 @@ def main():
         our_methodology()
     elif selected == "Causal Inference":
         causal_inf()
+
 
 if __name__ == "__main__":
     main()
