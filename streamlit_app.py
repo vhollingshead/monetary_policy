@@ -109,10 +109,6 @@ model_filename = 'models/sarimax_model_forecast.joblib'
 results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
-
-# st.table(final_ts_df.head())
-
-# Session state for storing variables
 if 'interest_rate' not in st.session_state:
     st.session_state.interest_rate = 5.0
 change_dff = st.session_state.interest_rate  
@@ -303,19 +299,6 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
         width=0.4
     )
 
-    # # Add custom value label to the right of the bar
-    # fig.add_annotation(
-    #     x=0,  # bar x-position
-    #     y=value,
-    #     text=f"<b>{value:.2f}</b>",
-    #     showarrow=False,
-    #     xanchor='left',
-    #     yanchor='middle',
-    #     font=dict(size=16, color='black'),
-    #     xshift=30  # pushes the label to the left of the bar
-    # )
-
-    # Add top and bottom annotations
     fig.add_annotation(
         x=-1, y=0,
         text="Perfect Equality",
@@ -346,8 +329,18 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     st.plotly_chart(fig, use_container_width=True)
 
+cc_value = 5.643
+cpi_value = 4.887
+m2_value = 6.212
+mbs_value = 3.842
+total_assets_value = 5.148
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
+
+def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643,
+cpi_value = 4.887,
+m2_value = 6.212,
+mbs_value = 3.842,
+total_assets_value = 5.148):
     date = "April 14, 2025"
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
@@ -367,16 +360,22 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>{value}</b></h2>", unsafe_allow_html=True)
         st.markdown(f"<div class='ind_subsubheader'>Gini Lower = {ci_lower}, Gini Upper = {ci_upper}</div>", unsafe_allow_html=True)
         st.write("")
+        st.markdown("<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",unsafe_allow_html=True)
+        
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='subsubheader'>{cc_value:.2f}</div>", unsafe_allow_html=True)
+
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='subsubheader'>{cpi_value:.2f}</div>", unsafe_allow_html=True)
+
         st.markdown("<div class='ind_subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='subsubheader'>{m2_value:.2f}</div>", unsafe_allow_html=True)
+
         st.markdown("<div class='ind_subsubheader'>Securities Held Outright: Mortgage-Backed Securities (WSHOMCB)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
-        st.markdown("<div class='ind_subsubheader'>Total Assets: Securities: Mortgage-Backed Securities  (QBPBSTASSCMRTSEC)</div>", unsafe_allow_html=True)
-        st.markdown("<div class='subsubheader'>5.6 </div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='subsubheader'>{mbs_value:.2f}</div>", unsafe_allow_html=True)
+
+        st.markdown("<div class='ind_subsubheader'>Total Assets: Securities: Mortgage-Backed Securities (QBPBSTASSCMRTSEC)</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='subsubheader'>{total_assets_value:.2f}</div>", unsafe_allow_html=True)
         
         
         # st.image("images/monetary_pic.png", use_container_width=True)  # Replace with actual image
@@ -391,7 +390,6 @@ def dashboard():
 
     
     first_part()
-    # one_point_five()
     second_part()
     third_part()
     fourth_part()
