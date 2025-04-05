@@ -428,12 +428,18 @@ def main():
             styles={
                 "container": {"padding": "5px", "background-color": "#f0f2f6"},
                 "icon": {"color": "black", "font-size": "18px"},
+                "nav-title": {  # This controls the "Navigation" label style
+                    "color": "black",
+                    "font-size": "18px",
+                    "font-weight": "bold",
+                    "text-align": "left"
+                },
                 "nav-link": {
                     "font-size": "16px",
                     "text-align": "left",
                     "margin": "0px",
                     "color": "black",
-                    "background-color": "#e0e0e0"  # Unselected background color
+                    "background-color": "#e0e0e0"
                 },
                 "nav-link-selected": {
                     "background-color": "#4F7849",
