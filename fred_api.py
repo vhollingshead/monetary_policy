@@ -21,8 +21,11 @@ def fred_api_funct():
     fred_key = st.secrets["api_keys"]["my_api_key"]
     fred = Fred(fred_key)
     # Get today's date
-    today = datetime.today()
-    start_date, end_date = get_last_full_month_range(today)
+    # today = datetime.today()
+    # start_date, end_date = get_last_full_month_range(today)
+
+    start_date = '2025-03-01'
+    end_date = '2025-04-01'
 
     # FRED series: Nominal Broad U.S. Dollar Index
     # https://fred.stlouisfed.org/series/DTWEXBGS
