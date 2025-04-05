@@ -12,7 +12,6 @@ import numpy as np
 import joblib
 import plotly.graph_objects as go
 import plotly.express as px
-import plotly.graph_objects as go
 
 
 # Set page config
@@ -343,7 +342,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
     )
 
     fig.update_traces(
-        marker_color='royalblue',
+        marker_color='green',
         width=0.4
     )
 
@@ -357,7 +356,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
     #     yanchor='middle',
     #     font=dict(size=16, color='black'),
     #     xshift=30  # pushes the label to the left of the bar
-    )
+    # )
 
     # Add top and bottom annotations
     fig.add_annotation(
@@ -378,7 +377,6 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
         font=dict(size=12, color="black")
     )
 
-    # Clean up layout
     fig.update_layout(
         showlegend=False,
         xaxis_title=None,
