@@ -24,7 +24,7 @@ def fred_api_funct():
     # today = datetime.today()
     # start_date, end_date = get_last_full_month_range(today)
 
-    start_date = '2025-01-01'
+    start_date = '2025-03-01'
     end_date = '2025-04-01'
 
     # FRED series: Nominal Broad U.S. Dollar Index
