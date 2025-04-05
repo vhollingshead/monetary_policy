@@ -13,7 +13,7 @@ def fred_api_funct():
     today = datetime.today()
 
     end_date = today.strftime('%Y-%m-%d')
-    start_date = (today - timedelta(days=30)).strftime('%Y-%m-%d')
+    start_date = (today - timedelta(days=90)).strftime('%Y-%m-%d')
 
     # FRED series: Nominal Broad U.S. Dollar Index
     # https://fred.stlouisfed.org/series/DTWEXBGS
@@ -119,8 +119,6 @@ def fred_api_funct():
     # Count the number of NaN values in the DataFrame
     nan_count = fred_data.isna().sum().sum()
     print("Number of NaN values:", nan_count)
-
-
 
     # Convert index to period and then to daily frequency
     fred_data.index = pd.to_datetime(fred_data.index)
