@@ -112,6 +112,10 @@ def fred_api_funct():
     fred_data = fred_data.merge(civpart, left_index=True, right_index=True, how='left')
     fred_data = fred_data.merge(m2real, left_index=True, right_index=True, how='left')
 
+
+    print("this is fred_data the head")
+    fred_data.head()
+
     # Count the number of NaN values in the DataFrame
     nan_count = fred_data.isna().sum().sum()
     print("Number of NaN values:", nan_count)
@@ -128,7 +132,7 @@ def fred_api_funct():
     # Change the name of the index column to 'Date'
     fred_data_daily.index.name = 'Date'
 
-    print("this is the head")
+    print("this is fred_data_daily the head")
     fred_data_daily.head()
 
     # monthly_start_avg = fred_data_daily.resample('M').mean()
