@@ -282,6 +282,8 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
     error_y = ci_upper - value
     error_y_minus = value - ci_lower
 
+
+
     # Create data
     df = pd.DataFrame({'Metric': ['Score'], 'Value': [value]})
 
@@ -376,7 +378,7 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_va
         st.write("")
         st.markdown(f"<div class='ind_subsubheader'>Gini Coefficient as of {date}</div>", unsafe_allow_html=True)
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>{value}</b></h2>", unsafe_allow_html=True)
-        st.markdown(f"<div class='ind_subsubheader'>Gini Lower = {ci_lower}, Gini Upper = {ci_upper}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='ind_subsubheader'>95% Confidence Interval: Gini Lower = {ci_lower}, Gini Upper = {ci_upper}</div>", unsafe_allow_html=True)
 
         st.markdown("<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",unsafe_allow_html=True)
         
