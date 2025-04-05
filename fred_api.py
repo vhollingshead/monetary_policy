@@ -6,8 +6,6 @@ from datetime import datetime, timedelta
 
 ####################
 
-
-
 def fred_api_funct():
     fred_key = st.secrets["api_keys"]["my_api_key"]
     fred = Fred(fred_key)
@@ -128,7 +126,7 @@ def fred_api_funct():
     # Change the name of the index column to 'Date'
     fred_data_daily.index.name = 'Date'
 
-    monthly_start_avg = fred_data_daily.resample('M').mean()
+    monthly_start_avg = fred_data_daily.resample('MS').mean()
 
     return monthly_start_avg
 
