@@ -332,8 +332,6 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     st.plotly_chart(fig, use_container_width=True)
 
-
-
 monthly_start_avg, today = fred_api_funct()
 
 cc_value = 5.643
@@ -342,7 +340,7 @@ m2_value = monthly_start_avg['M2REAL']
 mbs_value = monthly_start_avg['WSHOMCB']
 total_assets_value = 5.148
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643, cpi_value = 4.887, m2_value = 6.212,mbs_value = 3.842,total_assets_value = 5.148):
+def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_value, cpi_value = cpi_value, m2_value = m2_value, mbs_value = mbs_value, total_assets_value = total_assets_value):
     date = datetime.today()
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
