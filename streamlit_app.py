@@ -336,11 +336,7 @@ mbs_value = 3.842
 total_assets_value = 5.148
 
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643,
-cpi_value = 4.887,
-m2_value = 6.212,
-mbs_value = 3.842,
-total_assets_value = 5.148):
+def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643, cpi_value = 4.887, m2_value = 6.212,mbs_value = 3.842,total_assets_value = 5.148):
     date = "April 14, 2025"
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
@@ -360,6 +356,7 @@ total_assets_value = 5.148):
         st.markdown(f"<h2 style='color:#4F7849; text-align:center;'><b>{value}</b></h2>", unsafe_allow_html=True)
         st.markdown(f"<div class='ind_subsubheader'>Gini Lower = {ci_lower}, Gini Upper = {ci_upper}</div>", unsafe_allow_html=True)
         st.write("")
+        
         st.markdown("<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",unsafe_allow_html=True)
         
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
