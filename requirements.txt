@@ -9,4 +9,4 @@ plotly
 fredapi
 pandas_datareader
 datetime
-dateutil
+python-dateutil==2.8.2
