@@ -334,11 +334,11 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
 monthly_start_avg = fred_api_funct()
 
-cc_value = monthly_start_avg['WSHOMCB'] # need to fix 
-cpi_value = monthly_start_avg['CPILFESL']
-m2_value = monthly_start_avg['M2REAL']
-mbs_value = monthly_start_avg['WSHOMCB']
-total_assets_value = monthly_start_avg['WSHOMCB'] # need to fix
+cc_value = monthly_start_avg['WSHOMCB'].astype(float) # need to fix 
+cpi_value = monthly_start_avg['CPILFESL'].astype(float)
+m2_value = monthly_start_avg['M2REAL'].astype(float)
+mbs_value = monthly_start_avg['WSHOMCB'].astype(float)
+total_assets_value = monthly_start_avg['WSHOMCB'].astype(float) # need to fix
 
 def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_value, cpi_value = cpi_value, m2_value = m2_value, mbs_value = mbs_value, total_assets_value = total_assets_value):
     date = datetime.today()
