@@ -347,16 +347,16 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
         width=0.4
     )
 
-    # Add custom value label to the right of the bar
-    fig.add_annotation(
-        x=0,  # bar x-position
-        y=value,
-        text=f"<b>{value:.2f}</b>",
-        showarrow=False,
-        xanchor='left',
-        yanchor='middle',
-        font=dict(size=16, color='black'),
-        xshift=30  # pushes the label to the right of the bar
+    # # Add custom value label to the right of the bar
+    # fig.add_annotation(
+    #     x=0,  # bar x-position
+    #     y=value,
+    #     text=f"<b>{value:.2f}</b>",
+    #     showarrow=False,
+    #     xanchor='left',
+    #     yanchor='middle',
+    #     font=dict(size=16, color='black'),
+    #     xshift=30  # pushes the label to the left of the bar
     )
 
     # Add top and bottom annotations
