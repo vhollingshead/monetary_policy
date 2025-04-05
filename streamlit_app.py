@@ -334,17 +334,36 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
 monthly_start_avg = fred_api_funct()
 
-cc_value = monthly_start_avg['WSHOMCB'].astype(float) # need to fix 
-cpi_value = monthly_start_avg['CPILFESL'].astype(float)
-m2_value = monthly_start_avg['M2REAL'].astype(float)
-mbs_value = monthly_start_avg['WSHOMCB'].astype(float)
-total_assets_value = monthly_start_avg['WSHOMCB'].astype(float) # need to fix
 
-print("this is cc_value")
-cc_value
 
-print("this is cpi_value")
-cpi_value
+# cc_value = monthly_start_avg['WSHOMCB'] # need to fix 
+# cpi_value = monthly_start_avg['CPILFESL']
+# m2_value = monthly_start_avg['M2REAL']
+# mbs_value = monthly_start_avg['WSHOMCB']
+# total_assets_value = monthly_start_avg['WSHOMCB'] # need to fix
+
+# Sample access to columns (assuming monthly_start_avg is a DataFrame with a datetime index)
+cc_value = monthly_start_avg['WSHOMCB'].iloc[-1]
+cpi_value = monthly_start_avg['CPILFESL'].iloc[-1]
+m2_value = monthly_start_avg['M2REAL'].iloc[-1]
+mbs_value = monthly_start_avg['WSHOMCB'].iloc[-1]
+total_assets_value = monthly_start_avg['WALCL'].iloc[-1]  # Fixed from WSHOMCB
+
+# Get the corresponding dates (index values)
+cc_date = monthly_start_avg['WSHOMCB'].index[-1]
+cpi_date = monthly_start_avg['CPILFESL'].index[-1]
+m2_date = monthly_start_avg['M2REAL'].index[-1]
+mbs_date = monthly_start_avg['WSHOMCB'].index[-1]
+total_assets_date = monthly_start_avg['WALCL'].index[-1]
+
+# Store the dates in a list
+last_updated_dates = [cc_date, cpi_date, m2_date, mbs_date, total_assets_date]
+
+# Print the list of dates
+print("Dates of the last available data points:")
+for date in last_updated_dates:
+    print(date.strftime("%B %d, %Y"))
+
 
 def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_value, cpi_value = cpi_value, m2_value = m2_value, mbs_value = mbs_value, total_assets_value = total_assets_value):
     raw_date = datetime.today()
