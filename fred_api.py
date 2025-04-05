@@ -130,5 +130,5 @@ def fred_api_funct():
 
     monthly_start_avg = fred_data_daily.resample('M').mean()
 
-    return monthly_start_avg
+    return monthly_start_avg, today
 
