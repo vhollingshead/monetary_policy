@@ -3,17 +3,26 @@ import streamlit as st
 from pandas_datareader import data as pdr
 import pandas as pd
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 ####################
+
+
+
+def get_last_full_month_range(today):
+    first_day_this_month = today.replace(day=1)
+    last_month = first_day_this_month - relativedelta(months=1)
+    start_date = last_month.strftime('%Y-%m-01')
+    end_date = (first_day_this_month - timedelta(days=1)).strftime('%Y-%m-%d')
+    return start_date, end_date
+
 
 def fred_api_funct():
     fred_key = st.secrets["api_keys"]["my_api_key"]
     fred = Fred(fred_key)
     # Get today's date
     today = datetime.today()
-
-    end_date = today.strftime('%Y-%m-%d')
-    start_date = (today - timedelta(days=90)).strftime('%Y-%m-%d')
+    start_date, end_date = get_last_full_month_range(today)
 
     # FRED series: Nominal Broad U.S. Dollar Index
     # https://fred.stlouisfed.org/series/DTWEXBGS

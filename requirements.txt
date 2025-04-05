@@ -9,3 +9,4 @@ plotly
 fredapi
 pandas_datareader
 datetime
+dateutil
