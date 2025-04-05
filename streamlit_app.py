@@ -332,7 +332,7 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     st.plotly_chart(fig, use_container_width=True)
 
-monthly_start_avg, today = fred_api_funct()
+monthly_start_avg = fred_api_funct()
 
 cc_value = 5.643
 cpi_value = monthly_start_avg['CPILFESL']
