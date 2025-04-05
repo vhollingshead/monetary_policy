@@ -365,7 +365,7 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_va
         st.markdown("<div style='border-top: 4px solid #4F7849; margin: 20px 0;'></div>",unsafe_allow_html=True)
         
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='subsubheader'>{cc_value:.2f}</div>", unsafe_allow_html=True)
+        # st.markdown(f"<div class='subsubheader'>{cc_value:.2f}</div>", unsafe_allow_html=True)
 
         st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='subsubheader'>{cpi_value:.2f}</div>", unsafe_allow_html=True)
