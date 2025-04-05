@@ -340,8 +340,15 @@ m2_value = monthly_start_avg['M2REAL'].astype(float)
 mbs_value = monthly_start_avg['WSHOMCB'].astype(float)
 total_assets_value = monthly_start_avg['WSHOMCB'].astype(float) # need to fix
 
+print("this is cc_value")
+cc_value
+
+print("this is cpi_value")
+cpi_value
+
 def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_value, cpi_value = cpi_value, m2_value = m2_value, mbs_value = mbs_value, total_assets_value = total_assets_value):
-    date = datetime.today()
+    raw_date = datetime.today()
+    date = raw_date.strftime("%B %d, %Y")
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
