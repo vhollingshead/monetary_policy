@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu  # For sidebar navigation icons
+from datetime import datetime, timedelta
 
 import math
 from pathlib import Path
@@ -12,6 +13,8 @@ import numpy as np
 import joblib
 import plotly.graph_objects as go
 import plotly.express as px
+
+from fred_api import fred_api_funct
 
 
 # Set page config
@@ -329,15 +332,18 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
     st.plotly_chart(fig, use_container_width=True)
 
+
+
+monthly_start_avg = fred_api_funct()
+
 cc_value = 5.643
-cpi_value = 4.887
-m2_value = 6.212
-mbs_value = 3.842
+cpi_value = monthly_start_avg['CPILFESL']
+m2_value = monthly_start_avg['M2REAL']
+mbs_value = monthly_start_avg['WSHOMCB']
 total_assets_value = 5.148
 
-
 def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643, cpi_value = 4.887, m2_value = 6.212,mbs_value = 3.842,total_assets_value = 5.148):
-    date = "April 14, 2025"
+    date = datetime.today()
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
@@ -345,6 +351,8 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = 5.643
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
+        st.write("")
+        st.write("")
         inequality_display()
         
     
@@ -432,18 +440,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#  
-# # Example API call to FRED for economic data
-# def fetch_fred_data(series_id, api_key):
-#     url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
-#     response = requests.get(url)
-#     if response.status_code == 200:
-#         data = response.json()["observations"]
-#         df = pd.DataFrame(data)
-#         df["value"] = pd.to_numeric(df["value"], errors='coerce')
-#         df["date"] = pd.to_datetime(df["date"])
-#         return df
-#     else:
-#         st.error("Failed to fetch data from FRED API.")
-#         return None
