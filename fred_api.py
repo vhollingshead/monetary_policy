@@ -114,7 +114,7 @@ def fred_api_funct():
 
 
     print("this is fred_data the head")
-    fred_data.head()
+    print(fred_data.head())
 
     # Count the number of NaN values in the DataFrame
     nan_count = fred_data.isna().sum().sum()
@@ -133,7 +133,7 @@ def fred_api_funct():
     fred_data_daily.index.name = 'Date'
 
     print("this is fred_data_daily the head")
-    fred_data_daily.head()
+    print(fred_data_daily.head())
 
     # monthly_start_avg = fred_data_daily.resample('M').mean()
 
