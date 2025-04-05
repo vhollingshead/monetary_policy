@@ -116,6 +116,8 @@ def fred_api_funct():
     nan_count = fred_data.isna().sum().sum()
     print("Number of NaN values:", nan_count)
 
+
+
     # Convert index to period and then to daily frequency
     fred_data.index = pd.to_datetime(fred_data.index)
     fred_data = fred_data.resample('D').asfreq()
@@ -126,7 +128,10 @@ def fred_api_funct():
     # Change the name of the index column to 'Date'
     fred_data_daily.index.name = 'Date'
 
-    monthly_start_avg = fred_data_daily.resample('MS').mean()
+    print("this is the head")
+    fred_data_daily.head()
+
+    monthly_start_avg = fred_data_daily.resample('M').mean()
 
     return monthly_start_avg
 
