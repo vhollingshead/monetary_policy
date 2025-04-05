@@ -11,7 +11,7 @@ from dateutil.relativedelta import relativedelta
 
 def get_last_full_month_range(today):
     first_day_this_month = today.replace(day=1)
-    last_month = first_day_this_month - relativedelta(months=1)
+    last_month = first_day_this_month - relativedelta(months=12)
     start_date = last_month.strftime('%Y-%m-01')
     end_date = (first_day_this_month - timedelta(days=1)).strftime('%Y-%m-%d')
     return start_date, end_date
@@ -122,8 +122,8 @@ def fred_api_funct():
     fred_data = fred_data.merge(m2real, left_index=True, right_index=True, how='left')
 
 
-    print("this is fred_data the head")
-    print(fred_data.head())
+    print("this is fred_data the head for WSHOMCB")
+    print(fred_data['WSHOMCB'].head())
 
     # Count the number of NaN values in the DataFrame
     nan_count = fred_data.isna().sum().sum()
@@ -140,7 +140,7 @@ def fred_api_funct():
     fred_data_daily.index.name = 'Date'
 
     print("this is fred_data_daily the head")
-    print(fred_data_daily.head())
+    print(fred_data['M2REAL'].head())
 
     # monthly_start_avg = fred_data_daily.resample('M').mean()
 
