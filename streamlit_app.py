@@ -360,12 +360,22 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
 
+    lstm_model_filename = 'models/ensemble_data_simple_07Apr2024.joblib'
+    lstm_model = joblib.load(lstm_model_filename)
+
+    user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
+    scaler = lstm_model.feature_scaler
+    scaled_input = scaler.transform(user_input)
+    lstm_prediction = lstm_model.predict(scaled_input)
+
+
+
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
         st.write("")
         st.write("")
-        inequality_display()
+        inequality_display(value = lstm_prediction, ci_lower = 0.60, ci_upper = 0.74)
         
     
     with col2:
