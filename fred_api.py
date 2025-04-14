@@ -104,6 +104,16 @@ def fred_api_funct():
     m2real = pdr.DataReader("M2REAL", "fred", start=start_date, end=end_date)
     m2real.columns = ['M2REAL']
 
+    # FRED series: Real M2 Money Stock (QBPBSTASSCMRTSEC)
+    # https://fred.stlouisfed.org/series/QBPBSTASSCMRTSEC
+    qbpbstass = pdr.DataReader("QBPBSTASSCMRTSEC", "fred", start=start_date, end=end_date)
+    qbpbstass.columns = ['QBPBSTASSCMRTSEC']
+
+    # FRED series: Real M2 Money Stock (FGCCSAQ027S)
+    # https://fred.stlouisfed.org/series/FGCCSAQ027S
+    fgccsaq = pdr.DataReader("FGCCSAQ027S", "fred", start=start_date, end=end_date)
+    fgccsaq.columns = ['FGCCSAQ027S']
+
     # Merging the DataFrames
     fred_data = pd.merge(cpilfesl, dtwexbgs, left_index=True, right_index=True, how='left')
     fred_data = fred_data.merge(cuur0000sa0r, left_index=True, right_index=True, how='left')
@@ -120,6 +130,9 @@ def fred_api_funct():
     fred_data = fred_data.merge(bogz1fl1920900005q, left_index=True, right_index=True, how='left')
     fred_data = fred_data.merge(civpart, left_index=True, right_index=True, how='left')
     fred_data = fred_data.merge(m2real, left_index=True, right_index=True, how='left')
+    fred_data = fred_data.merge(qbpbstass, left_index=True, right_index=True, how='left')
+    fred_data = fred_data.merge(fgccsaq, left_index=True, right_index=True, how='left')
+
 
 
     

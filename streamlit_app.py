@@ -336,22 +336,18 @@ def inequality_display(value = 0.67, ci_lower = 0.60, ci_upper = 0.74):
 
 monthly_start_avg = fred_api_funct()
 
-# Sample access to columns (assuming monthly_start_avg is a DataFrame with a datetime index)
-cc_value = monthly_start_avg['WSHOMCB'].iloc[-1] # need to fix
-cpi_value = monthly_start_avg['CPILFESL'].iloc[-1]
-m2_value = monthly_start_avg['M2REAL'].iloc[-1]
+# Sample access to columns
 mbs_value = monthly_start_avg['WSHOMCB'].iloc[-1]
-total_assets_value = monthly_start_avg['WALCL'].iloc[-1]  # Fixed from WSHOMCB
+fgccsaq_value = monthly_start_avg['FGCCSAQ027S'].iloc[-1]
+qbpbstass_value = monthly_start_avg['QBPBSTASSCMRTSEC'].iloc[-1]
 
 # Get the corresponding dates (index values)
-cc_date = monthly_start_avg['WSHOMCB'].index[-1] # need to fix
-cpi_date = monthly_start_avg['CPILFESL'].index[-1]
-m2_date = monthly_start_avg['M2REAL'].index[-1]
 mbs_date = monthly_start_avg['WSHOMCB'].index[-1]
-total_assets_date = monthly_start_avg['WALCL'].index[-1]
+fgccsaq_date = monthly_start_avg['FGCCSAQ027S'].index[-1]
+qbpbstass_date = monthly_start_avg['QBPBSTASSCMRTSEC'].index[-1]
 
 # Store the dates in a list
-last_updated_dates = [cc_date, cpi_date, m2_date, mbs_date, total_assets_date]
+last_updated_dates = [mbs_date, fgccsaq_date, qbpbstass_date]
 
 # Get the earliest date from the list
 earliest_date = min(last_updated_dates)
@@ -359,7 +355,7 @@ earliest_date = min(last_updated_dates)
 # Format it as "Month Day, YYYY"
 formatted_earliest = earliest_date.strftime("%B %d, %Y")
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_value, cpi_value = cpi_value, m2_value = m2_value, mbs_value = mbs_value, total_assets_value = total_assets_value, date = formatted_earliest):
+def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
@@ -385,12 +381,6 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = cc_va
         st.markdown("<div class='ind_subsubheader'>Consumer Credit, Student Loans, Asset (FGCCSAQ027S)</div>", unsafe_allow_html=True)
         # st.markdown(f"<div class='subsubheader'>{cc_value:.2f}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='subsubheader'>{cc_value}</div>", unsafe_allow_html=True)
-
-        st.markdown("<div class='ind_subsubheader'>CPI Less Food and Energy (CPILFESL)</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='subsubheader'>{cpi_value:.2f}</div>", unsafe_allow_html=True)
-
-        st.markdown("<div class='ind_subsubheader'>US M2 Money Supply (US_M2_USD)</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='subsubheader'>{m2_value:.2f}</div>", unsafe_allow_html=True)
 
         st.markdown("<div class='ind_subsubheader'>Securities Held Outright: Mortgage-Backed Securities (WSHOMCB)</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='subsubheader'>{mbs_value:.2f}</div>", unsafe_allow_html=True)
