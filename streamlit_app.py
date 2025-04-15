@@ -362,8 +362,12 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
 
     # joblib approach
-    # lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.joblib'
-    # lstm_model = joblib.load(lstm_model_filename)
+    print("error is before filename")
+    lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.joblib'
+    print("error is before loading lstm")
+    lstm_model = joblib.load(lstm_model_filename)
+    print("error is after loading lstm")
+
 
     # user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
     # scaler = lstm_model.feature_scaler
@@ -372,13 +376,13 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
 
     # keras approach
 
-    lstm_model_filename = 'models/ensemble_complete.keras'  
-    lstm_model = load_model(lstm_model_filename)
+    # lstm_model_filename = 'models/ensemble_complete.keras'  
+    # lstm_model = load_model(lstm_model_filename)
 
-    user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
-    scaler = lstm_model.feature_scaler
-    scaled_input = scaler.transform(user_input)
-    lstm_prediction = lstm_model.predict(scaled_input)
+    # user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
+    # scaler = lstm_model.feature_scaler
+    # scaled_input = scaler.transform(user_input)
+    # lstm_prediction = lstm_model.predict(scaled_input)
 
 
     col1, col2 = st.columns([1, 1], gap="large")
