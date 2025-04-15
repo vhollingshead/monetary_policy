@@ -10,3 +10,8 @@ fredapi
 pandas_datareader
 datetime
 python-dateutil==2.8.2
+
+tensorflow
+tensorflow.keras
+
+
