@@ -383,6 +383,8 @@ def lstm_model():
 
     return lstm_prediction
 
+lstm_prediction = lstm_model()
+
 def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest, lstm_prediction = lstm_prediction):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
@@ -434,7 +436,7 @@ def dashboard():
     first_part()
     second_part()
     third_part()
-    fourth_part()
+    fourth_part(lstm_prediction = lstm_prediction)
 
 from streamlit_option_menu import option_menu
 
