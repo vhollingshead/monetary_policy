@@ -372,7 +372,7 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
 
     # keras approach
 
-    lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.keras'  
+    lstm_model_filename = 'models/ensemble_complete.keras'  
     lstm_model = load_model(lstm_model_filename)
 
     user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
