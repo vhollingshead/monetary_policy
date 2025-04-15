@@ -356,17 +356,14 @@ earliest_date = min(last_updated_dates)
 # Format it as "Month Day, YYYY"
 formatted_earliest = earliest_date.strftime("%B %d, %Y")
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest):
-    st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
-
+def lstm_model():
     # joblib approach
     print("error is before filename")
     lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.joblib'
     print("error is before loading lstm")
     lstm_model = joblib.load(lstm_model_filename)
     print("error is after loading lstm")
+    lstm_prediction = 0.65
 
 
     # user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
@@ -384,6 +381,14 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
     # scaled_input = scaler.transform(user_input)
     # lstm_prediction = lstm_model.predict(scaled_input)
 
+    return lstm_prediction
+
+def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest, lstm_prediction = lstm_prediction):
+    st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
+
+
 
     col1, col2 = st.columns([1, 1], gap="large")
 
@@ -391,6 +396,7 @@ def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccs
         st.write("")
         st.write("")
         inequality_display(value = lstm_prediction, ci_lower = 0.60, ci_upper = 0.74)
+        # inequality_display(value = 0.65, ci_lower = 0.60, ci_upper = 0.74)
         
     
     with col2:
