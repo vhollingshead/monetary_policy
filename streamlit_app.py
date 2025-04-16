@@ -341,7 +341,7 @@ def our_methodology():
 
 
 def causal_inf():
-    st.markdown("<div class='header'>Causal Inference</div>", unsafe_allow_html=True)
+    st.markdown("## Causal Inference")
 
     st.markdown("""
     To examine the impact of U.S. monetary policy on income inequality, the analysis employs a series of Difference-in-Differences (DiD) models using Canada as a control group. The core idea is to compare changes in the U.S. Gini coefficient over time—before and after key monetary policy events—with corresponding changes in Canada, a country with a similar economic structure but independent monetary policy. By focusing on the interaction between treatment status (U.S. vs. Canada) and time, these models aim to isolate the causal effect of U.S. monetary shifts (such as changes in interest rates or money supply) on income inequality trends.
