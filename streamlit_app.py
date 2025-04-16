@@ -51,12 +51,71 @@ st.markdown(
 
 
 
+# def home():
+#     # Header Section
+#     st.markdown("<div class='header'>Gini-Lab:  An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
+#     st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
+#     st.subtitle("Problem")
+#     st.markdown("<div class='green-box'>Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. Nobel prize winning economist Joseph Stiglitz in The Price of Inequality (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.</div>", unsafe_allow_html=True)
+
 def home():
     # Header Section
-    st.markdown("<div class='header'>Gini-Lab:  An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
+    st.markdown("<div class='header'>Gini-Lab: An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
     st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
-    st.subtitle("Problem")
-    st.markdown("<div class='green-box'>Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. Nobel prize winning economist Joseph Stiglitz in The Price of Inequality (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.</div>", unsafe_allow_html=True)
+
+    # Problem Section
+    st.markdown("### The Problem")
+    st.image("images/gini_chart.png", caption="Figure 1: Rising Inequality – The Gini Coefficient's Steady Climb from 1976 to 2023")
+
+    st.markdown("""
+    <div class='green-box'>
+    Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
+    Nobel prize-winning economist Joseph Stiglitz in <i>The Price of Inequality</i> (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. 
+    Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("#### Gaps in the Current Landscape")
+    st.markdown("""
+    - **Limited Data-Driven Tools**: No interactive tools exist to simulate policy impacts on inequality in real time.  
+    - **Periodic Reporting**: Federal Reserve research is limited to periodic reports, lacking real-time insights.  
+    - **Lack of Reproducibility**: Analyses rely on custom consulting, which isn’t reusable or scalable.  
+    - **Findings Stuck in Academia**: Research on inequality is often inaccessible, buried in academic papers.  
+    - **Market Inefficiency**: Billions are spent on policy simulation tools and economic research, yet reporting isn’t inequality-focused.
+    
+    These gaps prevent policymakers, researchers, and the public from understanding and addressing monetary policy’s role in inequality.
+    """)
+
+    # Solution Section
+    st.markdown("### Our Solution")
+    st.markdown("""
+    We introduce the **Monetary Policy Dashboard**, an interactive tool to highlight the impact of monetary policy on income inequality in the United States. It enables users to:
+
+    - Simulate the effects of policy changes, like interest rate adjustments, on inequality metrics such as the Gini coefficient in real time.  
+    - Visualize historical and forecasted inequality trends using advanced models.  
+    - Provide up-to-date Gini coefficient estimates through machine learning.  
+    """)
+
+    # Impact Section
+    st.markdown("### Product Impact")
+    st.markdown("""
+    - **Enables Equitable Policy-Making**: Addresses rising inequality concerns, helping design inclusive policies.  
+    - **Reduces Economic Disparities**: Fosters sustainable growth and social stability by ensuring broader benefits from monetary policy.  
+    """)
+
+    # Overview Section
+    st.markdown("### High-Level Overview")
+    st.markdown("""
+    The Monetary Policy Dashboard is an interactive platform that makes the link between monetary policy and income inequality accessible and actionable. It provides real-time insights into how policy decisions, such as interest rate changes, affect income inequality in the United States. 
+    Designed for policymakers, researchers, economists, and the public, the dashboard offers a clear way to explore these dynamics.
+
+    **The dashboard features two core components:**
+
+    - **Time Series Forecasting**: Forecasts future trends in income inequality, like the Gini coefficient, based on historical data and policy adjustments.  
+    - **Machine Learning for Current Insights**: Uses a machine learning model to calculate the current Gini coefficient, offering an up-to-date view of inequality.
+
+    Through intuitive visualizations, such as time series plots, users can see how a change in interest rate might impact the Gini coefficient over time. By blending real-time analysis with predictive modeling, the dashboard empowers users to make informed, equitable decisions.
+    """)
 
 def about():
     st.title("About")
