@@ -128,7 +128,6 @@ def about():
 
     st.title("Meet our Team")
 
-    # Display images and descriptions in pairs
     for item in images:
         col1, col2 = st.columns([1, 2])
         with col1:
