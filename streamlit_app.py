@@ -328,31 +328,34 @@ def causal_inf():
     
     To assess the validity of the parallel trends assumption—a key requirement for causal inference in Difference-in-Differences (DiD) analysis—a dynamic event study model was employed. A traditional pre-trend check was not feasible due to missing Gini coefficient data for Canada prior to 1992. Instead, the event study specification evaluates whether the U.S. and Canada followed similar inequality trends leading up to major monetary policy events, particularly around 2008. The interaction term `Treatment:Event_Time` captures the differential trend between the U.S. and Canada over time. In the model, this coefficient is small (0.0245) and statistically insignificant (p = 0.249), indicating no strong evidence of divergence in trends prior to the treatment period.
     
-    This supports the parallel trends assumption and reinforces the credibility of Canada as a valid control group. Additionally, the high R-squared (0.977) suggests that the model fits the data well, and the insignificant `Event_Time` term (p = 0.102) further suggests that overall trends were not drastically shifting in the pre-treatment years. Visual inspection of the Gini trends further supports this conclusion, as the U.S. and Canadian series appear to move in parallel throughout the pre-2008 period with no major divergence. While some divergence emerges around 2015—with U.S. inequality trending upward and Canada’s trend flattening or declining—this occurs well into the post-treatment period. Since the models estimate treatment effects over the full 1992–2019 window, such divergence may in fact reflect the very effects being studied, rather than a violation of the parallel trends assumption.
+    This supports the parallel trends assumption and reinforces the credibility of Canada as a valid control group. Additionally, the high R-squared (0.977) suggests that the model fits the data well, and the insignificant Event_Time term (p = 0.102) further suggests that overall trends were not drastically shifting in the pre-treatment years. Visual inspection of the Gini trends further supports this conclusion, as the U.S. and Canadian series appear to move in parallel throughout the pre-2008 period with no major divergence. While some divergence emerges around 2015—with U.S. inequality trending upward and Canada’s trend flattening or declining—this occurs well into the post-treatment period. Since the models estimate treatment effects over the full 1992–2019 window, such divergence may in fact reflect the very effects being studied, rather than a violation of the parallel trends assumption. Together, the statistical and graphical evidence provide strong justification for using Canada as a control group in the DiD framework.
     """)
+
+    st.markdown("### 📊 Parallel Trend Assumption Results")
+    did_image = "images/Table 4_OLS Regression Results for Parallel Trend Assumption in Gini Coefficient Analysis.png"
+    image_display(did_image)
+    did_caption_title = "Table 4: OLS Regression Results for Parallel Trend Assumption in Gini Coefficient Analysis"
+    display_caption(did_caption_title)
+
+    did_image_fig7 = "images/Figure 7_Parallel Trends Check for US vs. Canada Gini Coefficients.png"
+    image_display(did_image_fig7)
+    did_caption_title_fig7 = "Figure 7: Parallel Trends Check for US vs. Canada Gini Coefficients (1995-2023)"
+    display_caption(did_caption_title_fig7)
 
     st.markdown("### 📊 DiD Results Summary")
 
+
+
     st.markdown("""
-    The sequence of Difference-in-Differences (DiD) models progressively adds monetary policy controls and refinements to isolate the impact of U.S. monetary policy on income inequality.
+    The sequence of Difference-in-Differences (DiD) models progressively adds monetary policy controls and refinements to isolate the impact of U.S. monetary policy on income inequality. Across Models 3 through 14, the DiD_Interaction term—representing the treatment effect of U.S. policy changes relative to Canada—remains consistently positive and highly statistically significant at the 0.1% level (p < 0.001) while neither the U.S. federal funds rate (US_DFF) nor the Canadian target overnight rate are individually significant predictors of income inequality. This suggests robust evidence that inequality in the U.S. increased more than in Canada following monetary policy shifts. The coefficient of around 0.0037 to 0.0038 across these models, while modest in magnitude, is precise and consistent, pointing to a stable treatment effect across various model specifications and control variables.
 
-    Across **Models 3 through 14**, the `DiD_Interaction` term—representing the treatment effect of U.S. policy changes relative to Canada—remains **consistently positive and highly statistically significant at the 0.1% level (p < 0.001)** while neither the U.S. federal funds rate (US_DFF) nor the Canadian target overnight rate are individually significant predictors of income inequality.
+    Among the models, Model 14 stands out as the best-performing and most comprehensive specification. It includes not only the DiD interaction and time trend (Year), but also U.S. and Canadian interest rates (US_DFF, Canada_Overnight_Target_Rate), log of inflation-adjusted US money supply and log of Canada money supply. This model yields the highest t-statistic (49.15) for the DiD term, a low standard error (7.61e-05), and significance in the Year variable as well (p < 0.01), indicating that both the time dimension and treatment effect are driving variation in inequality. Moreover, this model includes real (inflation-adjusted) monetary aggregates, which add important explanatory power by capturing the purchasing power dynamics of monetary policy—something nominal M2 measures miss.
+    
+                ### ✅ Conclusion
+                
+    The consistent significance of the DiD_Interaction term across all advanced models (Models 3–14) provides strong evidence that U.S. monetary policy had an effect on income inequality, compared to Canada, a similar developed economy not directly affected by Federal Reserve policy. On the other hand, the Federal Funds Rate and M2 were not significant drivers, suggesting that broader economic factors contributed to inequality changes, rather than just monetary policy alone.
 
-    - The coefficient of around **0.0037 to 0.0038** across these models is modest but highly consistent, suggesting a **stable treatment effect**.
-    - **Model 14** stands out as the **best-performing and most comprehensive** specification.
-        - It includes: `DiD_Interaction`, `Year`, US and Canada interest rates, and **inflation-adjusted money supply**.
-        - It delivers the **highest t-statistic (49.15)**, low standard error (7.61e-05), and strong significance in both time and treatment terms.
-
-    The significance of inflation-adjusted variables highlights the importance of capturing real purchasing power effects, rather than relying solely on nominal aggregates.
-
-    ### ✅ Conclusion
-
-    The consistent significance of the `DiD_Interaction` term across advanced models provides **strong causal evidence** that U.S. monetary policy contributed to rising inequality compared to Canada. This suggests that even when interest rates and money supply are not significant individually, their **joint structural effects** may play a critical role. 
-
-    This analysis demonstrates that causal methods like DiD are essential in understanding **policy-driven inequality trends**, especially when paired with robust controls and strong parallel trend validation.
     """)
-
-    st.info("📈 See Table 5 and Figure 7 in your full report for detailed model coefficients and visual inspection of U.S.-Canada Gini trends.")
 
 uploaded_file_path = "models/final_ts_df_arimax.csv"
 no_index = pd.read_csv(uploaded_file_path)
