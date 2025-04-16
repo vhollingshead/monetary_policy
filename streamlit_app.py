@@ -17,6 +17,9 @@ import plotly.express as px
 from fred_api import fred_api_funct
 from tensorflow.keras.models import load_model
 
+import tensorflow as tf
+tf.keras.config.enable_unsafe_deserialization() 
+
 
 # Set page config
 st.set_page_config(page_title='Monetary Policy & Inequality', page_icon=':chart_with_upwards_trend:', layout='wide')
