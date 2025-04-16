@@ -388,7 +388,7 @@ def lstm_model():
 
 lstm_prediction = lstm_model()
 
-def fourth_part(value = 0.67, ci_lower = 0.53, ci_upper = 0.59, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest, lstm_prediction = lstm_prediction):
+def fourth_part(value = lstm_prediction, ci_lower = 0.53, ci_upper = 0.59, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
@@ -400,7 +400,7 @@ def fourth_part(value = 0.67, ci_lower = 0.53, ci_upper = 0.59, cc_value = fgccs
     with col1:
         st.write("")
         st.write("")
-        inequality_display(value = lstm_prediction, ci_lower = 0.60, ci_upper = 0.74)
+        inequality_display(value = lstm_prediction, ci_lower = ci_lower, ci_upper = ci_upper)
         # inequality_display(value = 0.65, ci_lower = 0.60, ci_upper = 0.74)
         
     
