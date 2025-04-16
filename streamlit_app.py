@@ -56,7 +56,16 @@ def home():
 
     # Problem Section
     st.markdown("### The Problem")
-    # st.image("images/gini_chart.png", caption="Figure 1: Rising Inequality – The Gini Coefficient's Steady Climb from 1976 to 2023")
+    image_path = "images/theproblem_increase_gini.png"
+
+    st.markdown(
+        f"""
+        <div style='text-align: center;'>
+            <img src="data:image/png;base64,{st.image(image_path, use_column_width=False).data}" alt="Centered Image" style="max-width: 70%;"/>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown("""
     Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
