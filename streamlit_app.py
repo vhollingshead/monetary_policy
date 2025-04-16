@@ -119,42 +119,114 @@ def about():
     st.title("About")
     st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
 
-def our_methodology():
-    st.title("Our Solution")
-    st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
-    
-    st.subheader("High Level Overview")
-    st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-    
-    st.subheader("Methodology")
-    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-    
-    st.subheader("Data pipeline")
-    st.write("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
-    
-    st.subheader("Training dataset (if applicable)")
-    st.write("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-    
-    st.subheader("Data pre-processing")
-    st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.")
-    
-    st.subheader("Modeling")
-    st.write("Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
-    
-    st.subheader("Model Evaluation")
-    st.write("Donec odio tempus molestie, porttitor ut, iaculis quis, sem.")
-    
-    st.subheader("Key Learnings & Impact")
-    st.write("Maecenas libero. Curabitur suscipit suscipit tellus.")
-    
-    st.subheader("Key Contributions")
-    st.write("Sed lectus. Integer euismod lacus luctus magna.")
-    
-    st.subheader("Future Work")
-    st.write("Vivamus quis mi. Phasellus a est.")
-    
-    st.subheader("Acknowledgements")
-    st.write("Pellentesque dapibus hendrerit tortor. Praesent egestas tristique nibh.")
+import streamlit as st
+
+def methodology():
+    st.markdown("## Methodology")
+    st.markdown("""
+    Our methodology leverages **causal analysis** and **advanced analytics** to provide insights into how monetary policy impacts income inequality.
+    """)
+
+    with st.expander("📉 Time Series Forecasting Model"):
+        st.markdown("""
+        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. Historical data is analyzed to simulate scenarios — such as interest rate adjustments — and visualize their impact over time. The model outputs both historical and forecasted inequality trends.
+        """)
+
+    with st.expander("🧠 LSTM Model to Predict the Current Gini"):
+        st.markdown("""
+        A **Long Short-Term Memory (LSTM)** model is used to estimate the **current Gini coefficient** based on recent economic data. This provides a real-time snapshot of inequality and allows users to track emerging patterns on the dashboard.
+        """)
+
+    with st.expander("🌲 RandomForestRegressor (Future Enhancement)"):
+        st.markdown("""
+        Although not part of the live dashboard, we trained a **RandomForestRegressor** model to evaluate its ability to predict Gini values. It outperformed many traditional approaches, showing potential for future integration. The model used a one-step-ahead forecasting approach with lagged features.
+        """)
+
+    with st.expander("📊 Difference-in-Differences (DiD) for Causal Inference"):
+        st.markdown("""
+        We used **DiD** to estimate the causal impact of monetary policy. This compares inequality before and after a policy change between treated and control groups — isolating the effect of interventions like interest rate hikes.
+        """)
+
+    with st.expander("🛠️ Data Pipeline & Preprocessing"):
+        st.markdown("""
+        - **Sources**: Data was pulled from FRED, Yahoo Finance, and real-time inequality databases.  
+        - **Data Types**: Leading indicators (e.g. interest rates) and lagging indicators (e.g. Gini coefficient) were aligned.
+        - **Preprocessing**: Dates were formatted, data resampled (daily/monthly), and missing values forward-filled.
+        - **Chronological Split**: Data was split in time order to preserve forecasting validity and simulate real-world policy modeling.
+        """)
+
+    with st.expander("📐 Gini Coefficient Calculation"):
+        st.markdown("""
+        The Gini coefficient was derived using quarterly income shares for three socioeconomic bins: **Bottom 50%**, **Middle 40%**, and **Top 10%**. We calculated a population-weighted estimate, sufficient for tracking inequality trends over time.
+        """)
+        st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
+
+    with st.expander("📈 Model Evaluation Summary"):
+        st.markdown("Here is a snapshot of the models we evaluated, and their performance:")
+        st.markdown("""
+        | Model                  | MAE       | MSE        | RMSE      | Selected?                   |
+        |------------------------|-----------|------------|-----------|-----------------------------|
+        | ARIMA (Baseline)       | 0.003738  | 0.001602   | 0.040029  | ❌                          |
+        | ARIMAX                 | 0.000485  | 0.000001   | 0.000563  | ✅ (Forecasting Gini)       |
+        | Linear Regression      | 0.011027  | 0.000130   | 0.005605  | ❌                          |
+        | LSTM                   | 0.001133  | 0.000002   | 0.001385  | ✅ (Current Gini)           |
+        | XGBoost                | 0.003849  | 0.000032   | 0.005696  | ❌                          |
+        | RandomForestRegressor | 0.0001587 | 0.00000057 | 0.0007531 | ❌ (Potential Future Use)   |
+        """)
+
+    with st.expander("🔮 Forecasting Framework (ARIMAX-Based)"):
+        st.markdown("""
+        Our **forecasting framework** uses the ARIMAX model to simulate future Gini coefficient trends under user-defined monetary policy assumptions.
+
+        - **Model Setup**: The ARIMAX model is trained on the first-differenced Gini coefficient with DFF and M2 as exogenous variables.
+        - **Future Variables**: Users specify future changes to DFF and M2, which are assumed to follow simple trends.
+        - **Forecast Output**: The model returns 5-year Gini coefficient forecasts with 95% confidence intervals.
+
+        In the dashboard, users simulate scenarios like lowering DFF by 1% per year or increasing M2 by 10% annually. This empowers exploration of **how monetary policy may shape income inequality**.
+
+        To improve reliability, we **re-weighted COVID-era data** to prevent the model from overfitting to volatility during the pandemic.
+
+        _Figure 8 in the dashboard shows the resulting forecast._
+        """)
+
+    with st.expander("⚠️ Limitations"):
+        st.markdown("""
+        - **Simplified Assumptions**: Future DFF and M2 paths are simplified and do not account for macroeconomic shocks.
+        - **National-Level View**: Aggregated data ignores regional or demographic heterogeneity.
+        - **Non-Normal Residuals**: Slightly skewed residuals may reduce confidence interval reliability.
+        - **Stationarity Risks**: Assumes stability in differenced series over long horizons.
+        - **Illustrative Forecasts**: The goal is insight, not precise prediction.
+        """)
+
+    with st.expander("🔁 Model Retraining Strategy"):
+        st.markdown("""
+        - **Normal Conditions**: Models retrained annually to reflect slowly changing trends.
+        - **Volatile Periods**: Quarterly retraining during instability like COVID-19.
+        - **Trigger Conditions**: Retrain if:
+            - Fed Funds Rate changes > 50 basis points in a quarter.
+            - M2 monthly growth > 1% for 3+ consecutive months.
+
+        This retraining ensures model relevance without overfitting to temporary noise.
+        """)
+
+    with st.expander("📌 Conclusion"):
+        st.markdown("""
+        This capstone demonstrates that monetary policy not only shapes macroeconomic conditions but also plays a measurable role in income inequality. Using ARIMAX models with exogenous variables like the Federal Funds Rate and M2 money supply, we significantly improved Gini coefficient forecasting accuracy. However, these models struggled to capture volatility during periods of economic disruption, such as the COVID-19 shock, underscoring the limits of linear forecasting frameworks under structural breaks.
+
+        For real-time estimation, the LSTM model proved highly effective and achieved a huge improvement over linear regression. Its capacity to model non-linear temporal dependencies between financial indicators and inequality metrics reinforces the value of deep learning in economic forecasting. RandomForestRegressor shows promising performance and opens up the possibility of including supervised learning techniques in effectively capturing temporal dependencies.
+
+        Meanwhile, the Difference-in-Differences (DiD) analysis provided robust causal evidence that U.S. monetary policy contributed to rising inequality, especially relative to Canada. Despite this, traditional monetary levers like interest rates and M2 did not individually emerge as significant predictors in the causal framework, suggesting broader structural dynamics are at play.
+
+        Together, these results highlight that advanced statistical and machine learning models can provide deep insights into complex policy effects. Yet, they also emphasize critical challenges—such as model fragility during volatile periods, difficulty in isolating causality, and the need for continual retraining in dynamic economic contexts. Moving forward, integrating ensemble learning (e.g., Random Forest), modeling real-time shocks, and testing alternate causal frameworks like Regression Discontinuity can further enhance the explanatory and predictive power of policy tools aimed at economic equity.
+        """)
+
+    with st.expander("📚 References"):
+        st.markdown("""
+        - Blanchet, T., Saez, E., & Zucman, G. (November 2022). *Who benefits from income and wealth growth in the United States?* Department of Economics, University of California, Berkeley.  
+        - Hyndman, R. J., & Athanasopoulos, G. (2021). *5.8 Training and test sets*. In Forecasting: Principles and practice. OTexts.
+        """)
+
+
 
 def causal_inf():
     st.title("Causal Inference")
