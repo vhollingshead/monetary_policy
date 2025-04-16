@@ -410,10 +410,12 @@ def causal_inf():
     did_results_df = pd.DataFrame(data)
 
     st.markdown("""
-    Below is a summary of results from our DiD models evaluating the impact of U.S. monetary policy on income inequality using Canada as a control group. Significance codes:
-    - *** = p < 0.001  
-    - ** = p < 0.01  
-    - * = p < 0.05  
+    Below is a summary of results from our DiD models evaluating the impact of U.S. monetary policy on income inequality using Canada as a control group. 
+    
+    Legend:
+    *** = p < 0.001  
+    ** = p < 0.01  
+    * = p < 0.05  
     """)
 
     st.dataframe(did_results_df, use_container_width=True)
