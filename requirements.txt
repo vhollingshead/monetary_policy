@@ -11,7 +11,7 @@ pandas_datareader
 datetime
 python-dateutil==2.8.2
 
-tensorflow
-tensorflow.keras
+tensorflow==2.18.0
+tensorflow.keras==3.8.0
 
 
