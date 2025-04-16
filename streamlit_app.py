@@ -19,6 +19,7 @@ from tensorflow.keras.models import load_model
 
 import tensorflow as tf
 tf.keras.config.enable_unsafe_deserialization() 
+from PIL import Image
 
 
 # Set page config
@@ -49,6 +50,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+def image_display(image_path):
+    image = Image.open(image_path)
+    standard_width = 500
+    aspect_ratio = image.height / image.width
+    new_height = int(standard_width * aspect_ratio)
+    resized_image = image.resize((standard_width, new_height))
+
+    # Center image using columns
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image(resized_image, use_container_width=True)
+
 def home():
     # Header Section
     st.markdown("<div class='header'>Gini-Lab: An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
@@ -56,16 +69,8 @@ def home():
 
     # Problem Section
     st.markdown("### The Problem")
-    image_path = "images/theproblem_increase_gini.png"
-
-    st.markdown(
-        f"""
-        <div style='text-align: center;'>
-            <img src="data:image/png;base64,{st.image(image_path, use_column_width=False).data}" alt="Centered Image" style="max-width: 70%;"/>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    problem_image_path = "images/theproblem_increase_gini.png"
+    image_display(problem_image_path)
 
     st.markdown("""
     Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
