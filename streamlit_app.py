@@ -131,7 +131,7 @@ def about():
     for item in images:
         col1, col2 = st.columns([1, 2])
         with col1:
-            st.image(item["url"], use_column_width=True)
+            st.image(item["url"], use_container_width=True)
         with col2:
             st.markdown(f"**Description**: {item['desc']}")
         st.markdown("---")  # horizontal line for separation
