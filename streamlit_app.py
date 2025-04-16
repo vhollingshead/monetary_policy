@@ -214,6 +214,9 @@ def our_methodology():
         - **Data Types**: We targeted economic variables that fall into the two major categories – Leading and Lagging.  Leading variables can be thought of as levers the federal reserve can pull to trigger a response.  They are often used to make forward-looking decisions.  Lagging variables can be thought of as measurements of economic performance and are often used to confirm economic shifts have occurred.  
         - **Preprocessing**: Multiple datasets are merged into a unified DataFrame, aligning them by date to create a comprehensive time series dataset for analysis.
         - **FRED API**: For the dashboard, data is pulled directly from the FRED database using the public API. Because leading and lagging variables have varying frequencies, they are averaged over the last month, published on the dashboard, and entered to the LSTM model for prediction.
+        
+        Data preprocessing prepares the raw data for modeling by ensuring consistency and quality. The high-level steps include:
+                    
         - **Data Alignment:** Datasets are merged by date, ensuring all time series are synchronized. For example, FRED data (e.g., interest rates) is combined with inequality metrics and financial data.
         - **Frequency Adjustment:** Data is resampled to a consistent frequency (e.g., daily or monthly) to match the analysis requirements, using methods like forward-filling for missing values.
         - **Handling Missing Values:** Missing data points are identified and addressed, either by forward-filling or filtering out incomplete records, to ensure a complete dataset.
@@ -222,7 +225,7 @@ def our_methodology():
         """)
 
         st.markdown("""
-        Data preprocessing prepares the raw data for modeling by ensuring consistency and quality. The high-level steps include:
+        
 
        
         """)
