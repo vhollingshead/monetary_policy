@@ -366,6 +366,57 @@ def causal_inf():
 
     st.markdown("### 📊 DiD Results Summary")
 
+    # Create a DataFrame for DiD Results Summary
+    data = {
+        "Model": [f"Model {i}" for i in range(1, 15)],
+        "Variables": [
+            "Treatment + Year + DiD_Interaction + US_DFF",
+            "Treatment + Year + DiD_Interaction + US_DFF + Canada_Overnight_Target_Rate",
+            "DiD_Interaction + Year + US_DFF + Canada_Overnight_Target_Rate + log_US_M2_USD + log_Canada_M2_USD",
+            "DiD_Interaction + Year + US_DFF + Canada_Overnight_Target_Rate + log_US_M2_USD",
+            "DiD_Interaction + Year + US_DFF + log_US_M2_USD",
+            "Year + DiD_Interaction + US_DFF_change",
+            "DiD_Interaction + Year + US_DFF_change + Canada_Rate_change",
+            "DiD_Interaction + Year + Interest_Spread",
+            "Year + DiD_Interaction + US_DFF_change + log_US_M2_USD",
+            "DiD_Interaction + Year + US_DFF_change + Canada_Rate_change + log_US_M2_USD",
+            "DiD_Interaction + Year + Interest_Spread + log_US_M2_USD",
+            "DiD_Interaction + Year + US_DFF_change + Canada_Rate_change + Interest_Spread + log_US_M2_USD",
+            "DiD_Interaction + Year + US_DFF_change + Canada_Rate_change + log_US_M2_USD_inflation_adj",
+            "DiD_Interaction + Year + US_DFF + Canada_Overnight_Target_Rate + log_US_M2_USD_inflation_adj + log_Canada_M2_USD"
+        ],
+        "Coef": [0.0274, 0.0274, 0.0037, 0.0037, 0.0037, 0.0038, 0.0038, 0.0038, 0.0038, 0.0038, 0.0038, 0.0038, 0.0038, 0.0037],
+        "Std Err": [0.021, 0.02, 8.12e-05, 8.16e-05, 8.38e-05, 8.15e-05, 8.15e-05, 8.20e-05, 8.23e-05, 8.21e-05, 8.23e-05, 8.10e-05, 7.98e-05, 7.61e-05],
+        "t": [1.276, 1.37, 46.075, 45.853, 44.651, 46.025, 46.064, 45.767, 45.563, 45.709, 45.579, 46.303, 47.037, 49.15],
+        "P>|t|": [0.208, 0.177, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "Significant Term(s)": [
+            "DiD_Interaction, Year *",
+            "DiD_Interaction, US_DFF *, Canada_Overnight_Target_Rate **",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***, Year *, Intercept *, log_US_M2_USD *",
+            "DiD_Interaction ***, Intercept *, Year ***",
+            "DiD_Interaction ***, Intercept *, Year ***",
+            "DiD_Interaction ***, Year **",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***",
+            "DiD_Interaction ***, Year **"
+        ]
+    }
+
+    did_results_df = pd.DataFrame(data)
+
+    st.markdown("""
+    Below is a summary of results from our DiD models evaluating the impact of U.S. monetary policy on income inequality using Canada as a control group. Significance codes:
+    - *** = p < 0.001  
+    - ** = p < 0.01  
+    - * = p < 0.05  
+    """)
+
+    st.dataframe(did_results_df, use_container_width=True)
 
 
     st.markdown("""
