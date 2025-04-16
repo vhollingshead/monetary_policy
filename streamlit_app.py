@@ -439,7 +439,7 @@ def dashboard():
     first_part()
     second_part()
     third_part()
-    fourth_part(lstm_prediction = lstm_prediction)
+    fourth_part()
 
 from streamlit_option_menu import option_menu
 
