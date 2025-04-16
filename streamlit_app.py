@@ -379,9 +379,9 @@ def lstm_model():
 
     # keras approach
 
-    lstm_model_filename = 'models/ensemble_complete.keras'  
-    lstm_model = load_model(lstm_model_filename)
-    
+    # lstm_model_filename = 'models/ensemble_complete.keras'  
+    # lstm_model = load_model(lstm_model_filename)
+
 
     # user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
     # scaler = lstm_model.feature_scaler
