@@ -216,13 +216,16 @@ def our_methodology():
         - **FRED API**: For the dashboard, data is pulled directly from the FRED database using the public API. Because leading and lagging variables have varying frequencies, they are averaged over the last month, published on the dashboard, and entered to the LSTM model for prediction.
         """)
 
-        st.markdown("""Data preprocessing prepares the raw data for modeling by ensuring consistency and quality. The high-level steps include:
+        st.markdown("""
+        Data preprocessing prepares the raw data for modeling by ensuring consistency and quality. The high-level steps include:
+
         - **Data Alignment:** Datasets are merged by date, ensuring all time series are synchronized. For example, FRED data (e.g., interest rates) is combined with inequality metrics and financial data.
         - **Frequency Adjustment:** Data is resampled to a consistent frequency (e.g., daily or monthly) to match the analysis requirements, using methods like forward-filling for missing values.
         - **Handling Missing Values:** Missing data points are identified and addressed, either by forward-filling or filtering out incomplete records, to ensure a complete dataset.
         - **Format Conversion:** Dates are converted to a standard datetime format, and the dataset is indexed by date for time series analysis.
         - **Data Split:** Our data was split chronologically (rather than randomly) to retain temporal relationships inherent in the data and to ensure past data was used to make sequential predictions in the future.  In addition, the temporal split establishes a “maximum forecast horizon” that serves as a guideline for model retraining (Hyndman, 2021).
         """)
+
 
     with st.expander("📐 Gini Coefficient Calculation"):
         st.markdown("""
@@ -249,7 +252,7 @@ def our_methodology():
         display_caption(model_summary_table_caption)
 
         st.markdown("While the RandomForestRegressor pulls ahead in performance over traditional time series models, we selected ARIMAX for forecasting the future gini coefficient and LSTM to predict the current gini coefficient for their conventional use in industry and relative strong performance. During the training period of the forecasting model, we compared ARIMA and SARIMAX models for forecasting the Gini coefficient time series, both configured with the same time series order based on ACF and PACF plots. The baseline ARIMA model relied solely on the Gini coefficient data, while SARIMAX incorporated exogenous variables—the effective federal funds rate (DFF) and M2 money supply (M2)—to enhance its predictive power. Based on the performance metrics in Table1 below, ARIMAX outperformed ARIMA, demonstrating that the inclusion of DFF and M2 as exogenous variables significantly improved the model’s ability to capture the dynamics of the Gini coefficient. We will describe more details of the model under the “Time Series Modelling” section below. During the training period for the model to predict the current gini coefficient, we compared LSTM time series networks with traditional linear regression. Both models used the same feature set—mortgage-backed securities (WSHOMCB), Balance Sheet, Total Assets (QBPBSTASSCMRTSEC), and Consumer Credit, Student Loans (FGCCSAQ027S)—and identical data splits. While linear regression provided a straightforward baseline, the LSTM architecture significantly outperformed it according to metrics in Table 2. The LSTM's ability to capture temporal dependencies and non-linear relationships between economic indicators and inequality proved superior to linear regression's static approach. This demonstrates that the sequential processing capabilities of LSTM networks are particularly valuable for modeling the complex dynamics of income inequality as measured by the Gini coefficient.  We will describe more details of the model under the “Long Short Term Memory (LSTM)” section below. Additional details of the Random Forest Regressor are described below under the section titled “Random Forest Regressor.”")
-        
+
 
     with st.expander("🔮 Forecasting Framework (ARIMAX-Based)"):
         st.markdown("""
