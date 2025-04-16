@@ -131,7 +131,7 @@ def fred_api_funct():
     # fred_data = fred_data.merge(bogz1fl1920900005q, left_index=True, right_index=True, how='left')
     # fred_data = fred_data.merge(civpart, left_index=True, right_index=True, how='left')
     # fred_data = fred_data.merge(m2real, left_index=True, right_index=True, how='left')
-    fred_data = fred_data.merge(qbpbstass, left_index=True, right_index=True, how='left')
+    # fred_data = fred_data.merge(qbpbstass, left_index=True, right_index=True, how='left')
     fred_data = fred_data.merge(fgccsaq, left_index=True, right_index=True, how='left')
 
 
