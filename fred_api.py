@@ -24,85 +24,85 @@ def fred_api_funct():
     today = datetime.today()
     start_date, end_date = get_last_full_month_range(today)
 
-    # FRED series: Nominal Broad U.S. Dollar Index
-    # https://fred.stlouisfed.org/series/DTWEXBGS
-    dtwexbgs = pdr.DataReader("DTWEXBGS", "fred", start=start_date, end=end_date)
-    dtwexbgs.columns = ['DTWEXBGS']
+    # # FRED series: Nominal Broad U.S. Dollar Index
+    # # https://fred.stlouisfed.org/series/DTWEXBGS
+    # dtwexbgs = pdr.DataReader("DTWEXBGS", "fred", start=start_date, end=end_date)
+    # dtwexbgs.columns = ['DTWEXBGS']
 
-    # FRED series: Consumer Price Index for All Urban Consumers: All Items Less Food and Energy in U.S. City Average
-    # https://fred.stlouisfed.org/series/CPILFESL
-    cpilfesl = pdr.DataReader("CPILFESL", "fred", start=start_date, end=end_date)
-    cpilfesl.columns = ['CPILFESL']
+    # # FRED series: Consumer Price Index for All Urban Consumers: All Items Less Food and Energy in U.S. City Average
+    # # https://fred.stlouisfed.org/series/CPILFESL
+    # cpilfesl = pdr.DataReader("CPILFESL", "fred", start=start_date, end=end_date)
+    # cpilfesl.columns = ['CPILFESL']
 
-    # FRED series: Consumer Price Index for All Urban Consumers: Purchasing Power of the Consumer Dollar in U.S. City Average
-    # https://fred.stlouisfed.org/series/CUUR0000SA0R
-    cuur0000sa0r = pdr.DataReader("CUUR0000SA0R", "fred", start=start_date, end=end_date)
-    cuur0000sa0r.columns = ['CUUR0000SA0R']
+    # # FRED series: Consumer Price Index for All Urban Consumers: Purchasing Power of the Consumer Dollar in U.S. City Average
+    # # https://fred.stlouisfed.org/series/CUUR0000SA0R
+    # cuur0000sa0r = pdr.DataReader("CUUR0000SA0R", "fred", start=start_date, end=end_date)
+    # cuur0000sa0r.columns = ['CUUR0000SA0R']
 
-    # FRED series: Consumer Price Index for All Urban Consumers: Energy in U.S. City Average
-    # https://fred.stlouisfed.org/series/CPIENGSL
-    cpiengsl = pdr.DataReader("CPIENGSL", "fred", start=start_date, end=end_date)
-    cpiengsl.columns = ['CPIENGSL']
+    # # FRED series: Consumer Price Index for All Urban Consumers: Energy in U.S. City Average
+    # # https://fred.stlouisfed.org/series/CPIENGSL
+    # cpiengsl = pdr.DataReader("CPIENGSL", "fred", start=start_date, end=end_date)
+    # cpiengsl.columns = ['CPIENGSL']
 
-    # FRED series: Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
-    # https://fred.stlouisfed.org/series/CPIAUCSL
-    cpiaucsl = pdr.DataReader("CPIAUCSL", "fred", start=start_date, end=end_date)
-    cpiaucsl.columns = ['CPIAUCSL']
+    # # FRED series: Consumer Price Index for All Urban Consumers: All Items in U.S. City Average
+    # # https://fred.stlouisfed.org/series/CPIAUCSL
+    # cpiaucsl = pdr.DataReader("CPIAUCSL", "fred", start=start_date, end=end_date)
+    # cpiaucsl.columns = ['CPIAUCSL']
 
-    # FRED series: Federal Funds Effective Rate (DFF)
-    # https://fred.stlouisfed.org/series/DFF
-    fred_def = pdr.DataReader("DFF", "fred", start=start_date, end=end_date)
-    fred_def.columns = ['DFF']
+    # # FRED series: Federal Funds Effective Rate (DFF)
+    # # https://fred.stlouisfed.org/series/DFF
+    # fred_def = pdr.DataReader("DFF", "fred", start=start_date, end=end_date)
+    # fred_def.columns = ['DFF']
 
-    # FRED series: Effective Federal Funds Rate (EFFR)
-    # https://fred.stlouisfed.org/series/EFFR
-    effr = pdr.DataReader("EFFR", "fred", start=start_date, end=end_date)
-    effr.columns = ['EFFR']
+    # # FRED series: Effective Federal Funds Rate (EFFR)
+    # # https://fred.stlouisfed.org/series/EFFR
+    # effr = pdr.DataReader("EFFR", "fred", start=start_date, end=end_date)
+    # effr.columns = ['EFFR']
 
-    # FRED series: Interest Rates and Price Indexes; Effective Federal Funds Rate (Percent), Level (BOGZ1FL072052006Q)
-    # https://fred.stlouisfed.org/series/BOGZ1FL072052006Q
-    bogz1fl072052006q = pdr.DataReader("BOGZ1FL072052006Q", "fred", start=start_date, end=end_date)
-    bogz1fl072052006q.columns = ['BOGZ1FL072052006Q']
+    # # FRED series: Interest Rates and Price Indexes; Effective Federal Funds Rate (Percent), Level (BOGZ1FL072052006Q)
+    # # https://fred.stlouisfed.org/series/BOGZ1FL072052006Q
+    # bogz1fl072052006q = pdr.DataReader("BOGZ1FL072052006Q", "fred", start=start_date, end=end_date)
+    # bogz1fl072052006q.columns = ['BOGZ1FL072052006Q']
 
-    # Assets: Total Assets: Total Assets (Less Eliminations from Consolidation): Wednesday Level (WALCL)
-    # https://fred.stlouisfed.org/series/WALCL
-    walcl = pdr.DataReader("WALCL", "fred", start=start_date, end=end_date)
-    walcl.columns = ['WALCL']
+    # # Assets: Total Assets: Total Assets (Less Eliminations from Consolidation): Wednesday Level (WALCL)
+    # # https://fred.stlouisfed.org/series/WALCL
+    # walcl = pdr.DataReader("WALCL", "fred", start=start_date, end=end_date)
+    # walcl.columns = ['WALCL']
 
     # Assets: Securities Held Outright: Mortgage-Backed Securities: Wednesday Level (WSHOMCB)
     # https://fred.stlouisfed.org/series/WSHOMCB
     wshomcb = pdr.DataReader("WSHOMCB", "fred", start=start_date, end=end_date)
     wshomcb.columns = ['WSHOMCB']
 
-    # Assets: Securities Held Outright: U.S. Treasury Securities: All: Wednesday Level (TREAST)
-    # https://fred.stlouisfed.org/series/TREAST
-    treast = pdr.DataReader("TREAST", "fred", start=start_date, end=end_date)
-    treast.columns = ['TREAST']
+    # # Assets: Securities Held Outright: U.S. Treasury Securities: All: Wednesday Level (TREAST)
+    # # https://fred.stlouisfed.org/series/TREAST
+    # treast = pdr.DataReader("TREAST", "fred", start=start_date, end=end_date)
+    # treast.columns = ['TREAST']
 
-    # FRED series: Real Estate Loans: Residential Real Estate Loans: Revolving Home Equity Loans, All Commercial Banks (RHEACBW027SBOG)
-    # https://fred.stlouisfed.org/series/RHEACBW027SBOG
-    rheacbw027sbog = pdr.DataReader("RHEACBW027SBOG", "fred", start=start_date, end=end_date)
-    rheacbw027sbog.columns = ['RHEACBW027SBOG']
+    # # FRED series: Real Estate Loans: Residential Real Estate Loans: Revolving Home Equity Loans, All Commercial Banks (RHEACBW027SBOG)
+    # # https://fred.stlouisfed.org/series/RHEACBW027SBOG
+    # rheacbw027sbog = pdr.DataReader("RHEACBW027SBOG", "fred", start=start_date, end=end_date)
+    # rheacbw027sbog.columns = ['RHEACBW027SBOG']
 
-    # FRED series: Real Estate Loans, All Commercial Banks (REALLN)
-    # https://fred.stlouisfed.org/series/REALLN
-    realln = pdr.DataReader("REALLN", "fred", start=start_date, end=end_date)
-    realln.columns = ['REALLN']
+    # # FRED series: Real Estate Loans, All Commercial Banks (REALLN)
+    # # https://fred.stlouisfed.org/series/REALLN
+    # realln = pdr.DataReader("REALLN", "fred", start=start_date, end=end_date)
+    # realln.columns = ['REALLN']
 
-    # FRED series: Households; Net Worth, Level (BOGZ1FL192090005Q)
-    # https://fred.stlouisfed.org/series/BOGZ1FL192090005Q
-    bogz1fl1920900005q = pdr.DataReader("BOGZ1FL192090005Q", "fred", start=start_date, end=end_date)
-    bogz1fl1920900005q.columns = ['BOGZ1FL192090005Q']
+    # # FRED series: Households; Net Worth, Level (BOGZ1FL192090005Q)
+    # # https://fred.stlouisfed.org/series/BOGZ1FL192090005Q
+    # bogz1fl1920900005q = pdr.DataReader("BOGZ1FL192090005Q", "fred", start=start_date, end=end_date)
+    # bogz1fl1920900005q.columns = ['BOGZ1FL192090005Q']
 
-    # FRED series: Labor Force Participation Rate (CIVPART)
-    # https://fred.stlouisfed.org/series/CIVPART
-    civpart = pdr.DataReader("CIVPART", "fred", start=start_date, end=end_date)
-    civpart.columns = ['CIVPART']
+    # # FRED series: Labor Force Participation Rate (CIVPART)
+    # # https://fred.stlouisfed.org/series/CIVPART
+    # civpart = pdr.DataReader("CIVPART", "fred", start=start_date, end=end_date)
+    # civpart.columns = ['CIVPART']
 
-    # FRED series: Real M2 Money Stock (M2REAL)
-    # https://fred.stlouisfed.org/series/M2REAL
-    m2real = pdr.DataReader("M2REAL", "fred", start=start_date, end=end_date)
-    m2real.columns = ['M2REAL']
+    # # FRED series: Real M2 Money Stock (M2REAL)
+    # # https://fred.stlouisfed.org/series/M2REAL
+    # m2real = pdr.DataReader("M2REAL", "fred", start=start_date, end=end_date)
+    # m2real.columns = ['M2REAL']
 
     # FRED series: Real M2 Money Stock (QBPBSTASSCMRTSEC)
     # https://fred.stlouisfed.org/series/QBPBSTASSCMRTSEC
