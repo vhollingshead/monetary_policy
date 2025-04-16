@@ -151,7 +151,7 @@ def about():
     for item in images:
         col1, col2 = st.columns([1, 2])
         with col1:
-            st.image(item["url"], use_column_width=True)
+            st.image(item["url"], use_container_width=True)
         with col2:
             st.markdown(f"<h5 style='margin-bottom:0'><b>{item['desc_header']}</b></h5>", unsafe_allow_html=True)
             for bullet in item["desc_bullets"]:
