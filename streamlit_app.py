@@ -107,34 +107,57 @@ def home():
     """)
 
 def about():
+    # List of image URLs and their descriptions as bullet points
     images = [
         {
             "url": "images/nicole.png",
-            "desc": "Nicole Kan"
+            "desc": [
+                "Nicole Kan",
+                "Causal Analysis",
+                "Machine Learning",
+                "Research"
+            ]
         },
         {
             "url": "images/victoria.png",
-            "desc": "Victoria Hollingshead"
+            "desc": [
+                "Victoria Hollingshead",
+                "Product",
+                "Machine Learning",
+                "Research"
+            ]
         },
         {
             "url": "images/william.png",
-            "desc": "William Lei"
+            "desc": [
+                "William Lei",
+                "Machine Learning",
+                "Research"
+            ]
         },
         {
             "url": "images/tracy.png",
-            "desc": "Tracy Volz"
+            "desc": [
+                "Tracy Volz",
+                "Exploratory Data Analysis",
+                "Machine Learning",
+                "Research"
+            ]
         }
     ]
 
-    st.title("Meet our Team")
+    st.title("Image Display with Descriptive Bullet Points")
 
+    # Display images and bullet-point descriptions
     for item in images:
         col1, col2 = st.columns([1, 2])
         with col1:
-            st.image(item["url"], use_container_width=True)
+            st.image(item["url"], use_column_width=True)
         with col2:
-            st.markdown(f"**Description**: {item['desc']}")
-        st.markdown("---")  # horizontal line for separation
+            st.markdown("**Description:**")
+            for bullet in item["desc"]:
+                st.markdown(f"- {bullet}")
+        st.markdown("---")  # Divider between sections
 
 
 def our_methodology():
