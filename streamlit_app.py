@@ -100,7 +100,7 @@ def home():
     # Solution Section
     st.markdown("### Our Solution")
     st.markdown("""
-    We introduce the **Monetary Policy Dashboard**, an interactive tool to highlight the impact of monetary policy on income inequality in the United States. It enables users to:
+    We introduce the **The Gini Lab**, an interactive tool to highlight the impact of monetary policy on income inequality in the United States. It enables users to:
 
     - Simulate the effects of policy changes, like interest rate adjustments, on inequality metrics such as the Gini coefficient in real time.  
     - Visualize historical and forecasted inequality trends using advanced models.  
@@ -117,7 +117,7 @@ def home():
     # Overview Section
     st.markdown("### High-Level Overview")
     st.markdown("""
-    The Monetary Policy Dashboard is an interactive platform that makes the link between monetary policy and income inequality accessible and actionable. It provides real-time insights into how policy decisions, such as interest rate changes, affect income inequality in the United States. 
+    The Gini Lab is an interactive platform that makes the link between monetary policy and income inequality accessible and actionable. It provides real-time insights into how policy decisions, such as interest rate changes, affect income inequality in the United States. 
     Designed for policymakers, researchers, economists, and the public, the dashboard offers a clear way to explore these dynamics.
 
     **The dashboard features two core components:**
