@@ -409,19 +409,23 @@ def causal_inf():
 
     did_results_df = pd.DataFrame(data)
 
+
+
+    st.dataframe(did_results_df, use_container_width=True)
+
+    did_tabl5 = "Table 5: Difference-in-Differences (DiD) Results Summary for Gini Coefficient Analysis"
+    display_caption(did_tabl5)
+
     st.markdown("""
-    Below is a summary of results from our DiD models evaluating the impact of U.S. monetary policy on income inequality using Canada as a control group. 
-    
-    Legend:
+    **Legend:**
                 
     3 asterisks = p < 0.001  
     2 asterisks = p < 0.01  
     1 asterisk = p < 0.05  
     ns = not significant
+    
+    
     """)
-
-    st.dataframe(did_results_df, use_container_width=True)
-
 
     st.markdown("""
     The sequence of Difference-in-Differences (DiD) models progressively adds monetary policy controls and refinements to isolate the impact of U.S. monetary policy on income inequality. Across Models 3 through 14, the DiD_Interaction term—representing the treatment effect of U.S. policy changes relative to Canada—remains consistently positive and highly statistically significant at the 0.1% level (p < 0.001) while neither the U.S. federal funds rate (US_DFF) nor the Canadian target overnight rate are individually significant predictors of income inequality. This suggests robust evidence that inequality in the U.S. increased more than in Canada following monetary policy shifts. The coefficient of around 0.0037 to 0.0038 across these models, while modest in magnitude, is precise and consistent, pointing to a stable treatment effect across various model specifications and control variables.
