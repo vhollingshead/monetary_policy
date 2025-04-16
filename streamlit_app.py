@@ -62,6 +62,12 @@ def image_display(image_path):
     with col2:
         st.image(resized_image, use_container_width=True)
 
+def display_caption(caption_text):
+    st.markdown(
+        f"<p style='text-align: center; font-size: 0.9rem; color: #555;'>{caption_text}</p>",
+        unsafe_allow_html=True
+    )
+
 def home():
     # Header Section
     st.markdown("<div class='header'>Gini-Lab: An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
@@ -70,7 +76,9 @@ def home():
     # Problem Section
     st.markdown("### The Problem")
     problem_image_path = "images/theproblem_increase_gini.png"
+    problem_caption_text = "Figure 1. Rising Inequality: The Gini Coefficient's Steady Climb from 1976 to 2023"
     image_display(problem_image_path)
+    display_caption(problem_caption_text)
 
     st.markdown("""
     Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
