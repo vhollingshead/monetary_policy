@@ -357,12 +357,12 @@ earliest_date = min(last_updated_dates)
 formatted_earliest = earliest_date.strftime("%B %d, %Y")
 
 def lstm_model():
-    # joblib approach
-    print("error is before filename")
-    lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.joblib'
-    print("error is before loading lstm")
-    lstm_model = joblib.load(lstm_model_filename)
-    print("error is after loading lstm")
+    # # joblib approach
+    # print("error is before filename")
+    # lstm_model_filename = 'models/ensemble_data_simple_14Apr2024.joblib'
+    # print("error is before loading lstm")
+    # lstm_model = joblib.load(lstm_model_filename)
+    # print("error is after loading lstm")
     lstm_prediction = 0.56
 
 
