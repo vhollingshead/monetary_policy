@@ -148,6 +148,9 @@ def forecast_gini(data, model, annual_dff_change, annual_m2_growth_pct):
     last_m2 = data['US_M2_USD'].iloc[-1]
     last_gini = data['gini_coefficient'].iloc[-1]
 
+    print("this is last_dff:", last_dff)
+    print("this is last_m2:", last_m2)
+
     dff_forecast = np.clip(np.linspace(last_dff, last_dff + annual_dff_change * 5, future_steps), 0, None)
     m2_forecast = last_m2 * (1 + annual_m2_growth_pct) ** (np.arange(1, future_steps + 1) / 12)
 
