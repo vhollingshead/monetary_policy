@@ -168,7 +168,7 @@ def about():
         }
     ]
 
-    st.title("Meet our Team")
+    st.title("Meet Our Team")
 
     for item in images:
         col1, col2 = st.columns([1, 2])
@@ -186,27 +186,6 @@ def our_methodology():
     st.markdown("""
     Our methodology leverages **causal analysis** and **advanced analytics** to provide insights into how monetary policy impacts income inequality.
     """)
-
-    with st.expander("📉 Time Series Forecasting Model"):
-        st.markdown("""
-        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. The model analyzes historical trends and allows users to simulate scenarios, such as adjusting interest rates, to see their impact on inequality over time. Results are visualized in the dashboard, showing both historical and forecasted trends.
-        """)
-
-    with st.expander("🧠 LSTM Model to Predict the Current Gini"):
-        st.markdown("""
-        A **Long Short-Term Memory (LSTM)** model, a type of machine learning approach, predict the current Gini coefficient using recent economic data. This provides an up-to-date snapshot of income inequality, which is integrated into the dashboard for real-time insights. By combining forecasting with real-time analysis, the Monetary Policy Dashboard offers a comprehensive view of income inequality dynamics, empowering users to explore both current and future impacts of monetary policy.
-
-        """)
-
-    with st.expander("🌲 RandomForestRegressor to Predict the Current Gini (Future Effort)"):
-        st.markdown("""
-        The **RandomForestRegressor** is an ensemble model composed of multiple trees, with each tree trained on a bootstrapped sample of the training data and random subset of the features. Final predictions are aggregated as a final step. While this model is not represented in the dashboard, it has shown considerable performance improvement over traditional time series and models. We recommend future teams explore supervised learning options like RandomForestRegressor for further analysis. 
-        """)
-
-    with st.expander("📊 Difference-in-Differences (DiD) for Causal Inference"):
-        st.markdown("""
-        To assess the causal impact of monetary policy on income inequality, we use a **Difference-in-Differences (DiD)** approach. This method compares changes in inequality metrics, like the Gini coefficient, between a treatment group (e.g., regions or groups affected by a specific policy change, such as an interest rate hike) and a control group (e.g., regions or groups not affected) before and after the policy intervention. By isolating the policy’s effect, DiD helps us understand how much of the change in inequality can be attributed to the monetary policy itself, rather than other factors.
-        """)
 
     with st.expander("🛠️ Data Pipeline & Preprocessing"):
         st.markdown("""
@@ -263,6 +242,26 @@ def our_methodology():
         Additional details of the Random Forest Regressor are described below under the section titled “Random Forest Regressor.”
         """)
 
+    with st.expander("📉 Time Series Forecasting Model"):
+        st.markdown("""
+        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. The model analyzes historical trends and allows users to simulate scenarios, such as adjusting interest rates, to see their impact on inequality over time. Results are visualized in the dashboard, showing both historical and forecasted trends.
+        """)
+
+    with st.expander("🧠 LSTM Model to Predict the Current Gini"):
+        st.markdown("""
+        A **Long Short-Term Memory (LSTM)** model, a type of machine learning approach, predict the current Gini coefficient using recent economic data. This provides an up-to-date snapshot of income inequality, which is integrated into the dashboard for real-time insights. By combining forecasting with real-time analysis, the Monetary Policy Dashboard offers a comprehensive view of income inequality dynamics, empowering users to explore both current and future impacts of monetary policy.
+
+        """)
+
+    with st.expander("🌲 RandomForestRegressor to Predict the Current Gini (Future Effort)"):
+        st.markdown("""
+        The **RandomForestRegressor** is an ensemble model composed of multiple trees, with each tree trained on a bootstrapped sample of the training data and random subset of the features. Final predictions are aggregated as a final step. While this model is not represented in the dashboard, it has shown considerable performance improvement over traditional time series and models. We recommend future teams explore supervised learning options like RandomForestRegressor for further analysis. 
+        """)
+
+    with st.expander("📊 Difference-in-Differences (DiD) for Causal Inference"):
+        st.markdown("""
+        To assess the causal impact of monetary policy on income inequality, we use a **Difference-in-Differences (DiD)** approach. This method compares changes in inequality metrics, like the Gini coefficient, between a treatment group (e.g., regions or groups affected by a specific policy change, such as an interest rate hike) and a control group (e.g., regions or groups not affected) before and after the policy intervention. By isolating the policy’s effect, DiD helps us understand how much of the change in inequality can be attributed to the monetary policy itself, rather than other factors.
+        """)
 
     with st.expander("🔮 Forecasting Framework (ARIMAX-Based)"):
         st.markdown("""
@@ -281,39 +280,42 @@ def our_methodology():
 
     with st.expander("⚠️ Limitations"):
         st.markdown("""
-        - **Simplified Assumptions**: Future DFF and M2 paths are simplified and do not account for macroeconomic shocks.
-        - **National-Level View**: Aggregated data ignores regional or demographic heterogeneity.
-        - **Non-Normal Residuals**: Slightly skewed residuals may reduce confidence interval reliability.
-        - **Stationarity Risks**: Assumes stability in differenced series over long horizons.
-        - **Illustrative Forecasts**: The goal is insight, not precise prediction.
+        The time series forecasting component of the Monetary Policy Dashboard has the following limitations:
+        - **Simplified Assumptions**: The ARIMAX model relies on historical data and basic assumptions for future exogenous variables like the Federal Funds Rate (DFF) and M2 Money Supply, which may not account for unexpected economic shocks or policy shifts.
+        - **Heterogeneity:** The model aggregates data at a national level, potentially overlooking heterogeneity across different economic regions or demographic groups.
+        - **Non-Normal Residuals:** The residuals are not entirely normal, which may affect the reliability of confidence intervals for forecasts.
+        - **Stationarity Concerns:** The assumption of stationarity after differencing may not hold over long horizons, potentially impacting forecast accuracy.
+        - **Illustrative Purpose:** While the dashboard effectively illustrates the potential impact of monetary policy on income inequality, its scenario-based forecasts should be interpreted as illustrative rather than definitive predictions.
         """)
 
     with st.expander("🔁 Model Retraining Strategy"):
         st.markdown("""
-        - **Normal Conditions**: Models retrained annually to reflect slowly changing trends.
-        - **Volatile Periods**: Quarterly retraining during instability like COVID-19.
-        - **Trigger Conditions**: Retrain if:
-            - Fed Funds Rate changes > 50 basis points in a quarter.
-            - M2 monthly growth > 1% for 3+ consecutive months.
-
-        This retraining ensures model relevance without overfitting to temporary noise.
+         Our ARIMAX and LSTM models require different retraining frequencies based on economic conditions:
+        - **Normal Conditions**: Annual retraining is sufficient during stable periods. Since our “maximum forecast horizon” for the LSTM is ~1.7 years, we establish a conservative retraining schedule of once every 12 months for scenarios when economic factors remain consistent.
+        - **Volatile Periods**: Quarterly retraining becomes necessary during volatility (like COVID-19), when economic relationships shift rapidly and model performance deteriorates within months rather than years.
+        - **Trigger Conditions**: To monitor these risks, we propose non-scheduled model retraining when the fed funds rate changes more than 50 basis points in a quarter, and / or the economy experiences significant shifts in M2 money supply (ex: monthly growth rate greater than 1% for 3 or more months in a row).
         """)
 
     with st.expander("📌 Conclusion"):
         st.markdown("""
         This capstone demonstrates that monetary policy not only shapes macroeconomic conditions but also plays a measurable role in income inequality. Using ARIMAX models with exogenous variables like the Federal Funds Rate and M2 money supply, we significantly improved Gini coefficient forecasting accuracy. However, these models struggled to capture volatility during periods of economic disruption, such as the COVID-19 shock, underscoring the limits of linear forecasting frameworks under structural breaks.
 
-        For real-time estimation, the LSTM model proved highly effective and achieved a huge improvement over linear regression. Its capacity to model non-linear temporal dependencies between financial indicators and inequality metrics reinforces the value of deep learning in economic forecasting. RandomForestRegressor shows promising performance and opens up the possibility of including supervised learning techniques in effectively capturing temporal dependencies.
+
+        For real-time estimation, the LSTM model proved highly effective and achieved a huge improvement over linear regression. Its capacity to model non-linear temporal dependencies between financial indicators and inequality metrics reinforces the value of deep learning in economic forecasting. RandomForestRegressor shows promising performance and opens up the possibility of including supervised learning techniques in effectively capturing temporal dependencies. 
+
 
         Meanwhile, the Difference-in-Differences (DiD) analysis provided robust causal evidence that U.S. monetary policy contributed to rising inequality, especially relative to Canada. Despite this, traditional monetary levers like interest rates and M2 did not individually emerge as significant predictors in the causal framework, suggesting broader structural dynamics are at play.
 
-        Together, these results highlight that advanced statistical and machine learning models can provide deep insights into complex policy effects. Yet, they also emphasize critical challenges—such as model fragility during volatile periods, difficulty in isolating causality, and the need for continual retraining in dynamic economic contexts. Moving forward, integrating ensemble learning (e.g., Random Forest), modeling real-time shocks, and testing alternate causal frameworks like Regression Discontinuity can further enhance the explanatory and predictive power of policy tools aimed at economic equity.
+
+        Together, these results highlight that advanced statistical and machine learning models can provide deep insights into complex policy effects. Yet, they also emphasize critical challenges—such as model fragility during volatile periods, difficulty in isolating causality, and the need for continual retraining in dynamic economic contexts. Moving forward, integrating ensemble learning (e.g., Random Forest), modeling real-time shocks, and testing alternate causal frameworks like Regression Discontinuity can further enhance the explanatory and predictive power of policy tools aimed at economic equity
+
         """)
 
     with st.expander("📚 References"):
         st.markdown("""
-        - Blanchet, T., Saez, E., & Zucman, G. (November 2022). *Who benefits from income and wealth growth in the United States?* Department of Economics, University of California, Berkeley.  
-        - Hyndman, R. J., & Athanasopoulos, G. (2021). *5.8 Training and test sets*. In Forecasting: Principles and practice. OTexts.
+        Blanchet, T., Saez, E., & Zucman, G. (November 2022). *Who benefits from income and wealth growth in the United States?* Department of Economics, University of California, Berkeley.  
+        
+        Hyndman, R. J., & Athanasopoulos, G. (2021). *5.8 Training and test sets*. In Forecasting: Principles and practice. OTexts.
         """)
 
 
