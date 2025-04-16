@@ -363,7 +363,7 @@ def lstm_model():
     print("error is before loading lstm")
     lstm_model = joblib.load(lstm_model_filename)
     print("error is after loading lstm")
-    lstm_prediction = 0.65
+    lstm_prediction = 0.56
 
 
     # user_input = np.array([[mbs_value, fgccsaq_value, qbpbstass_value]])
@@ -385,7 +385,7 @@ def lstm_model():
 
 lstm_prediction = lstm_model()
 
-def fourth_part(value = 0.67, ci_lower = 0.60, ci_upper = 0.74, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest, lstm_prediction = lstm_prediction):
+def fourth_part(value = 0.67, ci_lower = 0.53, ci_upper = 0.59, cc_value = fgccsaq_value, mbs_value = mbs_value, total_assets_value = qbpbstass_value, date = formatted_earliest, lstm_prediction = lstm_prediction):
     st.markdown("<div class='subsubheader'>Monthly Gini Coefficient Calculation </div>", unsafe_allow_html=True)
 
     st.markdown("<div class='green-box'>Measuring inequality is cumbersome, causing grave delays. Deep learning can provide real-time inequality metrics through indirect economic indicators. See our Methodologies section for more details.</div>", unsafe_allow_html=True)
