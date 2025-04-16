@@ -68,11 +68,9 @@ def home():
     # st.image("images/gini_chart.png", caption="Figure 1: Rising Inequality – The Gini Coefficient's Steady Climb from 1976 to 2023")
 
     st.markdown("""
-    <div class='green-box'>
     Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
     Nobel prize-winning economist Joseph Stiglitz in <i>The Price of Inequality</i> (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. 
     Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.
-    </div>
     """, unsafe_allow_html=True)
 
     st.markdown("#### Gaps in the Current Landscape")
