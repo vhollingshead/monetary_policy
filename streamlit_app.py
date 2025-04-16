@@ -56,7 +56,7 @@ def home():
     st.markdown("<div class='header'>Gini-Lab:  An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
     st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
     st.title("Problem")
-    st.markdown("<div class='green-box'>Monetary policy, governed by the Federal Reserve in the United States, plays a critical role in shaping economic conditions. The Federal Reserve operates under a dual mandate: to promote maximum employment and stable prices. However, its policy decisions, such as interest rate changes and quantitative easing, can unintentionally widen income and wealth inequality. Policymakers and financial institutions face significant challenges in addressing unintended consequences, such as widening income inequality and regional disparities. Without accurate tools to measure these effects, decisions are often made in isolation, perpetuating cycles of inequality and hindering inclusive growth. Addressing this gap is essential for building equitable and resilient economic systems.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='green-box'>Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. Nobel prize winning economist Joseph Stiglitz in The Price of Inequality (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.</div>", unsafe_allow_html=True)
 
 def about():
     st.title("About")
