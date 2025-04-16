@@ -413,9 +413,11 @@ def causal_inf():
     Below is a summary of results from our DiD models evaluating the impact of U.S. monetary policy on income inequality using Canada as a control group. 
     
     Legend:
-    *** = p < 0.001  
-    ** = p < 0.01  
-    * = p < 0.05  
+                
+    3 asterisks = p < 0.001  
+    2 asterisks = p < 0.01  
+    1 asterisk = p < 0.05  
+    ns = not significant
     """)
 
     st.dataframe(did_results_df, use_container_width=True)
