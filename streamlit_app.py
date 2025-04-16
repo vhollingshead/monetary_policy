@@ -189,41 +189,51 @@ def our_methodology():
 
     with st.expander("📉 Time Series Forecasting Model"):
         st.markdown("""
-        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. Historical data is analyzed to simulate scenarios — such as interest rate adjustments — and visualize their impact over time. The model outputs both historical and forecasted inequality trends.
+        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. The model analyzes historical trends and allows users to simulate scenarios, such as adjusting interest rates, to see their impact on inequality over time. Results are visualized in the dashboard, showing both historical and forecasted trends.
         """)
 
     with st.expander("🧠 LSTM Model to Predict the Current Gini"):
         st.markdown("""
-        A **Long Short-Term Memory (LSTM)** model is used to estimate the **current Gini coefficient** based on recent economic data. This provides a real-time snapshot of inequality and allows users to track emerging patterns on the dashboard.
+        A **Long Short-Term Memory (LSTM)** model, a type of machine learning approach, predict the current Gini coefficient using recent economic data. This provides an up-to-date snapshot of income inequality, which is integrated into the dashboard for real-time insights. By combining forecasting with real-time analysis, the Monetary Policy Dashboard offers a comprehensive view of income inequality dynamics, empowering users to explore both current and future impacts of monetary policy.
+
         """)
 
-    with st.expander("🌲 RandomForestRegressor (Future Enhancement)"):
+    with st.expander("🌲 RandomForestRegressor to Predict the Current Gini (Future Effort)"):
         st.markdown("""
-        Although not part of the live dashboard, we trained a **RandomForestRegressor** model to evaluate its ability to predict Gini values. It outperformed many traditional approaches, showing potential for future integration. The model used a one-step-ahead forecasting approach with lagged features.
+        The **RandomForestRegressor** is an ensemble model composed of multiple trees, with each tree trained on a bootstrapped sample of the training data and random subset of the features. Final predictions are aggregated as a final step. While this model is not represented in the dashboard, it has shown considerable performance improvement over traditional time series and models. We recommend future teams explore supervised learning options like RandomForestRegressor for further analysis. 
         """)
 
     with st.expander("📊 Difference-in-Differences (DiD) for Causal Inference"):
         st.markdown("""
-        We used **DiD** to estimate the causal impact of monetary policy. This compares inequality before and after a policy change between treated and control groups — isolating the effect of interventions like interest rate hikes.
+        To assess the causal impact of monetary policy on income inequality, we use a **Difference-in-Differences (DiD)** approach. This method compares changes in inequality metrics, like the Gini coefficient, between a treatment group (e.g., regions or groups affected by a specific policy change, such as an interest rate hike) and a control group (e.g., regions or groups not affected) before and after the policy intervention. By isolating the policy’s effect, DiD helps us understand how much of the change in inequality can be attributed to the monetary policy itself, rather than other factors.
         """)
 
     with st.expander("🛠️ Data Pipeline & Preprocessing"):
         st.markdown("""
-        - **Sources**: Data was pulled from FRED, Yahoo Finance, and real-time inequality databases.  
-        - **Data Types**: Leading indicators (e.g. interest rates) and lagging indicators (e.g. Gini coefficient) were aligned.
-        - **Preprocessing**: Dates were formatted, data resampled (daily/monthly), and missing values forward-filled.
-        - **FRED API**: Data is pulled directly from the FRED database using the public API. Because leading and lagging variables have varying frequencies, they are averaged over the last month, published on the dashboard, and entered to the LSTM model for prediction.
-        - **Chronological Split**: Data was split in time order to preserve forecasting validity and simulate real-world policy modeling.
+        - **Data Collection:** We source economic indicators from the Federal Reserve Economic Data (FRED), including interest rates, consumer price indices, and asset levels. Financial market data, such as equity indices, is retrieved from Yahoo Finance. Inequality metrics, like the Gini coefficient, are obtained from public datasets (e.g., real-time inequality databases).
+        - **Data Types**: We targeted economic variables that fall into the two major categories – Leading and Lagging.  Leading variables can be thought of as levers the federal reserve can pull to trigger a response.  They are often used to make forward-looking decisions.  Lagging variables can be thought of as measurements of economic performance and are often used to confirm economic shifts have occurred.  
+        - **Preprocessing**: Multiple datasets are merged into a unified DataFrame, aligning them by date to create a comprehensive time series dataset for analysis.
+        - **FRED API**: For the dashboard, data is pulled directly from the FRED database using the public API. Because leading and lagging variables have varying frequencies, they are averaged over the last month, published on the dashboard, and entered to the LSTM model for prediction.
+        """)
+
+        st.markdown("""Data preprocessing prepares the raw data for modeling by ensuring consistency and quality. The high-level steps include:
+        - **Data Alignment:** Datasets are merged by date, ensuring all time series are synchronized. For example, FRED data (e.g., interest rates) is combined with inequality metrics and financial data.
+        - **Frequency Adjustment:** Data is resampled to a consistent frequency (e.g., daily or monthly) to match the analysis requirements, using methods like forward-filling for missing values.
+        - **Handling Missing Values:** Missing data points are identified and addressed, either by forward-filling or filtering out incomplete records, to ensure a complete dataset.
+        - **Format Conversion:** Dates are converted to a standard datetime format, and the dataset is indexed by date for time series analysis.
+        - **Data Split:** Our data was split chronologically (rather than randomly) to retain temporal relationships inherent in the data and to ensure past data was used to make sequential predictions in the future.  In addition, the temporal split establishes a “maximum forecast horizon” that serves as a guideline for model retraining (Hyndman, 2021).
         """)
 
     with st.expander("📐 Gini Coefficient Calculation"):
         st.markdown("""
-        The Gini coefficient was derived using quarterly income shares for three socioeconomic bins: **Bottom 50%**, **Middle 40%**, and **Top 10%**. We calculated a population-weighted estimate, sufficient for tracking inequality trends over time.
+        The Gini coefficient is derived from the annual socioeconomic data produced by Blanchet et al. (2022), where income share for working-age adults in the **bottom 50%**, **middle 40%**, and **top 10%** are outlined on a quarterly basis between 1976 and 2023. Figure 2 shows the Gini coefficient formula applied. As a first step, we set the index (i) such that the socioeconomic bins were ascended by group (i.e., ordered from the bottom 50% to the middle 40% to the top 10%). We then computed the Gini coefficient while accounting for the population count for each socioeconomic bin. This essentially “weighted” our income share by accounting for the actual population distribution. It is important to note that this approach does not provide the most granular Gini coefficient, but is effective in producing a relative estimate based on limited information. 
         """)
         st.latex(r""" G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_i}{n \sum_{i=1}^{n} x_i} """)
+        gini_caption_text = "Figure 2. Gini coefficient formula in which: n = total population; i = ith individual, individuals are ranked from lowest to highest income ; x_i = income share of ith individual."
+        display_caption(gini_caption_text)
 
     with st.expander("📈 Model Evaluation Summary"):
-        st.markdown("Here is a snapshot of the models we evaluated, and their performance:")
+        st.markdown("We explored four key machine learning models over the course of this study to capture trends in inequality given direct and indirect economic indicators: SARIMAX, LSTM, XGBoost, and RandomForestRegressor. Below are the comparative performance of each with regard to MAE, MSE, and RMSE.")
         st.markdown("""
         | Model                  | MAE       | MSE        | RMSE      | Selected?                   |
         |------------------------|-----------|------------|-----------|-----------------------------|
@@ -234,6 +244,12 @@ def our_methodology():
         | XGBoost                | 0.003849  | 0.000032   | 0.005696  | ❌                          |
         | RandomForestRegressor | 0.0001587 | 0.00000057 | 0.0007531 | ❌ (Potential Future Use)   |
         """)
+
+        model_summary_table_caption = "Table 1: Performance Metrics of Models Trained on Direct and Indirect Economic Indicators"
+        display_caption(model_summary_table_caption)
+
+        st.markdown("While the RandomForestRegressor pulls ahead in performance over traditional time series models, we selected ARIMAX for forecasting the future gini coefficient and LSTM to predict the current gini coefficient for their conventional use in industry and relative strong performance. During the training period of the forecasting model, we compared ARIMA and SARIMAX models for forecasting the Gini coefficient time series, both configured with the same time series order based on ACF and PACF plots. The baseline ARIMA model relied solely on the Gini coefficient data, while SARIMAX incorporated exogenous variables—the effective federal funds rate (DFF) and M2 money supply (M2)—to enhance its predictive power. Based on the performance metrics in Table1 below, ARIMAX outperformed ARIMA, demonstrating that the inclusion of DFF and M2 as exogenous variables significantly improved the model’s ability to capture the dynamics of the Gini coefficient. We will describe more details of the model under the “Time Series Modelling” section below. During the training period for the model to predict the current gini coefficient, we compared LSTM time series networks with traditional linear regression. Both models used the same feature set—mortgage-backed securities (WSHOMCB), Balance Sheet, Total Assets (QBPBSTASSCMRTSEC), and Consumer Credit, Student Loans (FGCCSAQ027S)—and identical data splits. While linear regression provided a straightforward baseline, the LSTM architecture significantly outperformed it according to metrics in Table 2. The LSTM's ability to capture temporal dependencies and non-linear relationships between economic indicators and inequality proved superior to linear regression's static approach. This demonstrates that the sequential processing capabilities of LSTM networks are particularly valuable for modeling the complex dynamics of income inequality as measured by the Gini coefficient.  We will describe more details of the model under the “Long Short Term Memory (LSTM)” section below. Additional details of the Random Forest Regressor are described below under the section titled “Random Forest Regressor.”")
+        
 
     with st.expander("🔮 Forecasting Framework (ARIMAX-Based)"):
         st.markdown("""
