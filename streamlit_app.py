@@ -65,7 +65,7 @@ def home():
 
     # Problem Section
     st.markdown("### The Problem")
-    st.image("images/gini_chart.png", caption="Figure 1: Rising Inequality – The Gini Coefficient's Steady Climb from 1976 to 2023")
+    # st.image("images/gini_chart.png", caption="Figure 1: Rising Inequality – The Gini Coefficient's Steady Climb from 1976 to 2023")
 
     st.markdown("""
     <div class='green-box'>
