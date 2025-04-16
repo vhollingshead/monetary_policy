@@ -121,7 +121,7 @@ def about():
 
 import streamlit as st
 
-def methodology():
+def our_methodology():
     st.markdown("## Methodology")
     st.markdown("""
     Our methodology leverages **causal analysis** and **advanced analytics** to provide insights into how monetary policy impacts income inequality.
