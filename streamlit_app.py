@@ -111,8 +111,8 @@ def about():
     images = [
         {
             "url": "images/nicole.png",
-            "desc": [
-                "Nicole Kan",
+            "desc_header": "Nicole Kan",
+            "desc_bullets": [
                 "Causal Analysis",
                 "Machine Learning",
                 "Research"
@@ -120,8 +120,8 @@ def about():
         },
         {
             "url": "images/victoria.png",
-            "desc": [
-                "Victoria Hollingshead",
+            "desc_header": "Victoria Hollingshead",
+            "desc_bullets": [
                 "Product",
                 "Machine Learning",
                 "Research"
@@ -129,16 +129,16 @@ def about():
         },
         {
             "url": "images/william.png",
-            "desc": [
-                "William Lei",
+            "desc_header": "William Lei",
+            "desc_bullets": [
                 "Machine Learning",
                 "Research"
             ]
         },
         {
             "url": "images/tracy.png",
-            "desc": [
-                "Tracy Volz",
+            "desc_header": "Tracy Volz",
+            "desc_bullets": [
                 "Exploratory Data Analysis",
                 "Machine Learning",
                 "Research"
@@ -146,18 +146,17 @@ def about():
         }
     ]
 
-    st.title("Image Display with Descriptive Bullet Points")
+    st.title("Meet our Team")
 
-    # Display images and bullet-point descriptions
     for item in images:
         col1, col2 = st.columns([1, 2])
         with col1:
-            st.image(item["url"], use_container_width=True)
+            st.image(item["url"], use_column_width=True)
         with col2:
-            st.markdown("")
-            for bullet in item["desc"]:
-                st.markdown(f"- {bullet}")
-        st.markdown("---")  # Divider between sections
+            st.markdown(f"<h5 style='margin-bottom:0'><b>{item['desc_header']}</b></h5>", unsafe_allow_html=True)
+            for bullet in item["desc_bullets"]:
+                st.markdown(f"<div style='margin-left: 20px;'>• {bullet}</div>", unsafe_allow_html=True)
+        st.markdown("---")
 
 
 def our_methodology():
