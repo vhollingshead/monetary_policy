@@ -79,7 +79,6 @@ def home():
     problem_caption_text = "Figure 1. Rising Inequality: The Gini Coefficient's Steady Climb from 1976 to 2023"
     image_display(problem_image_path)
     problem_caption = display_caption(problem_caption_text)
-    problem_caption
 
     st.markdown("""
     Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. 
