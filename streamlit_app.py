@@ -265,18 +265,26 @@ def our_methodology():
 
     with st.expander("🔮 Forecasting Framework (ARIMAX-Based)"):
         st.markdown("""
-        Our **forecasting framework** uses the ARIMAX model to simulate future Gini coefficient trends under user-defined monetary policy assumptions.
+        The **forecasting framework** leverages our learned ARIMAX model to predict the Gini coefficient over a multiple-year horizon, starting from the last observed data point. The process involves:
 
-        - **Model Setup**: The ARIMAX model is trained on the first-differenced Gini coefficient with DFF and M2 as exogenous variables.
-        - **Future Variables**: Users specify future changes to DFF and M2, which are assumed to follow simple trends.
-        - **Forecast Output**: The model returns 5-year Gini coefficient forecasts with 95% confidence intervals.
 
-        In the dashboard, users simulate scenarios like lowering DFF by 1% per year or increasing M2 by 10% annually. This empowers exploration of **how monetary policy may shape income inequality**.
+        - **Model Setup**: An ARIMAX model is fitted on the full dataset, using the first-differenced Gini coefficient as the dependent variable and Federal Funds Rate (DFF) and U.S. M2 Money Supply (US_M2_USD) as exogenous variables to capture monetary policy effects.
+        - **Future Variables**: Future values of DFF and M2 are estimated using simple assumptions: DFF is scaled based on its last value plus an annual change, while M2 grows at its historical annual rate.
+        - **Forecast Output**: The model generates forecasts for the Gini coefficient, including point estimates and 95% confidence intervals.
 
-        To improve reliability, we **re-weighted COVID-era data** to prevent the model from overfitting to volatility during the pandemic.
+        In our Monetary Policy Dashboard, the ARIMAX model allows users to forecast the Gini coefficient over the next five years by inputting custom monetary policy assumptions, with 95% confidence intervals shaded around the forecast. Users can specify the annual change in the Federal Funds Rate and the annual growth rate of M2, enabling flexible exploration of monetary policy impacts on income inequality.
 
-        _Figure 8 in the dashboard shows the resulting forecast._
+        We have an example below that demonstrates this forecasting capability, using user-defined inputs where the Federal Funds Rate decreases by 1% annually (annual_dff_change=-1) and M2 grows at an annual rate of 10% (annual_m2_growth_pct=0.1). The historical Gini coefficient (blue line) reflects the trend from 2006 to 2023, showing rising inequality over time, while the forecasted Gini coefficient (red dashed line) projects a continued increase in inequality under these assumptions, with 95% confidence intervals shaded in red.
+
+        To improve model stability and reliability, we applied a weighting adjustment to reduce the influence of the COVID period, which introduced extreme volatility and structural distortions in both macroeconomic variables and the Gini trend. Research has shown that models trained on highly irregular periods can overfit to outliers and fail to generalize well. By incorporating this weighting scheme, the model better reflects long-term macroeconomic relationships rather than transient pandemic-era shocks.
+                    
+        This example below highlights the dashboard’s ability to simulate user-defined monetary policy impacts on income inequality, though it is not intended to provide specific policy recommendations.
+
         """)
+        forecast_image = "images/Figure 8_Example Dashboard Forecast of Gini Coefficient with 95% Confidence Interval.png"
+        image_display(forecast_image)
+        forecast_caption = "Figure 8: Example Dashboard Forecast of Gini Coefficient with 95% Confidence Interval"
+        display_caption(forecast_caption)
 
     with st.expander("⚠️ Limitations"):
         st.markdown("""
