@@ -49,15 +49,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-
-# def home():
-#     # Header Section
-#     st.markdown("<div class='header'>Gini-Lab:  An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
-#     st.markdown("<div class='subheader'>Nicole Kan, Victoria Hollingshead, William Lei, Tracy Volz</div>", unsafe_allow_html=True)
-#     st.subtitle("Problem")
-#     st.markdown("<div class='green-box'>Income inequality in the United States has worsened due to monetary policies that, while stabilizing prices and employment, often disproportionately benefit asset holders. Nobel prize winning economist Joseph Stiglitz in The Price of Inequality (2012) notes that monetary policy has favored the wealthy, with the top 1% gaining wealth share post-2008 Global Financial Crisis (GFC) while the bottom 50% lost ground. Data shows 70% of U.S. assets are held by the top 10%, deepening the divide.</div>", unsafe_allow_html=True)
-
 def home():
     # Header Section
     st.markdown("<div class='header'>Gini-Lab: An Interactive Dashboard on Monetary Policy’s Impact on Income Inequality</div>", unsafe_allow_html=True)
@@ -116,10 +107,36 @@ def home():
     """)
 
 def about():
-    st.title("About")
-    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+    images = [
+        {
+            "url": "images/nicole.png",
+            "desc": "Nicole Kan"
+        },
+        {
+            "url": "images/victoria.png",
+            "desc": "Victoria Hollingshead"
+        },
+        {
+            "url": "images/william.png",
+            "desc": "William Lei"
+        },
+        {
+            "url": "images/tracy.png",
+            "desc": "Tracy Volz"
+        }
+    ]
 
-import streamlit as st
+    st.title("Meet our Team")
+
+    # Display images and descriptions in pairs
+    for item in images:
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image(item["url"], use_column_width=True)
+        with col2:
+            st.markdown(f"**Description**: {item['desc']}")
+        st.markdown("---")  # horizontal line for separation
+
 
 def our_methodology():
     st.markdown("## Methodology")
@@ -152,6 +169,7 @@ def our_methodology():
         - **Sources**: Data was pulled from FRED, Yahoo Finance, and real-time inequality databases.  
         - **Data Types**: Leading indicators (e.g. interest rates) and lagging indicators (e.g. Gini coefficient) were aligned.
         - **Preprocessing**: Dates were formatted, data resampled (daily/monthly), and missing values forward-filled.
+        - **FRED API**: Data is pulled directly from the FRED database using the public API. Because leading and lagging variables have varying frequencies, they are averaged over the last month, published on the dashboard, and entered to the LSTM model for prediction.
         - **Chronological Split**: Data was split in time order to preserve forecasting validity and simulate real-world policy modeling.
         """)
 
@@ -229,12 +247,40 @@ def our_methodology():
 
 
 def causal_inf():
-    st.title("Causal Inference")
-    st.write("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+    st.markdown("<div class='header'>Causal Inference</div>", unsafe_allow_html=True)
 
-def use_case():
-    st.title("Use Case")
-    st.write("Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit.")
+    st.markdown("""
+    To examine the impact of U.S. monetary policy on income inequality, the analysis employs a series of Difference-in-Differences (DiD) models using Canada as a control group. The core idea is to compare changes in the U.S. Gini coefficient over time—before and after key monetary policy events—with corresponding changes in Canada, a country with a similar economic structure but independent monetary policy. By focusing on the interaction between treatment status (U.S. vs. Canada) and time, these models aim to isolate the causal effect of U.S. monetary shifts (such as changes in interest rates or money supply) on income inequality trends.
+    
+    A baseline DiD model includes just the treatment dummy, time trend, and an interaction term (`DiD_Interaction`), but more refined models introduce monetary policy variables like the U.S. federal funds rate (US_DFF), the interest rate spread between the U.S. and Canada, and both nominal and inflation-adjusted money supply (M2). As models evolve in complexity—e.g., Model 14 includes interest rate changes, cross-country spreads, and inflation-adjusted M2—the results become more robust and the DiD_Interaction term gains strong statistical significance. This suggests that U.S. monetary policy may indeed play a role in shaping inequality trends.
+    
+    To assess the validity of the parallel trends assumption—a key requirement for causal inference in Difference-in-Differences (DiD) analysis—a dynamic event study model was employed. A traditional pre-trend check was not feasible due to missing Gini coefficient data for Canada prior to 1992. Instead, the event study specification evaluates whether the U.S. and Canada followed similar inequality trends leading up to major monetary policy events, particularly around 2008. The interaction term `Treatment:Event_Time` captures the differential trend between the U.S. and Canada over time. In the model, this coefficient is small (0.0245) and statistically insignificant (p = 0.249), indicating no strong evidence of divergence in trends prior to the treatment period.
+    
+    This supports the parallel trends assumption and reinforces the credibility of Canada as a valid control group. Additionally, the high R-squared (0.977) suggests that the model fits the data well, and the insignificant `Event_Time` term (p = 0.102) further suggests that overall trends were not drastically shifting in the pre-treatment years. Visual inspection of the Gini trends further supports this conclusion, as the U.S. and Canadian series appear to move in parallel throughout the pre-2008 period with no major divergence. While some divergence emerges around 2015—with U.S. inequality trending upward and Canada’s trend flattening or declining—this occurs well into the post-treatment period. Since the models estimate treatment effects over the full 1992–2019 window, such divergence may in fact reflect the very effects being studied, rather than a violation of the parallel trends assumption.
+    """)
+
+    st.markdown("### 📊 DiD Results Summary")
+
+    st.markdown("""
+    The sequence of Difference-in-Differences (DiD) models progressively adds monetary policy controls and refinements to isolate the impact of U.S. monetary policy on income inequality.
+
+    Across **Models 3 through 14**, the `DiD_Interaction` term—representing the treatment effect of U.S. policy changes relative to Canada—remains **consistently positive and highly statistically significant at the 0.1% level (p < 0.001)** while neither the U.S. federal funds rate (US_DFF) nor the Canadian target overnight rate are individually significant predictors of income inequality.
+
+    - The coefficient of around **0.0037 to 0.0038** across these models is modest but highly consistent, suggesting a **stable treatment effect**.
+    - **Model 14** stands out as the **best-performing and most comprehensive** specification.
+        - It includes: `DiD_Interaction`, `Year`, US and Canada interest rates, and **inflation-adjusted money supply**.
+        - It delivers the **highest t-statistic (49.15)**, low standard error (7.61e-05), and strong significance in both time and treatment terms.
+
+    The significance of inflation-adjusted variables highlights the importance of capturing real purchasing power effects, rather than relying solely on nominal aggregates.
+
+    ### ✅ Conclusion
+
+    The consistent significance of the `DiD_Interaction` term across advanced models provides **strong causal evidence** that U.S. monetary policy contributed to rising inequality compared to Canada. This suggests that even when interest rates and money supply are not significant individually, their **joint structural effects** may play a critical role. 
+
+    This analysis demonstrates that causal methods like DiD are essential in understanding **policy-driven inequality trends**, especially when paired with robust controls and strong parallel trend validation.
+    """)
+
+    st.info("📈 See Table 5 and Figure 7 in your full report for detailed model coefficients and visual inspection of U.S.-Canada Gini trends.")
 
 uploaded_file_path = "models/final_ts_df_arimax.csv"
 no_index = pd.read_csv(uploaded_file_path)
