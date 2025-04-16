@@ -114,11 +114,11 @@ results2 = joblib.load(model_filename)
 last_date = final_ts_df.index[-1]
 
 if 'interest_rate' not in st.session_state:
-    st.session_state.interest_rate = 5.0
+    st.session_state.interest_rate = 2.0
 change_dff = st.session_state.interest_rate  
 
 if 'm2_supply' not in st.session_state:
-    st.session_state.m2_supply = 10.0
+    st.session_state.m2_supply = 5.0
 change_m2 = st.session_state.m2_supply  
 
 percent_change_m2 = change_m2 / 100  
@@ -224,12 +224,12 @@ def first_part():
         st.markdown("<div class='subsubheader'>Interest Rate Change (Annual Change)</div>", unsafe_allow_html=True)
 
         interest_rate = st.slider("", min_value=-5.0, max_value=10.0, step=0.25, 
-                                value=st.session_state.get("interest_rate", 5.0), key="slider_interest")
+                                value=st.session_state.get("interest_rate", 2.0), key="slider_interest")
 
         st.markdown("<div class='subsubheader'>M2 Supply Change (%)</div>", unsafe_allow_html=True)
 
         m2_supply = st.slider("", min_value=-50.0, max_value=50.0, step=0.05, 
-                            value=st.session_state.get("m2_supply", 10.0), key="slider_m2")
+                            value=st.session_state.get("m2_supply", 5.0), key="slider_m2")
 
         col3, col4 = st.columns([1, 1])
 
@@ -243,8 +243,8 @@ def first_part():
 
         # Reset button: Resets session state and refreshes UI
         if col4.button("Reset", key="reset_button"):
-            st.session_state.interest_rate = 5.0  # Reset to default
-            st.session_state.m2_supply = 10.0  # Reset to default
+            st.session_state.interest_rate = 2.0  # Reset to default
+            st.session_state.m2_supply = 5.0  # Reset to default
             st.rerun()  # Ensures sliders reset
         
         st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios.</div>", unsafe_allow_html=True)
