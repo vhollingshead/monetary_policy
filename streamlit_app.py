@@ -321,6 +321,28 @@ def our_methodology():
 
         """)
 
+        data = {
+            "Dataset": ["Training Set", "Validation Set", "Test Set"],
+            "MAE": [0.001774, 0.002289, 0.001133],
+            "MSE": [0.000005, 0.000009, 0.000002],
+            "RMSE": [0.002226, 0.003013, 0.001385]
+        }
+
+        lstm_eval_df = pd.DataFrame(data)
+
+        st.dataframe(lstm_eval_df, use_container_width=True)
+        lstm_caption1 = "Table 3: LSTM Model Performance Metrics Across Training, Validation, and Test Sets"
+
+        lstm_url = "images/Figure 4_Ensemble vs. Individual Models for Gini Coefficient Prediction.png"
+
+        lstm_caption2 = "none"
+
+        image_display(lstm_url)
+        display_caption(lstm_caption2)
+
+
+
+
     with st.expander("🌲 RandomForestRegressor to Predict the Current Gini (Future Effort)"):
         st.markdown("""
         While the RandomForestRegressor may not be a dedicated time series model, this exploratory study found it was highly effective in predicting future Gini coefficients given time series data. Prior to training the RandomForestRegressor, the dataset was converted to a format suitable for supervised machine learning, in which lagged versions of each feature were created as new input variables. For these runs, we formulated a one-step-ahead forecast using the past 12 time steps. In other words, each feature was transformed to create 12 additional lagged variables (e.g, t-12, t-11, ..., t-1). After training the RandomForestRegressor with 1000 trees, we simulated a realistic forecasting scenario in which the model was retrained as soon as new data became available. For example, if testing data is denoted as [t1, t2, t3, t4], after a prediction was made and stored for t1, t1 was appended to the training data and used to retrain the model in preparation for the prediction for t2. 
