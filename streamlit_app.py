@@ -332,10 +332,11 @@ def our_methodology():
 
         st.dataframe(lstm_eval_df, use_container_width=True)
         lstm_caption1 = "Table 3: LSTM Model Performance Metrics Across Training, Validation, and Test Sets"
+        display_caption(lstm_caption1)
 
         lstm_url = "images/Figure 4_Ensemble vs. Individual Models for Gini Coefficient Prediction.png"
 
-        lstm_caption2 = "none"
+        lstm_caption2 = "Figure 4: Ensemble vs. Individual Models for Gini Coefficient Prediction (2006-2024)"
 
         image_display(lstm_url)
         display_caption(lstm_caption2)
