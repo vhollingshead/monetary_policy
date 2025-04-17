@@ -266,6 +266,26 @@ def our_methodology():
                     
         """)
 
+        arimax_data = {
+            "Dataset": ["Training Set", "Validation Set", "Test Set"],
+            "MAE": [0.000661, 0.002192, 0.000485],
+            "MSE": [0.000001, 0.000016, 0.000001],
+            "RMSE": [0.000836, 0.004004, 0.000563]
+        }
+
+        evaluation_df = pd.DataFrame(arimax_data)
+        
+        arimax_image2 = "images/Figure 3_ARIMAX Forecast vs. Actual Differenced Gini Coefficient.png"
+
+        arimaxcaption1 = "Table 2: ARIMA and ARIMAX Performance Metrics for Gini Coefficient Forecasting"
+        arimaxcaption2 = "Figure 3: ARIMAX Forecast vs. Actual Differenced Gini Coefficient (2014-2023)"
+        
+        st.dataframe(evaluation_df, use_container_width=True)
+        display_caption(arimaxcaption1)
+
+        image_display(arimax_image2)
+        display_caption(arimaxcaption2)
+
 
         st.markdown("""
         The ARIMAX model effectively captures the directional trends of the differenced Gini coefficient from 2014 to 2023, as seen in the alignment of forecasted and actual values during the validation and test periods. However, it struggles to handle the heightened volatility during the COVID-19 period around 2020-2022, where the actual test data exhibits sharp fluctuations that the model fails to predict accurately, resulting in a smoother forecast that underestimates the extreme variations.
