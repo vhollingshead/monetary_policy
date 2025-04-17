@@ -32,7 +32,7 @@ st.markdown(
     <style>
     body { font-family: Arial, sans-serif; }
     .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; padding: 10px 20px; }
-    .header { text-align: center; color: #4F7849; font-size: 36px; font-weight: bold; }
+    .header { text-align: center; color: #4F7849; font-size: 24px; font-weight: bold; }
     .subsubheader { text-align: center; color: #4F7849; font-size: 14px; font-weight: bold; }
     .ind_subsubheader { text-align: center; color: black; font-size: 14px; }
     .stim_subheader { text-align: center; color: #ffbf6d; font-size: 14px; font-weight: bold; }
