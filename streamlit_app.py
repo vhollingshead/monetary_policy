@@ -256,19 +256,69 @@ def our_methodology():
 
     with st.expander("📉 Time Series Forecasting Model"):
         st.markdown("""
-        We use a **time series model** to predict future trends in the Gini coefficient based on monetary policy changes. The model analyzes historical trends and allows users to simulate scenarios, such as adjusting interest rates, to see their impact on inequality over time. Results are visualized in the dashboard, showing both historical and forecasted trends.
+        The time series modeling process aims to forecast the Gini coefficient, a key measure of income inequality, and assess the impact of monetary policy. We begin with a simple ARIMA model due to its suitability for capturing temporal patterns in time series data like the Gini coefficient, which exhibits trends and autocorrelation. After evaluating ARIMA, we transition to ARIMAX to incorporate exogenous variables—specifically the logarithms of the Federal Funds Rate (log DFF) and U.S. M2 Money Supply (log M2)—as critical monetary indicators. Our goal is not only to predict the Gini coefficient but to understand how these policy variables influence income inequality. The process involves:
+        
+        - Testing for stationarity using the Augmented Dickey-Fuller (ADF) test, which revealed the Gini coefficient was non-stationary (p-value > 0.05), requiring first-differencing.
+        - Analyzing ACF/PACF plots to determine the ARIMA order (1,1,1).
+        - Fitting an ARIMA model as a baseline, then extending to SARIMAX to include log DFF and log M2.
+
+        The ARIMA model serves as the baseline, evaluated using Root Mean Squared Error (RMSE) and Mean Absolute Error (MAE) on the training set. During the training period, the baseline ARIMA(1,1,1) showed reasonable performance for a simple model, while SARIMAX, incorporating log DFF and log M2, outperformed it (as shown in the table), demonstrating that these exogenous variables better capture the Gini coefficient’s dynamics. The final SARIMAX model, using log DFF and log M2, was evaluated on a train-validation-test split (80-10-10), yielding improved predictive accuracy.
+                    
+        """)
+
+
+        st.markdown("""
+        The ARIMAX model effectively captures the directional trends of the differenced Gini coefficient from 2014 to 2023, as seen in the alignment of forecasted and actual values during the validation and test periods. However, it struggles to handle the heightened volatility during the COVID-19 period around 2020-2022, where the actual test data exhibits sharp fluctuations that the model fails to predict accurately, resulting in a smoother forecast that underestimates the extreme variations.
+
+        **Key Learnings & Impact**
+                    
+        The improved metrics suggest SARIMAX better captures the relationship between monetary policy and inequality, though our focus remains on explanatory power rather than predictive accuracy. As shown in the forecast plot, the ARIMAX model, using log DFF and log M2, is effective at predicting the direction of the differenced Gini coefficient, with the starting and ending points of the actual and forecasted values aligning closely in both validation and test periods. However, it struggles to capture the volatility during the COVID period, where extreme monetary policies led to significant fluctuations in the Gini coefficient.
+
+        The modeling process revealed that monetary policy variables, specifically the federal funds rate and M2 money supply, have some level of influence in predicting the Gini coefficient, with ARIMAX providing a clearer understanding of their impact compared to ARIMA. Overall, we value the explanation of monetary policy tools’ impact on the Gini coefficient over achieving a perfect statistical fit. This aligns with our goal of assessing how policy decisions affect income inequality, rather than solely predicting the Gini coefficient. The dashboard’s ability to simulate these effects empowers policymakers to design more equitable monetary policies, potentially reducing economic disparity and fostering sustainable growth.
+
         """)
 
     with st.expander("🧠 LSTM Model to Predict the Current Gini"):
         st.markdown("""
-        A **Long Short-Term Memory (LSTM)** model, a type of machine learning approach, predict the current Gini coefficient using recent economic data. This provides an up-to-date snapshot of income inequality, which is integrated into the dashboard for real-time insights. By combining forecasting with real-time analysis, the Monetary Policy Dashboard offers a comprehensive view of income inequality dynamics, empowering users to explore both current and future impacts of monetary policy.
+        A comprehensive hyperparameter tuning study was conducted to optimize LSTM models for predicting the current Gini coefficient based on key economic indicators. The research focused on three significant FRED sourced features that showed strong correlations with income inequality:
+
+        - WSHOMCB (Mortgage-Backed Securities)
+        - QBPBSTASSCMRTSEC (Balance Sheet with Total Assets)
+        - FGCCSAQ027S (Consumer Credit including Student Loans)
+
+        These features were selected through a multi-stage feature selection process: first identifying variables with strong correlation coefficients with the Gini coefficient, then ranking feature importance using random forest models, and finally refining the selection using ridge regression to eliminate redundant or less impactful predictors.
+                    
+        The sequential nature of LSTM models proved particularly significant for this application, as economic indicators and inequality metrics inherently contain temporal patterns and dependencies. By processing data as sequences, the LSTM model could effectively capture how changes in mortgage-backed securities, balance sheet with total assets, and consumer credit including student loans over time influence income inequality trends, rather than treating each time point as an independent observation. This temporal awareness allows the model to detect lagged effects and cumulative impacts that traditional regression methods cannot adequately address.
+
+        The study explored two distinct data splitting approaches: a traditional 80:10:10 split and an optimized 72:19:9 split determined through ridge regression analysis to minimize the variability of Mean Absolute Error (MAE) across test sets. This optimized split was specifically designed to address extreme variability observed in the validation dataset while maintaining tight test set variability. Importantly, data scaling was performed prior to splitting purely to reduce computational load during the extensive hyperparameter tuning process. While this approach could potentially introduce data leakage concerns, a comprehensive data leakage check was performed and successfully passed, confirming the integrity of the model evaluation process.
+
+        The most successful architecture (Model #11) utilized a sequential structure with two LSTM layers (64 units each, ReLU activation functions) followed by dense layers with ELU and linear activations. This model incorporated dropout regularization (25%) and L2 regularization (0.001) to prevent overfitting, while employing the Huber loss function to manage outliers effectively. Each model was averaged over 5 runs to promote stability in the results, ensuring that performance metrics were not influenced by random initialization effects and increasing confidence in the consistency of the model's performance and the efficacy of the identified optimal hyperparameters.
+
+        Performance metrics clearly demonstrated the superiority of LSTM models over traditional linear regression approaches. The best-performing LSTM configuration achieved a test Mean Absolute Error (MAE) of just 0.001133, dramatically outperforming the baseline linear regression model's 0.011027 MAE - a nearly 12-fold improvement in prediction accuracy.            
+
+        This research highlights how deep learning techniques can significantly enhance our ability to forecast economic inequality metrics, potentially providing policymakers with more precise tools for evaluating the potential impact of economic policies on income distribution.
+                           
 
         """)
 
     with st.expander("🌲 RandomForestRegressor to Predict the Current Gini (Future Effort)"):
         st.markdown("""
-        The **RandomForestRegressor** is an ensemble model composed of multiple trees, with each tree trained on a bootstrapped sample of the training data and random subset of the features. Final predictions are aggregated as a final step. While this model is not represented in the dashboard, it has shown considerable performance improvement over traditional time series and models. We recommend future teams explore supervised learning options like RandomForestRegressor for further analysis. 
+        While the RandomForestRegressor may not be a dedicated time series model, this exploratory study found it was highly effective in predicting future Gini coefficients given time series data. Prior to training the RandomForestRegressor, the dataset was converted to a format suitable for supervised machine learning, in which lagged versions of each feature were created as new input variables. For these runs, we formulated a one-step-ahead forecast using the past 12 time steps. In other words, each feature was transformed to create 12 additional lagged variables (e.g, t-12, t-11, ..., t-1). After training the RandomForestRegressor with 1000 trees, we simulated a realistic forecasting scenario in which the model was retrained as soon as new data became available. For example, if testing data is denoted as [t1, t2, t3, t4], after a prediction was made and stored for t1, t1 was appended to the training data and used to retrain the model in preparation for the prediction for t2. 
+                    
+        The model's strong performance and ability to capture complex and nonlinear relationships makes it an available alternative to time-series specific models such as ARIMAX or LSTM. In Figure 5 below, abrupt dips in prediction are shown to occur, though absolute differences are less than 0.008 Gini coefficient points. In addition, the model was only retrained every 4 predictions; results may prove more reliable with more frequent retraining.
+                    
         """)
+        randomforest_image1 = "images/Figure 5_RandomForestRegressor Actual vs. Prediction on indirect indicators only.png .png"
+        randomforest_image2 = "images/Figure 6_RandomForestRegressor Actual vs. Prediction results on direct indicators only, DFF and US M2 Supply.png"
+
+        randomforestcaption1 = "Figure 5. RandomForestRegressor Actual vs. Prediction on indirect indicators only. "
+        randomforestcaption2 = "Figure 6. RandomForestRegressor Actual vs. Prediction results on direct indicators only, DFF and US M2 Supply"
+        
+        image_display(randomforest_image1)
+        display_caption(randomforestcaption1)
+
+        image_display(randomforest_image2)
+        display_caption(randomforestcaption2)
 
     with st.expander("📊 Difference-in-Differences (DiD) for Causal Inference"):
         st.markdown("""
@@ -581,9 +631,7 @@ def first_part():
             st.rerun()  # Ensures sliders reset
         
         st.markdown("<div class='white-box'>Adjust the Interest Rate Change & M2 Supply Change to see how the inequality forecast changes under different scenarios.</div>", unsafe_allow_html=True)
-
-        
-        
+  
         
 def one_point_five():
     st.markdown("<div class='white-box'></div>", unsafe_allow_html=True)
